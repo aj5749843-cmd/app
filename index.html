@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الحقيبة التعليمية التفاعلية — التحصيلي العلمي</title>
+  <style>
+    /* الإعدادات الأساسية */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+      direction: rtl;
+      background: #f4f6fa;
+      color: #1a1a2e;
+      min-height: 100vh;
+      padding: 1rem;
+    }
+
+    :root {
+      --blue: #1e6fc0; --blue-light: #e6f1fb; --blue-text: #0c447c;
+      --green: #3a9a2a; --green-light: #eaf3de; --green-text: #27500a;
+      --purple: #7c3fbf; --purple-light: #eeedfe; --purple-text: #3c3489;
+      --amber: #d45a1a; --amber-light: #faeeda; --amber-text: #633806;
+      --border: #e0e4ed; --surface: #ffffff; --text: #1a1a2e;
+      --text-muted: #6b7280; --radius: 12px; --radius-sm: 8px;
+    }
+
+    .app { max-width: 700px; margin: 0 auto; }
+
+    /* الهيدر */
+    .header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: white; padding: 1.5rem; border-radius: var(--radius); margin-bottom: 1rem;
+    }
+    .header-badge {
+      display: inline-block; background: #f5c518; color: #1a1a2e;
+      font-size: 12px; font-weight: 600; padding: 3px 12px; border-radius: 20px; margin-bottom: 10px;
+    }
+
+    /* الإحصائيات والتبويبات */
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 1rem; }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 6px; text-align: center; }
+    .stat-num { font-size: 18px; font-weight: 600; }
+    .stat-label { font-size: 11px; color: var(--text-muted); }
+
+    .tabs { display: flex; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 4px; margin-bottom: 1rem; gap: 2px; }
+    .tab-btn { flex: 1; padding: 9px; font-size: 13px; border: none; background: transparent; cursor: pointer; color: var(--text-muted); border-radius: var(--radius-sm); font-family: inherit; }
+    .tab-btn.active { background: #1a1a2e; color: white; font-weight: 600; }
+
+    /* البطاقات والقوائم */
+    .panel { display: none; }
+    .panel.active { display: block; }
+    .subjects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1rem; }
+    .subject-card { background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 1rem; cursor: pointer; }
+    .subject-card.selected { border-width: 2px; }
+    .subject-card.math.selected { border-color: var(--blue); }
+    .subject-card.phys.selected { border-color: var(--green); }
+    .subject-card.chem.selected { border-color: var(--purple); }
+    .subject-card.bio.selected { border-color: var(--amber); }
+
+    .subject-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .subject-icon { width: 35px; height: 35px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+    
+    .progress-bar { height: 6px; background: var(--border); border-radius: 3px; margin-top: 10px; overflow: hidden; }
+    .progress-fill { height: 100%; transition: width 0.4s; }
+
+    .topics-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 10px; }
+    .topics-header { padding: 12px; border-bottom: 1px solid var(--border); font-size: 14px; font-weight: 600; }
+    .topic-item { padding: 10px 15px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; font-size: 13.5px; }
+    .topic-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .topic-badge { margin-right: auto; font-size: 10px; padding: 2px 8px; border-radius: 10px; }
+
+    /* كود الاختبار والتقدم */
+    .quiz-setup, .question-card, .readiness-bar-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1rem; }
+    .filter-chip { padding: 6px 14px; border: 1px solid var(--border); border-radius: 20px; font-size: 12px; cursor: pointer; margin: 2px; background: white; }
+    .filter-chip.active { background: #1a1a2e; color: white; }
+    .start-btn { width: 100%; padding: 12px; background: #1a1a2e; color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; margin-top: 10px; }
+    .option { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 8px; text-align: right; cursor: pointer; background: white; display: flex; align-items: center; gap: 10px; }
+    .option.correct { background: #eaf3de; border-color: #3a9a2a; }
+    .option.wrong { background: #fcebeb; border-color: #c44; }
+    
+    .big-bar { height: 15px; background: var(--border); border-radius: 10px; overflow: hidden; margin: 10px 0; }
+    .big-bar-fill { height: 100%; background: linear-gradient(90deg, var(--blue), var(--green)); transition: width 0.5s; }
+
+    @media (max-width: 500px) { .stats-row, .subjects-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<div class="app">
+  <div class="header">
+    <div class="header-badge">حقيبة موهبة المحدثة</div>
+    <h1>منصة التحصيلي الذكية</h1>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-num" style="color:var(--blue)" id="st-math">0</div><div class="stat-label">رياضيات</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--green)" id="st-phys">0</div><div class="stat-label">فيزياء</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--purple)" id="st-chem">0</div><div class="stat-label">كيمياء</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--amber)" id="st-bio">0</div><div class="stat-label">أحياء</div></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('overview', this)">الرئيسية</button>
+    <button class="tab-btn" onclick="switchTab('topics', this)">المواضيع</button>
+    <button class="tab-btn" onclick="switchTab('quiz', this)">اختبار</button>
+    <button class="tab-btn" onclick="switchTab('progress', this)">تقدمي</button>
+  </div>
+
+  <!-- نظرة عامة -->
+  <div class="panel active" id="panel-overview">
+    <div class="subjects-grid">
+      <div class="subject-card math selected" onclick="selectSubject('math', this)">
+        <div class="subject-header">
+          <div class="subject-icon" style="background:var(--blue-light);color:var(--blue)">∑</div>
+          <div class="subject-title">الرياضيات</div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="pb-math" style="background:var(--blue);width:0%"></div></div>
+      </div>
+      <div class="subject-card phys" onclick="selectSubject('phys', this)">
+        <div class="subject-header">
+          <div class="subject-icon" style="background:var(--green-light);color:var(--green)">⚡</div>
+          <div class="subject-title">الفيزياء</div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="pb-phys" style="background:var(--green);width:0%"></div></div>
+      </div>
+      <div class="subject-card chem" onclick="selectSubject('chem', this)">
+        <div class="subject-header">
+          <div class="subject-icon" style="background:var(--purple-light);color:var(--purple)">⚗</div>
+          <div class="subject-title">الكيمياء</div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="pb-chem" style="background:var(--purple);width:0%"></div></div>
+      </div>
+      <div class="subject-card bio" onclick="selectSubject('bio', this)">
+        <div class="subject-header">
+          <div class="subject-icon" style="background:var(--amber-light);color:var(--amber)">🧬</div>
+          <div class="subject-title">الأحياء</div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="pb-bio" style="background:var(--amber);width:0%"></div></div>
+      </div>
+    </div>
+    <div class="topics-section">
+      <div class="topics-header" id="ov-title">مواضيع الرياضيات</div>
+      <div id="ov-list"></div>
+    </div>
+  </div>
+
+  <!-- المواضيع -->
+  <div class="panel" id="panel-topics">
+    <div id="all-topics-container"></div>
+  </div>
+
+  <!-- الاختبار -->
+  <div class="panel" id="panel-quiz">
+    <div id="quiz-init">
+      <div class="quiz-setup">
+        <h3>اختر مادة للتدريب:</h3>
+        <button class="filter-chip active" onclick="setQuizMode('all', this)">شامل</button>
+        <button class="filter-chip" onclick="setQuizMode('math', this)">رياضيات</button>
+        <button class="filter-chip" onclick="setQuizMode('phys', this)">فيزياء</button>
+        <button class="filter-chip" onclick="setQuizMode('chem', this)">كيمياء</button>
+        <button class="filter-chip" onclick="setQuizMode('bio', this)">أحياء</button>
+        <button class="start-btn" onclick="startQuiz()">ابدأ الآن</button>
+      </div>
+    </div>
+    <div id="quiz-play" style="display:none"></div>
+  </div>
+
+  <!-- التقدم -->
+  <div class="panel" id="panel-progress">
+    <div class="readiness-bar-wrap">
+      <div class="readiness-label">نسبة الجاهزية الكلية</div>
+      <div class="big-bar"><div class="big-bar-fill" id="total-fill" style="width:0%"></div></div>
+      <h2 id="total-pct">0%</h2>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const DATA = {
+    math: {
+      name: "الرياضيات", color: "#1e6fc0", icon: "∑",
+      topics: [{n:"المنطق الرياضي", l:"أساسي"}, {n:"المصفوفات", l:"متوسط"}, {n:"الدوال", l:"متقدم"}],
+      questions: [{q:"أي مما يلي مثال مضاد: كل الأعداد الزوجية تقبل القسمة على 4؟", o:["2","8","12","16"], a:0, e:"العدد 2 زوجي لكنه لا يقبل القسمة على 4."}]
+    },
+    phys: {
+      name: "الفيزياء", color: "#3a9a2a", icon: "⚡",
+      topics: [{n:"الميكانيكا", l:"أساسي"}, {n:"الكهرباء", l:"متوسط"}, {n:"الفيزياء النووية", l:"متقدم"}],
+      questions: [{q:"جسم كتلته 2kg وتسارعه 5m/s²، ما القوة المؤثرة؟", o:["7N","10N","3N","2.5N"], a:1, e:"القوة = الكتلة × التسارع (2×5=10)."}]
+    },
+    chem: {
+      name: "الكيمياء", color: "#7c3fbf", icon: "⚗",
+      topics: [{n:"الروابط الكيميائية", l:"أساسي"}, {n:"الحساب الكيميائي", l:"متوسط"}, {n:"الكيمياء العضوية", l:"متقدم"}],
+      questions: [{q:"ما شحنة نواة الذرة؟", o:["سالبة","متعادلة","موجبة","متغيرة"], a:2, e:"النواة تحتوي بروتونات موجبة ونيوترونات متعادلة، لذا محصلتها موجبة."}]
+    },
+    bio: {
+      name: "الأحياء", color: "#d45a1a", icon: "🧬",
+      topics: [{n:"علم الخلية", l:"أساسي"}, {n:"الوراثة", l:"متوسط"}, {n:"أجهزة جسم الإنسان", l:"متقدم"}],
+      questions: [{q:"أين يتم إنتاج الريبوسومات؟", o:["النواة","النوية","السيتوبلازم","الميتوكوندريا"], a:1, e:"تعد النوية هي موقع بناء الريبوسومات داخل النواة."}]
+    }
+  };
+
+  let currentSubj = 'math';
+  let quizMode = 'all';
+  let scores = { math:0, phys:0, chem:0, bio:0, total:0 };
+
+  function switchTab(t, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-'+t).classList.add('active');
+    btn.classList.add('active');
+    if(t === 'topics') renderAllTopics();
+  }
+
+  function selectSubject(s, el) {
+    currentSubj = s;
+    document.querySelectorAll('.subject-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    renderOverview();
+  }
+
+  function renderOverview() {
+    const d = DATA[currentSubj];
+    document.getElementById('ov-title').innerText = `مواضيع ${d.name}`;
+    document.getElementById('ov-list').innerHTML = d.topics.map(t => `
+      <div class="topic-item">
+        <div class="topic-dot" style="background:${d.color}"></div>
+        ${t.n} <span class="topic-badge" style="background:#eee">${t.l}</span>
+      </div>
+    `).join('');
+  }
+
+  function renderAllTopics() {
+    let html = '';
+    for(let k in DATA) {
+      html += `<div class="topics-section">
+        <div class="topics-header" style="color:${DATA[k].color}">قسم ${DATA[k].name}</div>
+        ${DATA[k].topics.map(t => `<div class="topic-item">${t.n}</div>`).join('')}
+      </div>`;
+    }
+    document.getElementById('all-topics-container').innerHTML = html;
+  }
+
+  function setQuizMode(m, el) {
+    quizMode = m;
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function startQuiz() {
+    document.getElementById('quiz-init').style.display = 'none';
+    const play = document.getElementById('quiz-play');
+    play.style.display = 'block';
+    
+    let pool = [];
+    if(quizMode === 'all') Object.keys(DATA).forEach(k => pool.push(...DATA[k].questions));
+    else pool = DATA[quizMode].questions;
+
+    const q = pool[0]; // تبسيط لنظام السؤال الواحد كمثال
+    play.innerHTML = `
+      <div class="question-card">
+        <p>${q.q}</p><br>
+        ${q.o.map((opt, i) => `<button class="option" onclick="checkAns(${i}, ${q.a}, '${quizMode}')">${opt}</button>`).join('')}
+        <div id="expl" style="margin-top:10px; display:none; font-size:13px; color:var(--text-muted)">${q.e}</div>
+        <button class="start-btn" style="background:#666" onclick="location.reload()">إنهاء التدريب</button>
+      </div>
+    `;
+  }
+
+  function checkAns(idx, correct, subj) {
+    const opts = document.querySelectorAll('.option');
+    opts[correct].classList.add('correct');
+    if(idx !== correct) opts[idx].classList.add('wrong');
+    document.getElementById('expl').style.display = 'block';
+    
+    // تحديث الإحصائيات (تجريبي)
+    if(idx === correct) {
+      if(subj === 'all') scores.total++; else scores[subj]++;
+      updateUI();
+    }
+  }
+
+  function updateUI() {
+    for(let k in scores) {
+      if(document.getElementById('st-'+k)) document.getElementById('st-'+k).innerText = scores[k];
+      if(document.getElementById('pb-'+k)) document.getElementById('pb-'+k).style.width = (scores[k]*100)+'%';
+    }
+    const total = Object.values(scores).reduce((a,b)=>a+b, 0);
+    document.getElementById('total-fill').style.width = (total*10)+'%';
+    document.getElementById('total-pct').innerText = (total*10)+'%';
+  }
+
+  // البداية
+  renderOverview();
+</script>
+
+</body>
+</html>
