@@ -167,7 +167,7 @@ const DATA = {
       ]
     }
   };
- 
+
   // ===== STATE =====
   let selectedSubject = 'math';
   let quizFilter = 'all';
@@ -180,7 +180,7 @@ const DATA = {
     chem: { correct: 0, total: 0 },
     bio:  { correct: 0, total: 0 }
   };
- 
+
   // ===== TAB SWITCHING =====
   function switchTab(tab, btn) {
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
@@ -189,7 +189,7 @@ const DATA = {
     if (btn) btn.classList.add('active');
     if (tab === 'progress') updateProgress();
   }
- 
+
   // ===== SUBJECT SELECTION =====
   function selectSubject(subj, el) {
     selectedSubject = subj;
@@ -197,7 +197,7 @@ const DATA = {
     el.classList.add('selected');
     renderOverviewTopics(subj);
   }
- 
+
   // ===== RENDER OVERVIEW TOPICS =====
   function renderOverviewTopics(subj) {
     const d = DATA[subj];
@@ -212,7 +212,7 @@ const DATA = {
       </div>
     `).join('');
   }
- 
+
   function badgeHTML(level) {
     const map = {
       'أساسي':  { bg: '#eaf3de', color: '#27500a' },
@@ -222,7 +222,7 @@ const DATA = {
     const s = map[level] || map['أساسي'];
     return `<span class="topic-badge" style="background:${s.bg};color:${s.color};">${level}</span>`;
   }
- 
+
   // ===== RENDER ALL TOPICS =====
   function renderAllTopics() {
     ['math','phys','chem','bio'].forEach(subj => {
@@ -237,14 +237,14 @@ const DATA = {
       `).join('');
     });
   }
- 
+
   // ===== QUIZ =====
   function setFilter(f, el) {
     quizFilter = f;
     document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
     el.classList.add('active');
   }
- 
+
   function startQuiz() {
     const subjects = quizFilter === 'all' ? ['math','phys','chem','bio'] : [quizFilter];
     let pool = [];
@@ -257,7 +257,7 @@ const DATA = {
     document.getElementById('quiz-score-view').style.display = 'none';
     renderQuestion();
   }
- 
+
   function renderQuestion() {
     answered = false;
     const q = quizQuestions[currentQ];
@@ -266,7 +266,7 @@ const DATA = {
     const dots = quizQuestions.map((_, i) =>
       `<div class="q-dot ${i < currentQ ? 'done' : i === currentQ ? 'current' : ''}"></div>`
     ).join('');
- 
+
     document.getElementById('question-area').innerHTML = `
       <div class="q-meta">
         <span class="q-tag" style="background:${subj.bgLight};color:${subj.textDark};">${subj.name}</span>
@@ -291,7 +291,7 @@ const DATA = {
       </div>
     `;
   }
- 
+
   function answerQ(idx) {
     if (answered) return;
     answered = true;
@@ -299,25 +299,25 @@ const DATA = {
     const correct = q.ans === idx;
     if (correct) score[q.subject].correct++;
     score[q.subject].total++;
- 
+
     document.querySelectorAll('.option').forEach((btn, i) => {
       btn.disabled = true;
       if (i === q.ans) btn.classList.add('correct');
       else if (i === idx && !correct) btn.classList.add('wrong');
     });
- 
+
     document.getElementById('explanation-area').innerHTML =
       `<div class="explanation"><strong>${correct ? '✓ إجابة صحيحة' : '✗ إجابة خاطئة'}</strong> — ${q.exp}</div>`;
     document.getElementById('q-nav').style.display = 'flex';
     updateStatBadges();
   }
- 
+
   function nextQ() { currentQ++; renderQuestion(); }
- 
+
   function showScore() {
     document.getElementById('quiz-active-view').style.display = 'none';
     document.getElementById('quiz-score-view').style.display = 'block';
- 
+
     let totalCorrect = 0, totalQ = quizQuestions.length;
     Object.values(score).forEach(s => totalCorrect += s.correct);
     // Count only from this session
@@ -325,14 +325,14 @@ const DATA = {
     // Use running score totals for display
     let allCorrect = 0, allTotal = 0;
     Object.values(score).forEach(s => { allCorrect += s.correct; allTotal += s.total; });
- 
+
     const sessionScore = score;
     // Count session answers
     let sessC = 0;
     quizQuestions.forEach(q => {
       // approximate: use total - prior. Just show running tally.
     });
- 
+
     const pct = allTotal ? Math.round(allCorrect / allTotal * 100) : 0;
     const circleColor = pct >= 80 ? '#27a157' : pct >= 60 ? '#e0901a' : '#c44';
     const circle = document.getElementById('score-circle');
@@ -346,20 +346,20 @@ const DATA = {
       `أجبتِ بشكل صحيح على ${allCorrect} من أصل ${allTotal} سؤالاً بنسبة ${pct}%`;
     updateProgress();
   }
- 
+
   function restartQuiz() {
     document.getElementById('quiz-setup-view').style.display = 'block';
     document.getElementById('quiz-active-view').style.display = 'none';
     document.getElementById('quiz-score-view').style.display = 'none';
   }
- 
+
   function updateStatBadges() {
     ['math','phys','chem','bio'].forEach(s => {
       const st = score[s];
       document.getElementById('stat-' + s).textContent = st.total ? `${st.correct}/${st.total}` : '—';
     });
   }
- 
+
   function updateProgress() {
     let allCorrect = 0, allTotal = 0;
     ['math','phys','chem','bio'].forEach(s => {
@@ -379,8 +379,7 @@ const DATA = {
     document.getElementById('readiness-fill').style.width = overall + '%';
     document.getElementById('readiness-pct').textContent = overall + '%';
   }
- 
+
   // ===== INIT =====
   renderOverviewTopics('math');
   renderAllTopics();
-    }
