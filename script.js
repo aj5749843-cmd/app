@@ -146,10 +146,10 @@ const DATA = {
           exp: 'الزاويتان المتتامتان مجموعهما 90°. m∠2 = 90° − 40° = 50°.'
         },
         {
-          q: 'قيمة x في الشكل المجاور تساوي ..<br><svg width="160" height="125" viewBox="0 0 160 125" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><line x1="8" y1="18" x2="152" y2="108" stroke="#1e6fc0" stroke-width="2.5"/><line x1="152" y1="18" x2="8" y2="108" stroke="#1e6fc0" stroke-width="2.5"/><text x="62" y="52" font-size="12" fill="#c00" font-family="Arial">7x°</text><text x="62" y="82" font-size="12" fill="#555" font-family="Arial">3x°</text></svg>',
+          q: 'قيمة x في الشكل المجاور تساوي ..<br><svg width="160" height="125" viewBox="0 0 160 125" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><line x1="8" y1="18" x2="152" y2="108" stroke="#1e6fc0" stroke-width="2.5"/><line x1="152" y1="18" x2="8" y2="108" stroke="#1e6fc0" stroke-width="2.5"/><text x="62" y="52" font-size="12" fill="#c00" font-family="Arial">3x°</text><text x="62" y="82" font-size="12" fill="#555" font-family="Arial">6x°</text></svg>',
           opts: ['3', '20', '30', '60'],
-          ans: 2,
-          exp: 'الزوايا المتقايسة برأس متساوية: 7x = 3x + ... الزاويتان على مستقيم: 7x+3x=180°، 10x=180، x=18. أو إن كانت متقايستين: 7x=3x، لا حل. الزاويتان متكاملتان: مجموعهما 180°. 7x=3x لا ينجح. الزاوية الواحدة هي 3x والمجاورة 7x إذا كانتا على مستقيم: 10x=180، x=18. الإجابة بحسب الخيارات: x=30.'
+          ans: 1,
+          exp: 'الزاويتان المتجاورتان على مستقيم: 3x + 6x = 180°، 9x = 180°، x = 20.'
         },
         {
           q: 'في الشكل المجاور: قيمة x تساوي ..<br><svg width="210" height="125" viewBox="0 0 210 125" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="42" x2="200" y2="42" stroke="#1e6fc0" stroke-width="2"/><line x1="10" y1="92" x2="200" y2="92" stroke="#1e6fc0" stroke-width="2"/><text x="175" y="38" font-size="11" fill="#1e6fc0" font-family="Arial">→</text><text x="175" y="88" font-size="11" fill="#1e6fc0" font-family="Arial">→</text><line x1="75" y1="5" x2="135" y2="120" stroke="#c00" stroke-width="2"/><path d="M 91,42 A 18,18 0 0,0 84,25" fill="none" stroke="#555" stroke-width="1.5"/><text x="72" y="40" font-size="12" fill="#333" font-family="Arial">120°</text><path d="M 107,92 A 18,18 0 0,1 114,75" fill="none" stroke="#c00" stroke-width="1.5"/><text x="111" y="90" font-size="12" fill="#c00" font-family="Arial">x°</text></svg>',
