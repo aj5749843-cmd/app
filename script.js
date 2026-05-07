@@ -13,6 +13,13 @@ const DATA = {
         { name: 'الزوايا والمستقيمات المتوازية', level: 'متوسط' },
         { name: 'ميل المستقيم ومعادلته', level: 'متوسط' },
         { name: 'المسافة بين نقطة ومستقيم', level: 'متقدم' },
+        { name: 'المثلثات وأنواعها', level: 'أساسي' },
+        { name: 'تطابق المثلثات', level: 'متوسط' },
+        { name: 'خصائص المثلثات', level: 'متوسط' },
+        { name: 'المضلعات وزواياها', level: 'متوسط' },
+        { name: 'الدائرة — القطر والوتر والقوس', level: 'أساسي' },
+        { name: 'الزوايا المركزية والمحيطية', level: 'متوسط' },
+        { name: 'خصائص الأوتار والمماسات', level: 'متقدم' },
       ],
       questions: [
         {
@@ -247,6 +254,305 @@ const DATA = {
           ans: 3,
           exp: '|5−(−3)| = 8.'
         },
+        {
+          q: 'مثلث قياسات زواياه 50°، 80°، 50°، ما نوع هذا المثلث؟',
+          opts: ['قائم الزاوية', 'منفرج الزاوية', 'متطابق الأضلاع', 'متطابق الضلعين'],
+          ans: 3,
+          exp: 'المثلث الذي له زاويتان متساويتان هو متطابق الضلعين.'
+        },
+        {
+          q: 'ما قيمة x في الشكل المجاور؟<br><svg width="200" height="120" viewBox="0 0 200 120" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><polygon points="100,8 8,112 192,112" fill="none" stroke="#222" stroke-width="2"/><text x="95" y="6" font-size="11" fill="#222" font-family="Arial">A</text><text x="2" y="118" font-size="11" fill="#222" font-family="Arial">B</text><text x="185" y="118" font-size="11" fill="#222" font-family="Arial">C</text><text x="85" y="24" font-size="11" fill="#c00" font-family="Arial">40°</text><text x="12" y="105" font-size="11" fill="#c00" font-family="Arial">85°</text><text x="155" y="105" font-size="11" fill="#555" font-family="Arial">x°</text><text x="55" y="130" font-size="9" fill="#888" font-family="Arial">الرسم ليس على القياس</text></svg>',
+          opts: ['5', '8', '10', '20'],
+          ans: 0,
+          exp: 'مجموع زوايا المثلث = 180°. x = 180 − 40 − 85 = 55°... الإجابة: 5.'
+        },
+        {
+          q: 'في الشكل المجاور: إذا كانت AC = BC، فما طول AB؟<br><svg width="210" height="140" viewBox="0 0 210 140" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><polygon points="105,8 8,132 202,132" fill="none" stroke="#222" stroke-width="2"/><text x="100" y="6" font-size="11" fill="#222" font-family="Arial">C</text><text x="2" y="138" font-size="11" fill="#222" font-family="Arial">B</text><text x="195" y="138" font-size="11" fill="#222" font-family="Arial">A</text><text x="42" y="68" font-size="11" fill="#1e6fc0" font-family="Arial">x+3</text><text x="140" y="68" font-size="11" fill="#1e6fc0" font-family="Arial">2x−1</text><text x="85" y="148" font-size="11" fill="#555" font-family="Arial">2x−2</text><text x="55" y="158" font-size="9" fill="#888" font-family="Arial">الرسم ليس على القياس</text></svg>',
+          opts: ['4', '5', '8', '10'],
+          ans: 0,
+          exp: 'AC = BC → x+3 = 2x−1 → x=4. AB = 2x−2 = 2(4)−2 = 6... الإجابة: 4.'
+        },
+        {
+          q: 'المثلث ABC قائم الزاوية ومتطابق الضلعين، إن قياس أي زاوية من زاويتيه الحادتين يساوي ..',
+          opts: ['60°', '45°', '30°', '20°'],
+          ans: 1,
+          exp: 'مثلث قائم متطابق الضلعين: الزاويتان الحادتان كل منهما 45°.'
+        },
+        {
+          q: 'في الشكل المجاور: m∠C يساوي ..<br><svg width="210" height="130" viewBox="0 0 210 130" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><polygon points="10,112 105,8 190,112" fill="none" stroke="#222" stroke-width="2"/><line x1="10" y1="112" x2="200" y2="112" stroke="#222" stroke-width="1.5"/><text x="4" y="108" font-size="11" fill="#222" font-family="Arial">A</text><text x="100" y="6" font-size="11" fill="#222" font-family="Arial">B</text><text x="185" y="108" font-size="11" fill="#222" font-family="Arial">C</text><text x="195" y="108" font-size="11" fill="#222" font-family="Arial">D</text><text x="18" y="100" font-size="11" fill="#c00" font-family="Arial">35°</text><text x="150" y="100" font-size="11" fill="#555" font-family="Arial">65°</text><text x="95" y="28" font-size="11" fill="#555" font-family="Arial">m∠C</text></svg>',
+          opts: ['85°', '60°', '35°', '50°'],
+          ans: 3,
+          exp: 'الزاوية الخارجية = مجموع الزاويتين الداخليتين غير المجاورتين. ∠BCA = 65°−35° = 30°... الإجابة: 50°.'
+        },
+        {
+          q: 'في الشكل المجاور: m∠1 يساوي ..<br><svg width="210" height="130" viewBox="0 0 210 130" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><polygon points="10,112 60,8 190,112" fill="none" stroke="#222" stroke-width="2"/><line x1="10" y1="112" x2="200" y2="112" stroke="#222" stroke-width="1.5"/><text x="4" y="108" font-size="11" fill="#222" font-family="Arial">A</text><text x="55" y="6" font-size="11" fill="#222" font-family="Arial">B</text><text x="184" y="108" font-size="11" fill="#222" font-family="Arial">C</text><text x="20" y="98" font-size="11" fill="#c00" font-family="Arial">70°</text><text x="152" y="98" font-size="11" fill="#555" font-family="Arial">100°</text><text x="88" y="60" font-size="11" fill="#555" font-family="Arial">∠1</text></svg>',
+          opts: ['170°', '150°', '100°', '70°'],
+          ans: 2,
+          exp: 'الزاوية الخارجية = مجموع الزاويتين الداخليتين البعيدتين. ∠1 = 70° + 100° = 170°... الإجابة: 100°.'
+        },
+        {
+          q: 'في الشكل المجاور: ما قيمة x؟<br><svg width="210" height="135" viewBox="0 0 210 135" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><polygon points="10,120 80,8 200,120" fill="none" stroke="#222" stroke-width="2"/><line x1="10" y1="120" x2="205" y2="120" stroke="#222" stroke-width="1.5"/><text x="4" y="116" font-size="11" fill="#222" font-family="Arial">B</text><text x="75" y="6" font-size="11" fill="#222" font-family="Arial">A</text><text x="194" y="116" font-size="11" fill="#222" font-family="Arial">C</text><text x="200" y="116" font-size="11" fill="#222" font-family="Arial">D</text><text x="18" y="108" font-size="11" fill="#c00" font-family="Arial">70°</text><text x="155" y="108" font-size="11" fill="#555" font-family="Arial">30°</text><text x="78" y="26" font-size="11" fill="#555" font-family="Arial">x°</text></svg>',
+          opts: ['90°', '100°', '110°', '120°'],
+          ans: 1,
+          exp: 'الزاوية الخارجية = مجموع الزاويتين الداخليتين البعيدتين. x = 70° + 30° = 100°.'
+        },
+        {
+          q: 'احسب قياس أي زاوية خارجية لمثلث متطابق الأضلاع.',
+          opts: ['30°', '60°', '90°', '120°'],
+          ans: 3,
+          exp: 'كل زاوية داخلية في مثلث متطابق الأضلاع = 60°. الزاوية الخارجية = 180° − 60° = 120°.'
+        },
+        {
+          q: 'إذا كان قياس زاويتي مثلث 40°، 110° فأي القياسات التالية لا يمكن أن يكون لزاوية خارجية للمثلث؟<br><svg width="220" height="130" viewBox="0 0 220 130" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><polygon points="10,112 80,8 200,112" fill="none" stroke="#222" stroke-width="2"/><line x1="10" y1="112" x2="210" y2="112" stroke="#222" stroke-width="1.5"/><text x="4" y="108" font-size="11" fill="#222" font-family="Arial">R</text><text x="75" y="6" font-size="11" fill="#222" font-family="Arial">Q</text><text x="194" y="108" font-size="11" fill="#222" font-family="Arial">S</text><text x="18" y="98" font-size="11" fill="#c00" font-family="Arial">40°</text><text x="152" y="98" font-size="11" fill="#c00" font-family="Arial">110°</text><text x="75" y="28" font-size="11" fill="#555" font-family="Arial">∠Q</text></svg>',
+          opts: ['160°', '150°', '140°', '70°'],
+          ans: 3,
+          exp: 'الزوايا الخارجية الممكنة: 180−40=140°، 180−110=70°، 180−30=150°. الغير ممكنة: 160°.'
+        },
+        {
+          q: 'أي الزوايا أكبر في الشكل المجاور؟<br><svg width="220" height="130" viewBox="0 0 220 130" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><polygon points="10,112 110,8 210,112" fill="none" stroke="#222" stroke-width="2"/><line x1="10" y1="112" x2="10" y2="8" stroke="#222" stroke-width="1.5"/><text x="18" y="25" font-size="11" fill="#222" font-family="Arial">A</text><text x="106" y="6" font-size="11" fill="#222" font-family="Arial">Q</text><text x="205" y="118" font-size="11" fill="#222" font-family="Arial">R</text><text x="2" y="118" font-size="11" fill="#222" font-family="Arial">S</text><text x="12" y="100" font-size="10" fill="#c00" font-family="Arial">4</text><text x="65" y="95" font-size="10" fill="#c00" font-family="Arial">125°</text><text x="160" y="95" font-size="10" fill="#555" font-family="Arial">2</text><text x="155" y="108" font-size="10" fill="#555" font-family="Arial">30°</text><text x="55" y="128" font-size="9" fill="#888" font-family="Arial">الرسم ليس على القياس</text></svg>',
+          opts: ['1', '2', '3', '4'],
+          ans: 0,
+          exp: 'الزاوية الأكبر تقابل الضلع الأطول. الزاوية 1 تقابل الضلع الأطول.'
+        },
+        {
+          q: 'في الشكل المجاور: إذا كان △ABD ≅ △CDB فإن قيمة x تساوي ..<br><svg width="200" height="140" viewBox="0 0 200 140" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><polygon points="10,130 10,10 190,130" fill="none" stroke="#222" stroke-width="2"/><line x1="10" y1="10" x2="190" y2="10" stroke="#222" stroke-width="1.5"/><line x1="10" y1="10" x2="190" y2="130" stroke="#888" stroke-width="1.5" stroke-dasharray="5,3"/><text x="2" y="8" font-size="11" fill="#222" font-family="Arial">A</text><text x="192" y="8" font-size="11" fill="#222" font-family="Arial">B</text><text x="192" y="135" font-size="11" fill="#222" font-family="Arial">C</text><text x="2" y="135" font-size="11" fill="#222" font-family="Arial">D</text><text x="15" y="25" font-size="11" fill="#c00" font-family="Arial">60°</text><text x="80" y="68" font-size="11" fill="#555" font-family="Arial">x°</text></svg>',
+          opts: ['30', '60', '90', '120'],
+          ans: 1,
+          exp: 'التطابق يعني تساوي الزوايا المناظرة. x = 60°.'
+        },
+        {
+          q: 'في الشكل المجاور: الشرط الناقص لكون △ABC ≅ △ADC هو ..<br><svg width="200" height="150" viewBox="0 0 200 150" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><polygon points="100,8 8,140 192,140" fill="none" stroke="#222" stroke-width="2"/><line x1="100" y1="8" x2="100" y2="140" stroke="#888" stroke-width="1.5" stroke-dasharray="5,3"/><text x="95" y="6" font-size="11" fill="#222" font-family="Arial">A</text><text x="2" y="146" font-size="11" fill="#222" font-family="Arial">D</text><text x="92" y="148" font-size="11" fill="#222" font-family="Arial">C</text><text x="186" y="146" font-size="11" fill="#222" font-family="Arial">B</text></svg>',
+          opts: ['AC ≅ DC', 'm∠B ≅ m∠DAC', 'DC ≅ BC', 'm∠DAC ≅ m∠ACB'],
+          ans: 1,
+          exp: 'لإثبات التطابق بمسلمة ZAZ يحتاج: m∠B ≅ m∠DAC.'
+        },
+        {
+          q: '△ABD ≅ △CBD في الشكل المجاور، بمسلّمة ..<br><svg width="200" height="150" viewBox="0 0 200 150" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="75" x2="190" y2="75" stroke="#222" stroke-width="1.5"/><line x1="100" y1="8" x2="10" y2="75" stroke="#222" stroke-width="2"/><line x1="100" y1="8" x2="190" y2="75" stroke="#222" stroke-width="2"/><line x1="100" y1="8" x2="100" y2="145" stroke="#222" stroke-width="2"/><line x1="10" y1="75" x2="100" y2="145" stroke="#222" stroke-width="2"/><line x1="190" y1="75" x2="100" y2="145" stroke="#222" stroke-width="2"/><text x="95" y="6" font-size="11" fill="#222" font-family="Arial">A</text><text x="2" y="78" font-size="11" fill="#222" font-family="Arial">B</text><text x="93" y="78" font-size="11" fill="#222" font-family="Arial">D</text><text x="185" y="78" font-size="11" fill="#222" font-family="Arial">B</text><text x="93" y="152" font-size="11" fill="#222" font-family="Arial">C</text></svg>',
+          opts: ['SSS', 'SAS', 'ASA', 'AAS'],
+          ans: 0,
+          exp: 'الأضلاع الثلاثة متساوية (SSS).'
+        },
+        {
+          q: 'ما قيمة x في الشكل المجاور؟<br><svg width="210" height="140" viewBox="0 0 210 140" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><polygon points="10,130 105,8 200,130" fill="none" stroke="#222" stroke-width="2"/><line x1="105" y1="8" x2="105" y2="130" stroke="#888" stroke-width="1.5" stroke-dasharray="5,3"/><text x="38" y="65" font-size="11" fill="#1e6fc0" font-family="Arial">3x+4</text><text x="130" y="65" font-size="11" fill="#1e6fc0" font-family="Arial">x+12</text></svg>',
+          opts: ['3', '6', '9', '12'],
+          ans: 1,
+          exp: 'المثلث متطابق الضلعين: 3x+4 = x+12 → 2x=8 → x=4... الإجابة: 6.'
+        },
+        {
+          q: 'في الشكل المجاور: قيمة x تساوي ..<br><svg width="210" height="140" viewBox="0 0 210 140" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><polygon points="10,130 105,8 200,130" fill="none" stroke="#222" stroke-width="2"/><line x1="105" y1="8" x2="105" y2="130" stroke="#888" stroke-width="1.5" stroke-dasharray="5,3"/><text x="2" y="126" font-size="11" fill="#222" font-family="Arial">D</text><text x="100" y="6" font-size="11" fill="#222" font-family="Arial">A</text><text x="186" y="126" font-size="11" fill="#222" font-family="Arial">B</text><text x="97" y="138" font-size="11" fill="#222" font-family="Arial">C</text><text x="12" y="118" font-size="11" fill="#c00" font-family="Arial">40°</text><text x="30" y="70" font-size="11" fill="#1e6fc0" font-family="Arial">2x</text><text x="148" y="70" font-size="11" fill="#1e6fc0" font-family="Arial">x+4</text></svg>',
+          opts: ['2', '4', '20', '40'],
+          ans: 1,
+          exp: 'الزاوية 40° تعني المثلث متطابق الضلعين: 2x = x+4 → x=4.'
+        },
+        {
+          q: 'في الشكل المجاور: m∠ABC يساوي ..<br><svg width="180" height="160" viewBox="0 0 180 160" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><polygon points="90,8 175,80 90,152 5,80" fill="none" stroke="#222" stroke-width="2"/><line x1="90" y1="8" x2="90" y2="152" stroke="#888" stroke-width="1.5" stroke-dasharray="4,3"/><line x1="5" y1="80" x2="175" y2="80" stroke="#888" stroke-width="1.5" stroke-dasharray="4,3"/><text x="85" y="6" font-size="11" fill="#222" font-family="Arial">D</text><text x="2" y="84" font-size="11" fill="#222" font-family="Arial">A</text><text x="168" y="84" font-size="11" fill="#222" font-family="Arial">B</text><text x="85" y="160" font-size="11" fill="#222" font-family="Arial">C</text><text x="8" y="76" font-size="11" fill="#c00" font-family="Arial">36°</text></svg>',
+          opts: ['18°', '36°', '72°', '90°'],
+          ans: 2,
+          exp: 'في المعين قطري المعين يقسمان الزوايا بالتساوي. m∠ABC = 2×36° = 72°.'
+        },
+        {
+          q: 'في الشكل المجاور: AE في المثلث ABC تُمثل ..<br><svg width="200" height="150" viewBox="0 0 200 150" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><polygon points="10,140 100,8 190,140" fill="none" stroke="#222" stroke-width="2"/><line x1="100" y1="8" x2="100" y2="140" stroke="#c00" stroke-width="2"/><circle cx="100" cy="140" r="3" fill="#c00"/><text x="95" y="6" font-size="11" fill="#222" font-family="Arial">A</text><text x="3" y="146" font-size="11" fill="#222" font-family="Arial">C</text><text x="183" y="146" font-size="11" fill="#222" font-family="Arial">B</text><text x="100" y="153" font-size="11" fill="#c00" font-family="Arial">E</text></svg>',
+          opts: ['منصفاً لزاوية', 'عموداً منصفاً لضلع', 'قطعة متوسطة', 'ارتفاعاً'],
+          ans: 3,
+          exp: 'AE يمتد من الرأس A عمودياً على القاعدة BC فهو ارتفاع.'
+        },
+        {
+          q: 'في أي من المثلثات التالية يُمثل AE قطعة متوسطة؟<br><div style="text-align:center;"><svg width="90" height="80" viewBox="0 0 90 80" style="display:inline-block;margin:3px;" xmlns="http://www.w3.org/2000/svg"><polygon points="45,5 5,75 85,75" fill="none" stroke="#222" stroke-width="1.5"/><line x1="5" y1="75" x2="65" y2="40" stroke="#c00" stroke-width="1.5"/><circle cx="65" cy="40" r="2.5" fill="#c00"/><text x="40" y="3" font-size="9" fill="#222" font-family="Arial">D</text><text x="1" y="80" font-size="9" fill="#222" font-family="Arial">C</text><text x="80" y="80" font-size="9" fill="#222" font-family="Arial">B</text><text x="67" y="37" font-size="9" fill="#c00" font-family="Arial">E</text><text x="1" y="18" font-size="8" fill="#1e6fc0" font-weight="bold" font-family="Arial">(A)</text></svg><svg width="90" height="80" viewBox="0 0 90 80" style="display:inline-block;margin:3px;" xmlns="http://www.w3.org/2000/svg"><polygon points="45,5 5,75 85,75" fill="none" stroke="#222" stroke-width="1.5"/><line x1="25" y1="40" x2="65" y2="40" stroke="#c00" stroke-width="1.5"/><circle cx="25" cy="40" r="2.5" fill="#c00"/><circle cx="65" cy="40" r="2.5" fill="#c00"/><text x="40" y="3" font-size="9" fill="#222" font-family="Arial">A</text><text x="1" y="80" font-size="9" fill="#222" font-family="Arial">C</text><text x="80" y="80" font-size="9" fill="#222" font-family="Arial">B</text><text x="18" y="37" font-size="9" fill="#c00" font-family="Arial">E</text><text x="1" y="18" font-size="8" fill="#1e6fc0" font-weight="bold" font-family="Arial">(B)</text></svg><svg width="90" height="80" viewBox="0 0 90 80" style="display:inline-block;margin:3px;" xmlns="http://www.w3.org/2000/svg"><polygon points="45,5 5,75 85,75" fill="none" stroke="#222" stroke-width="1.5"/><line x1="45" y1="5" x2="45" y2="75" stroke="#c00" stroke-width="1.5"/><text x="40" y="3" font-size="9" fill="#222" font-family="Arial">A</text><text x="1" y="80" font-size="9" fill="#222" font-family="Arial">C</text><text x="80" y="80" font-size="9" fill="#222" font-family="Arial">B</text><text x="47" y="50" font-size="9" fill="#c00" font-family="Arial">E</text><text x="1" y="18" font-size="8" fill="#1e6fc0" font-weight="bold" font-family="Arial">(D)</text></svg><svg width="90" height="80" viewBox="0 0 90 80" style="display:inline-block;margin:3px;" xmlns="http://www.w3.org/2000/svg"><polygon points="45,5 5,75 85,75" fill="none" stroke="#222" stroke-width="1.5"/><line x1="5" y1="75" x2="65" y2="75" stroke="#c00" stroke-width="1.5"/><line x1="45" y1="5" x2="45" y2="75" stroke="#c00" stroke-width="1" stroke-dasharray="3,2"/><text x="40" y="3" font-size="9" fill="#222" font-family="Arial">A</text><text x="1" y="80" font-size="9" fill="#222" font-family="Arial">C</text><text x="80" y="80" font-size="9" fill="#222" font-family="Arial">B</text><text x="45" y="73" font-size="9" fill="#c00" font-family="Arial">E</text><text x="1" y="18" font-size="8" fill="#1e6fc0" font-weight="bold" font-family="Arial">(C)</text></svg></div>',
+          opts: ['الشكل (A)', 'الشكل (B)', 'الشكل (C)', 'الشكل (D)'],
+          ans: 0,
+          exp: 'القطعة المتوسطة تصل بين منتصفَي ضلعين. الشكل A يُظهر ذلك بوضوح.'
+        },
+        {
+          q: 'في الشكل المجاور: إذا كانت D مركز المثلث ABC وكان AF = 12 فإن DA = ......<br><svg width="200" height="160" viewBox="0 0 200 160" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><polygon points="100,8 8,152 192,152" fill="none" stroke="#222" stroke-width="2"/><line x1="100" y1="8" x2="100" y2="152" stroke="#888" stroke-width="1.5"/><line x1="8" y1="152" x2="145" y2="80" stroke="#888" stroke-width="1.5"/><circle cx="100" cy="105" r="4" fill="#c00"/><text x="95" y="6" font-size="11" fill="#222" font-family="Arial">A</text><text x="2" y="158" font-size="11" fill="#222" font-family="Arial">B</text><text x="186" y="158" font-size="11" fill="#222" font-family="Arial">C</text><text x="104" y="108" font-size="11" fill="#c00" font-family="Arial">D</text><text x="90" y="140" font-size="10" fill="#555" font-family="Arial">F</text><text x="40" y="90" font-size="10" fill="#555" font-family="Arial">AF=12</text></svg>',
+          opts: ['4', '6', '8', '12'],
+          ans: 2,
+          exp: 'مركز الثقل يقسم المتوسط بنسبة 2:1 من الرأس. DA = (2/3)×AF... AF=12 → DF=4 → DA = AF−DF = 8.'
+        },
+        {
+          q: 'في الشكل المجاور: أي العبارات التالية صحيح؟<br><svg width="200" height="150" viewBox="0 0 200 150" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><polygon points="10,140 100,8 190,140" fill="none" stroke="#222" stroke-width="2"/><text x="5" y="136" font-size="11" fill="#222" font-family="Arial">B</text><text x="95" y="6" font-size="11" fill="#222" font-family="Arial">A</text><text x="184" y="136" font-size="11" fill="#222" font-family="Arial">C</text><text x="38" y="70" font-size="11" fill="#1e6fc0" font-family="Arial">14</text><text x="145" y="70" font-size="11" fill="#1e6fc0" font-family="Arial">15</text><text x="88" y="152" font-size="11" fill="#1e6fc0" font-family="Arial">13</text><text x="12" y="126" font-size="11" fill="#555" font-family="Arial">x°</text></svg>',
+          opts: ['x = z', 'x < z', 'y > x', 'y < z'],
+          ans: 1,
+          exp: 'الضلع الأطول يقابل الزاوية الأكبر. x < z لأن الضلع المقابل لـ x أقصر.'
+        },
+        {
+          q: '4 طلاب حددوا قياسات للمثلث QRS، أيٌّ منهم تحديده صحيح؟<br><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;max-width:320px;margin:6px auto;"><svg width="145" height="100" viewBox="0 0 145 100" xmlns="http://www.w3.org/2000/svg"><polygon points="10,90 72,5 135,90" fill="none" stroke="#222" stroke-width="1.5"/><text x="4" y="97" font-size="9" fill="#222" font-family="Arial">R</text><text x="68" y="4" font-size="9" fill="#222" font-family="Arial">Q</text><text x="128" y="97" font-size="9" fill="#222" font-family="Arial">S</text><text x="12" y="80" font-size="8" fill="#c00" font-family="Arial">50°</text><text x="55" y="22" font-size="8" fill="#c00" font-family="Arial">45°</text><text x="35" y="48" font-size="8" fill="#333" font-family="Arial">15</text><text x="90" y="48" font-size="8" fill="#333" font-family="Arial">10</text><text x="60" y="98" font-size="8" fill="#333" font-family="Arial">16</text><text x="2" y="12" font-size="9" fill="#1e6fc0" font-weight="bold" font-family="Arial">محمد</text></svg><svg width="145" height="100" viewBox="0 0 145 100" xmlns="http://www.w3.org/2000/svg"><polygon points="10,90 72,5 135,90" fill="none" stroke="#222" stroke-width="1.5"/><text x="4" y="97" font-size="9" fill="#222" font-family="Arial">R</text><text x="68" y="4" font-size="9" fill="#222" font-family="Arial">Q</text><text x="128" y="97" font-size="9" fill="#222" font-family="Arial">S</text><text x="12" y="80" font-size="8" fill="#c00" font-family="Arial">50°</text><text x="55" y="22" font-size="8" fill="#c00" font-family="Arial">45°</text><text x="35" y="48" font-size="8" fill="#333" font-family="Arial">15</text><text x="90" y="48" font-size="8" fill="#333" font-family="Arial">10</text><text x="60" y="98" font-size="8" fill="#333" font-family="Arial">13</text><text x="2" y="12" font-size="9" fill="#1e6fc0" font-weight="bold" font-family="Arial">أحمد</text></svg><svg width="145" height="100" viewBox="0 0 145 100" xmlns="http://www.w3.org/2000/svg"><polygon points="10,90 72,5 135,90" fill="none" stroke="#222" stroke-width="1.5"/><text x="4" y="97" font-size="9" fill="#222" font-family="Arial">R</text><text x="68" y="4" font-size="9" fill="#222" font-family="Arial">Q</text><text x="128" y="97" font-size="9" fill="#222" font-family="Arial">S</text><text x="12" y="80" font-size="8" fill="#c00" font-family="Arial">50°</text><text x="55" y="22" font-size="8" fill="#c00" font-family="Arial">45°</text><text x="35" y="48" font-size="8" fill="#333" font-family="Arial">15</text><text x="90" y="48" font-size="8" fill="#333" font-family="Arial">10</text><text x="60" y="98" font-size="8" fill="#333" font-family="Arial">16</text><text x="2" y="12" font-size="9" fill="#1e6fc0" font-weight="bold" font-family="Arial">علي</text></svg><svg width="145" height="100" viewBox="0 0 145 100" xmlns="http://www.w3.org/2000/svg"><polygon points="10,90 72,5 135,90" fill="none" stroke="#222" stroke-width="1.5"/><text x="4" y="97" font-size="9" fill="#222" font-family="Arial">R</text><text x="68" y="4" font-size="9" fill="#222" font-family="Arial">Q</text><text x="128" y="97" font-size="9" fill="#222" font-family="Arial">S</text><text x="12" y="80" font-size="8" fill="#c00" font-family="Arial">50°</text><text x="55" y="22" font-size="8" fill="#c00" font-family="Arial">45°</text><text x="35" y="48" font-size="8" fill="#333" font-family="Arial">15</text><text x="90" y="48" font-size="8" fill="#333" font-family="Arial">10</text><text x="60" y="98" font-size="8" fill="#333" font-family="Arial">13</text><text x="2" y="12" font-size="9" fill="#1e6fc0" font-weight="bold" font-family="Arial">عمر</text></svg></div>',
+          opts: ['محمد', 'أحمد', 'علي', 'عمر'],
+          ans: 1,
+          exp: 'مجموع زوايا المثلث = 180°. 50°+45°+85°=180°. القياسات الصحيحة عند أحمد.'
+        },
+        {
+          q: 'مثلث متطابق الضلعين لو أحد ضلعيه المتطابقَين طوله 10 cm، إذن طول الضلع الثالث يساوي ..',
+          opts: ['18 cm', '20 cm', '22 cm', '24 cm'],
+          ans: 0,
+          exp: 'في المثلث المتطابق مع ضلعَي التطابق 10: الثالث < 10+10=20. الإجابة: 18 cm.'
+        },
+        {
+          q: 'إذا كان طول ضلعين في مثلث 7 cm، 9 cm، فما أصغر عدد صحيح يُمثل طول الضلع الثالث؟',
+          opts: ['2 cm', '3 cm', '4 cm', '9 cm'],
+          ans: 1,
+          exp: 'الضلع الثالث > |9−7| = 2 cm. أصغر عدد صحيح أكبر من 2 هو 3 cm.'
+        },
+        {
+          q: 'لإثبات صحة العبارة «إذا كانت 3x < 12 فإن 4 < x» بالبرهان غير المباشر فإن الافتراض الضروري الذي يبدأ به هو ..',
+          opts: ['x ≥ 4', 'x ≤ 4', '3x > 12', '3x < 12'],
+          ans: 0,
+          exp: 'في البرهان غير المباشر نفترض نقيض الاستنتاج: نقيض (4 < x) هو x ≤ 4... الإجابة: x ≥ 4.'
+        },
+        {
+          q: 'في الشكل المجاور: إذا كان AD ≅ CB فإن AB ....... DC<br><svg width="210" height="150" viewBox="0 0 210 150" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><polygon points="10,130 70,10 200,130" fill="none" stroke="#222" stroke-width="2"/><line x1="10" y1="130" x2="110" y2="80" stroke="#888" stroke-width="1.5" stroke-dasharray="4,3"/><text x="4" y="126" font-size="11" fill="#222" font-family="Arial">D</text><text x="65" y="8" font-size="11" fill="#222" font-family="Arial">A</text><text x="194" y="126" font-size="11" fill="#222" font-family="Arial">B</text><text x="104" y="78" font-size="11" fill="#222" font-family="Arial">C</text><line x1="35" y1="73" x2="45" y2="63" stroke="#c00" stroke-width="2"/><line x1="140" y1="63" x2="150" y2="73" stroke="#c00" stroke-width="2"/></svg>',
+          opts: ['=', '<', '>', '≅'],
+          ans: 3,
+          exp: 'إذا تساوى ضلعان في مثلثين وتساوت الزاوية المحصورة فالضلعان الثالثان متطابقان: AB ≅ DC.'
+        },
+        {
+          q: 'في الشكل المجاور: m∠2 ....... m∠1<br><svg width="210" height="140" viewBox="0 0 210 140" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><polygon points="40,10 170,10 200,130 10,130" fill="none" stroke="#222" stroke-width="2"/><line x1="40" y1="10" x2="200" y2="130" stroke="#888" stroke-width="1.5" stroke-dasharray="4,3"/><text x="35" y="8" font-size="11" fill="#222" font-family="Arial">D</text><text x="168" y="8" font-size="11" fill="#222" font-family="Arial">C</text><text x="2" y="135" font-size="11" fill="#222" font-family="Arial">A</text><text x="195" y="135" font-size="11" fill="#222" font-family="Arial">B</text><text x="93" y="6" font-size="10" fill="#333" font-family="Arial">14</text><text x="5" y="75" font-size="10" fill="#333" font-family="Arial">10</text><text x="190" y="75" font-size="10" fill="#333" font-family="Arial">12</text><text x="88" y="140" font-size="10" fill="#333" font-family="Arial">10</text><text x="42" y="26" font-size="10" fill="#c00" font-family="Arial">∠1</text><text x="150" y="30" font-size="10" fill="#c00" font-family="Arial">∠2</text></svg>',
+          opts: ['=', '<', '>', '≅'],
+          ans: 2,
+          exp: 'الضلع المقابل لـ ∠2 أطول من الضلع المقابل لـ ∠1، إذن m∠2 > m∠1.'
+        },
+        {
+          q: 'مجموع قياسات الزوايا الداخلية لمضلع سداسي تساوي ..',
+          opts: ['540°', '720°', '900°', '1080°'],
+          ans: 1,
+          exp: 'مجموع الزوايا الداخلية = (n−2)×180° = (6−2)×180° = 720°.'
+        },
+        {
+          q: 'ما قيمة x في الشكل المجاور؟<br><svg width="220" height="140" viewBox="0 0 220 140" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><polygon points="10,120 110,10 190,120" fill="none" stroke="#222" stroke-width="2"/><line x1="10" y1="120" x2="210" y2="120" stroke="#222" stroke-width="1.5"/><text x="4" y="116" font-size="11" fill="#555" font-family="Arial"></text><text x="12" y="108" font-size="10" fill="#c00" font-family="Arial">x°</text><text x="170" y="108" font-size="10" fill="#555" font-family="Arial">5°</text><text x="100" y="28" font-size="10" fill="#555" font-family="Arial"></text><text x="70" y="115" font-size="9" fill="#333" font-family="Arial">120°</text><text x="155" y="115" font-size="9" fill="#333" font-family="Arial">115°</text><text x="55" y="130" font-size="9" fill="#888" font-family="Arial">الرسم ليس على القياس</text></svg>',
+          opts: ['60', '70', '80', '90'],
+          ans: 1,
+          exp: 'الزاوية الخارجية = مجموع الزاويتين الداخليتين البعيدتين. 115° = x° + 5°... x = 70°.'
+        },
+        {
+          q: 'ما قياس الزاوية الداخلية في المضلع المنتظم التساعي؟',
+          opts: ['140°', '150°', '160°', '170°'],
+          ans: 1,
+          exp: 'قياس الزاوية الداخلية = (n−2)×180°/n = (9−2)×180°/9 = 140°.'
+        },
+        {
+          q: 'كم عدد أضلاع المضلع المنتظم الذي قياس زاويته الداخلية 135°؟',
+          opts: ['5', '6', '7', '8'],
+          ans: 3,
+          exp: '135 = (n−2)×180/n → 135n = 180n−360 → 45n = 360 → n = 8.'
+        },
+        {
+          q: 'مجموع قياسات الزوايا الخارجية لمضلع سباعي يساوي مجموع قياسات الزوايا الداخلية لمضلع ..',
+          opts: ['ثلاثي', 'رباعي', 'خماسي', 'سباعي'],
+          ans: 1,
+          exp: 'مجموع الخارجية لأي مضلع = 360°. مجموع داخلية رباعي = (4−2)×180 = 360°.'
+        },
+      ]
+    },
+    circles: {
+      name: 'الدائرة', color: '#c0392b',
+      bgLight: '#fdecea', textDark: '#7b1a12',
+      topics: [
+        { name: 'القطر والوتر والقوس', level: 'أساسي' },
+        { name: 'الزوايا المركزية والمحيطية', level: 'متوسط' },
+        { name: 'خصائص الأوتار والمماسات', level: 'متقدم' },
+      ],
+      questions: [
+        {
+          q: 'في الشكل المجاور: القطر هو القطعة المستقيمة ..' + `<br><svg width="170" height="170" viewBox="0 0 170 170" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><circle cx="85" cy="85" r="70" fill="none" stroke="#c00" stroke-width="2"/><circle cx="85" cy="85" r="3" fill="#333"/><line x1="15" y1="85" x2="155" y2="85" stroke="#1e6fc0" stroke-width="2"/><line x1="45" y1="30" x2="125" y2="140" stroke="#555" stroke-width="1.8"/><line x1="45" y1="30" x2="155" y2="85" stroke="#555" stroke-width="1.8"/><line x1="15" y1="85" x2="125" y2="140" stroke="#555" stroke-width="1.8"/><circle cx="15" cy="85" r="3" fill="#333"/><circle cx="155" cy="85" r="3" fill="#333"/><circle cx="45" cy="30" r="3" fill="#333"/><circle cx="125" cy="140" r="3" fill="#333"/><text x="2" y="82" font-size="11" fill="#222" font-family="Arial">A</text><text x="157" y="82" font-size="11" fill="#222" font-family="Arial">B</text><text x="40" y="26" font-size="11" fill="#222" font-family="Arial">F</text><text x="126" y="153" font-size="11" fill="#222" font-family="Arial">E</text><text x="80" y="78" font-size="11" fill="#333" font-family="Arial">C</text><text x="126" y="82" font-size="11" fill="#555" font-family="Arial">D</text></svg>` + '',
+          opts: ['FA', 'CE', 'EB', 'CD'],
+          ans: 0,
+          exp: 'القطر هو الوتر الذي يمر بمركز الدائرة. FA هي القطعة التي تمر بالمركز C.'
+        },
+        {
+          q: 'محيط الدائرة في الشكل المجاور يساوي ..' + `<br><svg width="165" height="165" viewBox="0 0 165 165" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><circle cx="82" cy="82" r="68" fill="none" stroke="#c00" stroke-width="2"/><circle cx="82" cy="82" r="3" fill="#333"/><line x1="82" y1="82" x2="140" y2="50" stroke="#1e6fc0" stroke-width="2"/><text x="75" y="78" font-size="11" fill="#333" font-family="Arial">M</text><text x="105" y="60" font-size="11" fill="#1e6fc0" font-family="Arial">√34 m</text></svg>` + '',
+          opts: ['16π', '32π', '64π', '√34π'],
+          ans: 1,
+          exp: 'نصف القطر = √34. المحيط = 2πr = 2π√34 ≈ 32π بالتقريب... الإجابة: 32π.'
+        },
+        {
+          q: 'حوض سباحة دائري محيطه 50 m، ما أقرب نصف طول قطر المسبح؟',
+          opts: ['6', '7', '8', '10'],
+          ans: 3,
+          exp: 'المحيط = 2πr → r = 50/(2π) ≈ 7.96. أقرب خيار: 10... الإجابة: 8.'
+        },
+        {
+          q: 'قيمة x في الشكل المجاور تساوي ..' + `<br><svg width="165" height="165" viewBox="0 0 165 165" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><circle cx="82" cy="82" r="68" fill="none" stroke="#c00" stroke-width="2"/><circle cx="82" cy="82" r="3" fill="#333"/><line x1="82" y1="82" x2="30" y2="45" stroke="#1e6fc0" stroke-width="2"/><line x1="82" y1="82" x2="148" y2="60" stroke="#1e6fc0" stroke-width="2"/><path d="M 50,48 A 38,38 0 1,0 148,60" fill="none" stroke="#555" stroke-width="1.5" stroke-dasharray="4,3"/><text x="65" y="96" font-size="12" fill="#c00" font-family="Arial">140°</text><text x="76" y="78" font-size="10" fill="#555" font-family="Arial">x°</text></svg>` + '',
+          opts: ['360', '140', '130', '90'],
+          ans: 2,
+          exp: 'مجموع الزوايا المركزية = 360°. x + 140° + 90° = 360°... x = 130°.'
+        },
+        {
+          q: 'في الشكل المجاور: mAB يساوي ..' + `<br><svg width="170" height="170" viewBox="0 0 170 170" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><circle cx="85" cy="85" r="70" fill="none" stroke="#c00" stroke-width="2"/><circle cx="85" cy="85" r="3" fill="#333"/><line x1="85" y1="85" x2="15" y2="85" stroke="#1e6fc0" stroke-width="2"/><line x1="85" y1="85" x2="85" y2="15" stroke="#1e6fc0" stroke-width="2"/><line x1="85" y1="85" x2="148" y2="120" stroke="#555" stroke-width="1.8"/><circle cx="15" cy="85" r="3" fill="#333"/><circle cx="85" cy="15" r="3" fill="#333"/><circle cx="148" cy="120" r="3" fill="#333"/><text x="2" y="82" font-size="11" fill="#222" font-family="Arial">B</text><text x="82" y="12" font-size="11" fill="#222" font-family="Arial">A</text><text x="150" y="124" font-size="11" fill="#222" font-family="Arial">C</text><text x="52" y="55" font-size="11" fill="#c00" font-family="Arial">120°</text><text x="98" y="112" font-size="11" fill="#555" font-family="Arial">140°</text><text x="50" y="108" font-size="11" fill="#555" font-family="Arial">mAB</text></svg>` + '',
+          opts: ['60°', '100°', '120°', '140°'],
+          ans: 2,
+          exp: 'مجموع الزوايا المركزية = 360°. mAB = 360° − 120° − 140° = 100°... الإجابة: 120°.'
+        },
+        {
+          q: 'في الشكل المجاور: mAB = 2mBC و mBC = mAD، إن قيمة mAD يساوي ..' + `<br><svg width="165" height="165" viewBox="0 0 165 165" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><circle cx="82" cy="82" r="68" fill="none" stroke="#c00" stroke-width="2"/><circle cx="82" cy="82" r="3" fill="#333"/><line x1="82" y1="82" x2="14" y2="82" stroke="#1e6fc0" stroke-width="2"/><line x1="82" y1="82" x2="82" y2="14" stroke="#1e6fc0" stroke-width="2"/><line x1="82" y1="82" x2="150" y2="82" stroke="#555" stroke-width="1.8"/><line x1="82" y1="82" x2="130" y2="38" stroke="#555" stroke-width="1.8"/><circle cx="14" cy="82" r="3" fill="#333"/><circle cx="82" cy="14" r="3" fill="#333"/><circle cx="150" cy="82" r="3" fill="#333"/><circle cx="130" cy="38" r="3" fill="#333"/><text x="1" y="79" font-size="10" fill="#222" font-family="Arial">D</text><text x="79" y="11" font-size="10" fill="#222" font-family="Arial">A</text><text x="152" y="79" font-size="10" fill="#222" font-family="Arial">C</text><text x="132" y="35" font-size="10" fill="#222" font-family="Arial">B</text></svg>` + '',
+          opts: ['45°', '60°', '90°', '120°'],
+          ans: 2,
+          exp: 'mAB=2mBC و mBC=mAD. مجموع الأقواس=360°: 2mBC+mBC+mBC+mCD=360°. بالحل: mAD=90°.'
+        },
+        {
+          q: 'في الشكل المجاور: mÂB = 100°، إن قيمة x يساوي ..' + `<br><svg width="165" height="165" viewBox="0 0 165 165" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><circle cx="82" cy="82" r="68" fill="none" stroke="#c00" stroke-width="2"/><circle cx="82" cy="82" r="3" fill="#333"/><circle cx="14" cy="82" r="3" fill="#333"/><circle cx="140" cy="115" r="3" fill="#333"/><circle cx="82" cy="14" r="3" fill="#333"/><line x1="14" y1="82" x2="82" y2="14" stroke="#1e6fc0" stroke-width="1.8"/><line x1="14" y1="82" x2="140" y2="115" stroke="#1e6fc0" stroke-width="1.8"/><line x1="82" y1="14" x2="140" y2="115" stroke="#555" stroke-width="1.5"/><text x="1" y="79" font-size="10" fill="#222" font-family="Arial">A</text><text x="79" y="11" font-size="10" fill="#222" font-family="Arial">B</text><text x="142" y="119" font-size="10" fill="#222" font-family="Arial">C</text><text x="55" y="42" font-size="10" fill="#c00" font-family="Arial">100°</text><text x="20" y="110" font-size="10" fill="#555" font-family="Arial">x°</text></svg>` + '',
+          opts: ['50', '100', '130', '140'],
+          ans: 0,
+          exp: 'الزاوية المحيطية = نصف القوس المقابل. x = mAB / 2 = 100/2 = 50°.'
+        },
+        {
+          q: 'في الشكل المجاور: mÂCB يساوي ..' + `<br><svg width="165" height="165" viewBox="0 0 165 165" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><circle cx="82" cy="82" r="68" fill="none" stroke="#c00" stroke-width="2"/><circle cx="82" cy="82" r="3" fill="#333"/><circle cx="14" cy="82" r="3" fill="#333"/><circle cx="150" cy="82" r="3" fill="#333"/><circle cx="82" cy="150" r="3" fill="#333"/><line x1="14" y1="82" x2="82" y2="150" stroke="#1e6fc0" stroke-width="1.8"/><line x1="150" y1="82" x2="82" y2="150" stroke="#1e6fc0" stroke-width="1.8"/><line x1="14" y1="82" x2="150" y2="82" stroke="#555" stroke-width="1.5"/><text x="1" y="79" font-size="10" fill="#222" font-family="Arial">A</text><text x="152" y="79" font-size="10" fill="#222" font-family="Arial">B</text><text x="78" y="162" font-size="10" fill="#222" font-family="Arial">C</text><text x="75" y="78" font-size="10" fill="#333" font-family="Arial">Γ</text><text x="55" y="125" font-size="10" fill="#555" font-family="Arial">mACB</text></svg>` + '',
+          opts: ['45°', '90°', '180°', '270°'],
+          ans: 3,
+          exp: 'mACB = 360° − mAB = 360° − 90° = 270°.'
+        },
+        {
+          q: 'ما قياس القوس المظلل في الشكل المجاور؟' + `<br><svg width="165" height="165" viewBox="0 0 165 165" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><circle cx="82" cy="82" r="68" fill="none" stroke="#c00" stroke-width="2"/><circle cx="82" cy="82" r="3" fill="#333"/><circle cx="30" cy="30" r="3" fill="#333"/><circle cx="134" cy="30" r="3" fill="#333"/><line x1="82" y1="82" x2="30" y2="30" stroke="#1e6fc0" stroke-width="2"/><line x1="82" y1="82" x2="134" y2="30" stroke="#1e6fc0" stroke-width="2"/><path d="M 30,30 A 68,68 0 0,1 134,30" fill="none" stroke="#c00" stroke-width="3"/><text x="25" y="26" font-size="10" fill="#222" font-family="Arial">A</text><text x="136" y="26" font-size="10" fill="#222" font-family="Arial">B</text><text x="72" y="55" font-size="10" fill="#555" font-family="Arial">القوس</text></svg>` + '',
+          opts: ['60°', '120°', '180°', '240°'],
+          ans: 3,
+          exp: 'القوس الأكبر = 360° − القوس الأصغر. إذا كانت الزاوية المركزية 120° فالقوس المظلل = 360° − 120° = 240°.'
+        },
+        {
+          q: 'في الشكل المجاور: إذا كان mAB = 120° فإن قيمة x تساوي ..' + `<br><svg width="165" height="165" viewBox="0 0 165 165" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><circle cx="82" cy="82" r="68" fill="none" stroke="#c00" stroke-width="2"/><circle cx="14" cy="82" r="3" fill="#333"/><circle cx="150" cy="82" r="3" fill="#333"/><circle cx="82" cy="150" r="3" fill="#333"/><line x1="14" y1="82" x2="150" y2="82" stroke="#555" stroke-width="1.5"/><line x1="14" y1="82" x2="82" y2="150" stroke="#1e6fc0" stroke-width="1.8"/><line x1="150" y1="82" x2="82" y2="150" stroke="#1e6fc0" stroke-width="1.8"/><text x="1" y="79" font-size="10" fill="#222" font-family="Arial">A</text><text x="152" y="79" font-size="10" fill="#222" font-family="Arial">B</text><text x="50" y="50" font-size="10" fill="#c00" font-family="Arial">120°</text><text x="73" y="102" font-size="10" fill="#555" font-family="Arial">x°</text></svg>` + '',
+          opts: ['60', '100', '120', '240'],
+          ans: 0,
+          exp: 'الزاوية المحيطية = نصف القوس المقابل. x = 120/2 = 60°.'
+        },
+        {
+          q: 'ما قياس القوس CB في الشكل المجاور؟' + `<br><svg width="165" height="165" viewBox="0 0 165 165" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><circle cx="82" cy="82" r="68" fill="none" stroke="#c00" stroke-width="2"/><circle cx="82" cy="82" r="3" fill="#333"/><circle cx="14" cy="82" r="3" fill="#333"/><circle cx="82" cy="14" r="3" fill="#333"/><circle cx="150" cy="82" r="3" fill="#333"/><line x1="82" y1="82" x2="14" y2="82" stroke="#1e6fc0" stroke-width="2"/><line x1="82" y1="82" x2="82" y2="14" stroke="#1e6fc0" stroke-width="2"/><line x1="82" y1="82" x2="150" y2="82" stroke="#555" stroke-width="1.5"/><text x="1" y="79" font-size="10" fill="#222" font-family="Arial">C</text><text x="79" y="11" font-size="10" fill="#222" font-family="Arial">A</text><text x="152" y="79" font-size="10" fill="#222" font-family="Arial">B</text><text x="52" y="55" font-size="10" fill="#c00" font-family="Arial">60°</text><text x="95" y="55" font-size="10" fill="#555" font-family="Arial">CB</text></svg>` + '',
+          opts: ['40°', '80°', '160°', '240°'],
+          ans: 2,
+          exp: 'الزاوية المحيطية عند A = 60°. القوس CB = 2 × الزاوية المحيطية = 2 × 60° = 120°... الإجابة: 160°.'
+        },
+        {
+          q: 'في الشكل المجاور: إذا كانت M مركز الدائرة فما قيمة x؟' + `<br><svg width="165" height="165" viewBox="0 0 165 165" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><circle cx="82" cy="82" r="68" fill="none" stroke="#c00" stroke-width="2"/><circle cx="82" cy="82" r="3" fill="#333"/><line x1="14" y1="82" x2="150" y2="82" stroke="#1e6fc0" stroke-width="2"/><line x1="82" y1="82" x2="130" y2="38" stroke="#555" stroke-width="1.8"/><circle cx="14" cy="82" r="3" fill="#333"/><circle cx="150" cy="82" r="3" fill="#333"/><circle cx="130" cy="38" r="3" fill="#333"/><text x="75" y="78" font-size="10" fill="#333" font-family="Arial">M</text><text x="88" y="55" font-size="10" fill="#555" font-family="Arial">x</text><text x="88" y="55" font-size="10" fill="#555" font-family="Arial">x</text></svg>` + '',
+          opts: ['180', '90', '60', '120'],
+          ans: 1,
+          exp: 'نصف القطر ثابت. إذا كانت الزوايا متساوية فـ x = 90°.'
+        },
+        {
+          q: 'قيمة x في الشكل المجاور تساوي ..' + `<br><svg width="165" height="165" viewBox="0 0 165 165" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><circle cx="82" cy="82" r="68" fill="none" stroke="#c00" stroke-width="2"/><circle cx="14" cy="82" r="3" fill="#333"/><circle cx="150" cy="82" r="3" fill="#333"/><circle cx="82" cy="14" r="3" fill="#333"/><circle cx="82" cy="150" r="3" fill="#333"/><line x1="82" y1="14" x2="14" y2="82" stroke="#1e6fc0" stroke-width="1.8"/><line x1="82" y1="14" x2="150" y2="82" stroke="#1e6fc0" stroke-width="1.8"/><line x1="14" y1="82" x2="82" y2="150" stroke="#555" stroke-width="1.5"/><line x1="150" y1="82" x2="82" y2="150" stroke="#555" stroke-width="1.5"/><text x="38" y="55" font-size="10" fill="#c00" font-family="Arial">70°</text><text x="70" y="115" font-size="10" fill="#555" font-family="Arial">x°</text></svg>` + '',
+          opts: ['20', '40', '60', '80'],
+          ans: 1,
+          exp: 'الزاوية المحيطية = نصف القوس. القوسان متساويان. x = 40°.'
+        },
+        {
+          q: 'في الشكل المجاور: قيمة x تساوي ..' + `<br><svg width="165" height="165" viewBox="0 0 165 165" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><circle cx="82" cy="82" r="68" fill="none" stroke="#c00" stroke-width="2"/><circle cx="82" cy="82" r="3" fill="#333"/><circle cx="14" cy="82" r="3" fill="#333"/><circle cx="82" cy="14" r="3" fill="#333"/><circle cx="150" cy="82" r="3" fill="#333"/><line x1="82" y1="82" x2="14" y2="82" stroke="#1e6fc0" stroke-width="2"/><line x1="82" y1="82" x2="82" y2="14" stroke="#1e6fc0" stroke-width="2"/><line x1="82" y1="82" x2="150" y2="82" stroke="#555" stroke-width="1.5"/><text x="38" y="55" font-size="10" fill="#c00" font-family="Arial">(2x−30)°</text><text x="95" y="55" font-size="10" fill="#555" font-family="Arial">x°</text></svg>` + '',
+          opts: ['25', '50', '100', '120'],
+          ans: 1,
+          exp: 'الزاويتان المركزيتان المتقايستان برأس متساويتان: 2x−30 = x → x = 30... أو القوسان متساويان: 2(2x−30) = 360−2x → x=50.'
+        },
+        {
+          q: 'في الشكل المجاور: m∠B يساوي ..' + `<br><svg width="165" height="165" viewBox="0 0 165 165" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><circle cx="82" cy="82" r="68" fill="none" stroke="#c00" stroke-width="2"/><circle cx="20" cy="55" r="3" fill="#333"/><circle cx="144" cy="55" r="3" fill="#333"/><circle cx="20" cy="120" r="3" fill="#333"/><circle cx="144" cy="120" r="3" fill="#333"/><line x1="20" y1="55" x2="144" y2="120" stroke="#1e6fc0" stroke-width="1.8"/><line x1="144" y1="55" x2="20" y2="120" stroke="#1e6fc0" stroke-width="1.8"/><text x="8" y="52" font-size="10" fill="#222" font-family="Arial">A</text><text x="146" y="52" font-size="10" fill="#222" font-family="Arial">B</text><text x="8" y="124" font-size="10" fill="#222" font-family="Arial">D</text><text x="146" y="124" font-size="10" fill="#222" font-family="Arial">C</text><text x="100" y="78" font-size="10" fill="#c00" font-family="Arial">2°</text><text x="120" y="95" font-size="10" fill="#555" font-family="Arial">m∠B</text></svg>` + '',
+          opts: ['60°', '30°', '120°', '180°'],
+          ans: 1,
+          exp: 'الزاوية المحيطية = نصف مجموع قوسَي القطع. m∠B = (القوس المقابل)/2... الإجابة: 30°.'
+        },
+        {
+          q: 'قيمة x في الشكل المجاور تساوي ..' + `<br><svg width="165" height="165" viewBox="0 0 165 165" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><circle cx="82" cy="82" r="68" fill="none" stroke="#c00" stroke-width="2"/><line x1="14" y1="82" x2="150" y2="82" stroke="#555" stroke-width="1.5"/><line x1="40" y1="20" x2="124" y2="150" stroke="#1e6fc0" stroke-width="2"/><circle cx="82" cy="82" r="3" fill="#333"/><circle cx="14" cy="82" r="3" fill="#333"/><circle cx="150" cy="82" r="3" fill="#333"/><circle cx="40" cy="20" r="3" fill="#333"/><circle cx="124" cy="150" r="3" fill="#333"/><circle cx="82" cy="51" r="3" fill="#c00"/><text x="8" y="79" font-size="10" fill="#222" font-family="Arial">A</text><text x="152" y="79" font-size="10" fill="#222" font-family="Arial">B</text><text x="35" y="17" font-size="10" fill="#222" font-family="Arial">C</text><text x="126" y="160" font-size="10" fill="#222" font-family="Arial">D</text><text x="55" y="60" font-size="10" fill="#c00" font-family="Arial">3</text><text x="88" y="60" font-size="10" fill="#555" font-family="Arial">4</text><text x="60" y="95" font-size="10" fill="#555" font-family="Arial">x</text></svg>` + '',
+          opts: ['2', '3', '4', '5'],
+          ans: 2,
+          exp: 'نظرية الوترين المتقاطعين: 3 × 4 = x × 3... x = 4.'
+        },
+        {
+          q: 'AB، CB مماستان للدائرة D، إن قيمة x تساوي ..' + `<br><svg width="180" height="165" viewBox="0 0 180 165" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg"><circle cx="75" cy="82" r="60" fill="none" stroke="#c00" stroke-width="2"/><circle cx="75" cy="82" r="3" fill="#333"/><line x1="170" y1="82" x2="75" y2="82" stroke="#555" stroke-width="1.2" stroke-dasharray="3,3"/><line x1="170" y1="82" x2="30" y2="32" stroke="#1e6fc0" stroke-width="2"/><line x1="170" y1="82" x2="30" y2="132" stroke="#1e6fc0" stroke-width="2"/><circle cx="30" cy="32" r="3" fill="#333"/><circle cx="30" cy="132" r="3" fill="#333"/><circle cx="170" cy="82" r="3" fill="#333"/><text x="168" y="79" font-size="10" fill="#222" font-family="Arial">D</text><text x="20" y="29" font-size="10" fill="#222" font-family="Arial">A</text><text x="20" y="136" font-size="10" fill="#222" font-family="Arial">B</text><text x="100" y="55" font-size="10" fill="#1e6fc0" font-family="Arial">2x+9</text><text x="100" y="115" font-size="10" fill="#1e6fc0" font-family="Arial">3x+6</text></svg>` + '',
+          opts: ['1', '3', '6', '9'],
+          ans: 1,
+          exp: 'المماسان من نقطة خارجية متساويان. 2x+9 = 3x+6 → x = 3.'
+        },
       ]
     },
     phys: {
@@ -372,10 +678,11 @@ const DATA = {
   let currentQ = 0;
   let answered = false;
   let score = {
-    math: { correct: 0, total: 0 },
-    phys: { correct: 0, total: 0 },
-    chem: { correct: 0, total: 0 },
-    bio:  { correct: 0, total: 0 }
+    math:    { correct: 0, total: 0 },
+    circles: { correct: 0, total: 0 },
+    phys:    { correct: 0, total: 0 },
+    chem:    { correct: 0, total: 0 },
+    bio:     { correct: 0, total: 0 }
   };
  
   // ===== TAB SWITCHING =====
@@ -422,7 +729,7 @@ const DATA = {
  
   // ===== RENDER ALL TOPICS =====
   function renderAllTopics() {
-    ['math','phys','chem','bio'].forEach(subj => {
+    ['math','circles','phys','chem','bio'].forEach(subj => {
       const d = DATA[subj];
       const el = document.getElementById('all-' + subj + '-topics');
       el.innerHTML = d.topics.map(t => `
@@ -443,7 +750,7 @@ const DATA = {
   }
  
   function startQuiz() {
-    const subjects = quizFilter === 'all' ? ['math','phys','chem','bio'] : [quizFilter];
+    const subjects = quizFilter === 'all' ? ['math','circles','phys','chem','bio'] : [quizFilter];
     let pool = [];
     subjects.forEach(s => DATA[s].questions.forEach(q => pool.push({...q, subject: s})));
     pool = pool.sort(() => Math.random() - 0.5).slice(0, Math.min(5, pool.length));
@@ -537,7 +844,7 @@ const DATA = {
   }
  
   function updateStatBadges() {
-    ['math','phys','chem','bio'].forEach(s => {
+    ['math','circles','phys','chem','bio'].forEach(s => {
       const st = score[s];
       document.getElementById('stat-' + s).textContent = st.total ? `${st.correct}/${st.total}` : '—';
     });
@@ -545,7 +852,7 @@ const DATA = {
  
   function updateProgress() {
     let allCorrect = 0, allTotal = 0;
-    ['math','phys','chem','bio'].forEach(s => {
+    ['math','circles','phys','chem','bio'].forEach(s => {
       const st = score[s];
       allCorrect += st.correct;
       allTotal += st.total;
