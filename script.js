@@ -31,7 +31,8 @@ const DATA = {
         steps: ['تحقق: 2÷4=0.5 ← ليس صحيحاً ✓', '8÷4=2 ، 12÷4=3 ، 16÷4=4 ← تنجح جميعاً'],
         topic: 'المثال المضاد',
         refs: [
-          { name: 'بوابة عين — المثال المضاد', url: 'https://www.ain.edu.sa/' },
+          { name: 'بوابة عين — المثال المضاد', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — المثال المضاد', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
           { name: 'يوتيوب — شرح المثال المضاد', url: 'https://www.youtube.com/results?search_query=%D8%A7%D9%84%D9%85%D8%AB%D8%A7%D9%84+%D8%A7%D9%84%D9%85%D8%B6%D8%A7%D8%AF+%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
         ]
       },
@@ -44,7 +45,8 @@ const DATA = {
         steps: ['p=ص ، q=خ', 'ص ∧ خ = خاطئة (قاعدة جدول الحقيقة)'],
         topic: 'العبارات المنطقية',
         refs: [
-          { name: 'بوابة عين — المنطق الرياضي', url: 'https://www.ain.edu.sa/' },
+          { name: 'بوابة عين — المنطق الرياضي', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — المنطق الرياضي', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
           { name: 'يوتيوب — جدول الحقيقة', url: 'https://www.youtube.com/results?search_query=%D8%AC%D8%AF%D9%88%D9%84+%D8%A7%D9%84%D8%AD%D9%82%D9%8A%D9%82%D8%A9+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
         ]
       },
@@ -62,7 +64,8 @@ const DATA = {
         steps: ['العبارة: إذا p فإن q', 'المعاكس الإيجابي: إذا ¬q فإن ¬p'],
         topic: 'العبارات الشرطية',
         refs: [
-          { name: 'بوابة عين — العبارات الشرطية', url: 'https://www.ain.edu.sa/' },
+          { name: 'بوابة عين — العبارات الشرطية', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — العبارات الشرطية', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
           { name: 'يوتيوب — المعاكس الإيجابي', url: 'https://www.youtube.com/results?search_query=%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%83%D8%B3+%D8%A7%D9%84%D8%A5%D9%8A%D8%AC%D8%A7%D8%A8%D9%8A+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
         ]
       },
@@ -75,7 +78,8 @@ const DATA = {
         steps: ['مجموع المتتامتين = 90°', '90 − 35 = 55°'],
         topic: 'الزوايا المتتامة',
         refs: [
-          { name: 'بوابة عين — الزوايا', url: 'https://www.ain.edu.sa/' },
+          { name: 'بوابة عين — الزوايا', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — الزوايا', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
           { name: 'Desmos — رسم الزوايا تفاعلياً', url: 'https://www.desmos.com/geometry' },
         ]
       },
@@ -88,7 +92,8 @@ const DATA = {
         steps: ['ص∨ص=ص ، ص∨خ=ص ، خ∨ص=ص', 'خ∨خ=خ ← الحالة الوحيدة للخطأ'],
         topic: 'العبارات المنطقية',
         refs: [
-          { name: 'بوابة عين — المنطق الرياضي', url: 'https://www.ain.edu.sa/' },
+          { name: 'بوابة عين — المنطق الرياضي', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — المنطق الرياضي', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
           { name: 'يوتيوب — الفصل والوصل', url: 'https://www.youtube.com/results?search_query=%D8%A7%D9%84%D9%81%D8%B5%D9%84+%D9%88%D8%A7%D9%84%D9%88%D8%B5%D9%84+%D8%A7%D9%84%D9%85%D9%86%D8%B7%D9%82+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
         ]
       },
@@ -119,7 +124,8 @@ const DATA = {
         steps: ['Ek = ½ × 5 × (4)²', '= ½ × 5 × 16 = 40 جول'],
         topic: 'الطاقة الحركية',
         refs: [
-          { name: 'بوابة عين — الطاقة الحركية', url: 'https://www.ain.edu.sa/' },
+          { name: 'بوابة عين — الطاقة الحركية', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — الطاقة الحركية', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
           { name: 'محاكاة الطاقة — PhET', url: 'https://phet.colorado.edu/sims/html/energy-skate-park-basics/latest/energy-skate-park-basics_all.html' },
           { name: 'يوتيوب — الطاقة الحركية', url: 'https://www.youtube.com/results?search_query=%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9+%D8%A7%D9%84%D8%AD%D8%B1%D9%83%D9%8A%D8%A9+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A+%D9%81%D9%8A%D8%B2%D9%8A%D8%A7%D8%A1' },
         ]
@@ -133,7 +139,8 @@ const DATA = {
         steps: ['a = F ÷ m', 'a = 20 ÷ 4 = 5 م/ث²'],
         topic: 'قوانين نيوتن',
         refs: [
-          { name: 'بوابة عين — قوانين نيوتن', url: 'https://www.ain.edu.sa/' },
+          { name: 'بوابة عين — قوانين نيوتن', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — قوانين نيوتن', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
           { name: 'محاكاة القوى — PhET', url: 'https://phet.colorado.edu/sims/html/forces-and-motion-basics/latest/forces-and-motion-basics_all.html' },
           { name: 'يوتيوب — قوانين نيوتن', url: 'https://www.youtube.com/results?search_query=%D9%82%D9%88%D8%A7%D9%86%D9%8A%D9%86+%D9%86%D9%8A%D9%88%D8%AA%D9%86+%D9%81%D9%8A%D8%B2%D9%8A%D8%A7%D8%A1+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
         ]
@@ -147,7 +154,8 @@ const DATA = {
         steps: ['I = V ÷ R', 'R تزداد → I تنقص ← عكسية'],
         topic: 'قانون أوم',
         refs: [
-          { name: 'بوابة عين — الكهرباء', url: 'https://www.ain.edu.sa/' },
+          { name: 'بوابة عين — الكهرباء', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — الكهرباء', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
           { name: 'محاكاة الدوائر — PhET', url: 'https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_all.html' },
         ]
       },
@@ -160,7 +168,8 @@ const DATA = {
         steps: ['شغل = قوة (N) × إزاحة (m)', '1 N·m = 1 جول (J)'],
         topic: 'الشغل والطاقة',
         refs: [
-          { name: 'بوابة عين — الشغل والطاقة', url: 'https://www.ain.edu.sa/' },
+          { name: 'بوابة عين — الشغل والطاقة', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — الشغل والطاقة', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
           { name: 'يوتيوب — الشغل الميكانيكي', url: 'https://www.youtube.com/results?search_query=%D8%A7%D9%84%D8%B4%D8%BA%D9%84+%D8%A7%D9%84%D9%85%D9%8A%D9%83%D8%A7%D9%86%D9%8A%D9%83%D9%8A+%D9%81%D9%8A%D8%B2%D9%8A%D8%A7%D8%A1+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
         ]
       },
@@ -191,7 +200,8 @@ const DATA = {
         steps: ['عدد إلكترونات Na = 11', 'Na⁺ فقد إلكتروناً: 11−1=10'],
         topic: 'التركيب الذري',
         refs: [
-          { name: 'بوابة عين — التركيب الذري', url: 'https://www.ain.edu.sa/' },
+          { name: 'بوابة عين — التركيب الذري', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — التركيب الذري', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
           { name: 'الجدول الدوري التفاعلي — Ptable', url: 'https://ptable.com/?lang=ar#Properties' },
           { name: 'يوتيوب — الأيونات', url: 'https://www.youtube.com/results?search_query=%D8%A7%D9%84%D8%A3%D9%8A%D9%88%D9%86%D8%A7%D8%AA+%D9%83%D9%8A%D9%85%D9%8A%D8%A7%D8%A1+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
         ]
@@ -205,7 +215,8 @@ const DATA = {
         steps: ['H وO يتشاركان إلكترونات ← تساهمية', 'الفارق في الكهرسلبية كبير ← قطبية'],
         topic: 'الروابط الكيميائية',
         refs: [
-          { name: 'بوابة عين — الروابط الكيميائية', url: 'https://www.ain.edu.sa/' },
+          { name: 'بوابة عين — الروابط الكيميائية', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — الروابط الكيميائية', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
           { name: 'الجدول الدوري — الكهرسلبية', url: 'https://ptable.com/?lang=ar#Properties/Electronegativity' },
         ]
       },
@@ -218,7 +229,8 @@ const DATA = {
         steps: ['ابحث عن C في الجدول', 'العدد الذري = 6'],
         topic: 'الجدول الدوري',
         refs: [
-          { name: 'بوابة عين — الجدول الدوري', url: 'https://www.ain.edu.sa/' },
+          { name: 'بوابة عين — الجدول الدوري', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — الجدول الدوري', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
           { name: 'الجدول الدوري التفاعلي — Ptable', url: 'https://ptable.com/?lang=ar#Properties' },
         ]
       },
@@ -249,7 +261,8 @@ const DATA = {
         steps: ['التنفس الخلوي ينتج ATP', 'يحدث داخل الميتوكوندريا'],
         topic: 'تركيب الخلية',
         refs: [
-          { name: 'بوابة عين — الخلية', url: 'https://www.ain.edu.sa/' },
+          { name: 'بوابة عين — الخلية', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — الخلية', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
           { name: 'يوتيوب — الميتوكوندريا', url: 'https://www.youtube.com/results?search_query=%D8%A7%D9%84%D9%85%D9%8A%D8%AA%D9%88%D9%83%D9%88%D9%86%D8%AF%D8%B1%D9%8A%D8%A7+%D8%A3%D8%AD%D9%8A%D8%A7%D8%A1+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
         ]
       },
@@ -262,7 +275,8 @@ const DATA = {
         steps: ['الأم: A أو a (50/50)', 'الأب: a فقط', 'النتائج: Aa,Aa,aa,aa → 50% Aa'],
         topic: 'الوراثة',
         refs: [
-          { name: 'بوابة عين — الوراثة', url: 'https://www.ain.edu.sa/' },
+          { name: 'بوابة عين — الوراثة', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — الوراثة', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
           { name: 'يوتيوب — مربع بانيت', url: 'https://www.youtube.com/results?search_query=%D9%85%D8%B1%D8%A8%D8%B9+%D8%A8%D8%A7%D9%86%D9%8A%D8%AA+%D8%A3%D8%AD%D9%8A%D8%A7%D8%A1+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
         ]
       },
@@ -275,7 +289,8 @@ const DATA = {
         steps: ['الريبوسوم يقرأ mRNA', 'يُجمّع الأحماض الأمينية', 'النتيجة: سلسلة بروتينية'],
         topic: 'تركيب الخلية',
         refs: [
-          { name: 'بوابة عين — الخلية', url: 'https://www.ain.edu.sa/' },
+          { name: 'بوابة عين — الخلية', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — الخلية', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
           { name: 'يوتيوب — عضيات الخلية', url: 'https://www.youtube.com/results?search_query=%D8%B9%D8%B6%D9%8A%D8%A7%D8%AA+%D8%A7%D9%84%D8%AE%D9%84%D9%8A%D8%A9+%D8%A3%D8%AD%D9%8A%D8%A7%D8%A1+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
         ]
       },
@@ -288,7 +303,8 @@ const DATA = {
         steps: ['الأولية: نخاع العظم + التيموس', 'الطحال والعقد واللوزتان = ثانوية'],
         topic: 'الجهاز المناعي',
         refs: [
-          { name: 'بوابة عين — الجهاز المناعي', url: 'https://www.ain.edu.sa/' },
+          { name: 'بوابة عين — الجهاز المناعي', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — الجهاز المناعي', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
           { name: 'يوتيوب — الجهاز المناعي', url: 'https://www.youtube.com/results?search_query=%D8%A7%D9%84%D8%AC%D9%87%D8%A7%D8%B2+%D8%A7%D9%84%D9%85%D9%86%D8%A7%D8%B9%D9%8A+%D8%A3%D8%AD%D9%8A%D8%A7%D8%A1+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
         ]
       },
@@ -538,6 +554,7 @@ function renderAssistant(q) {
 }
 
 function getResIcon(name) {
+  if(name.includes('عين دروس')) return '<span style="background:#fff3e0;color:#e65100;padding:4px 7px;border-radius:6px;font-size:11px;font-weight:900;">▶عين</span>';
   if(name.includes('عين'))   return '<span style="background:#e6f0ff;color:#0066cc;padding:4px 7px;border-radius:6px;font-size:11px;font-weight:900;">عين</span>';
   if(name.includes('يوتيوب'))return '<span style="background:#fff0f0;color:#ff0000;font-size:18px;">▶️</span>';
   if(name.includes('PhET') || name.includes('محاكاة')) return '<span style="background:#eaf3de;color:#2e7d32;font-size:18px;">⚗️</span>';
