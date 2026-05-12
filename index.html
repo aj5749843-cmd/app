@@ -1,214 +1,471 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>الحقيبة التعليمية التفاعلية — التحصيلي العلمي</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>حقيبة التحصيلي العلمي 2025</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
- 
-<div class="app">
- 
-  <!-- HEADER -->
-  <div class="header">
-    <div class="header-badge">التحصيلي العلمي</div>
-    <h1>حقيبتك التعليمية التفاعلية</h1>
-  </div>
- 
-  <!-- STATS -->
-  <div class="stats-row">
-    <div class="stat-card">
-      <div class="stat-num" style="color: var(--blue);" id="stat-math">—</div>
-      <div class="stat-label">رياضيات</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<div class="app-shell">
+
+  <!-- ══════════════════════════════════════════
+       SIDEBAR
+       ══════════════════════════════════════════ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-badge">🎓 التحصيلي 2025</div>
+      <h1>الحقيبة التعليمية التفاعلية</h1>
+      <p>للتخصصات العلمية — بنين وبنات</p>
     </div>
-    <div class="stat-card">
-      <div class="stat-num" style="color: var(--green);" id="stat-phys">—</div>
-      <div class="stat-label">فيزياء</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-num" style="color: var(--purple);" id="stat-chem">—</div>
-      <div class="stat-label">كيمياء</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-num" style="color: var(--amber);" id="stat-bio">—</div>
-      <div class="stat-label">أحياء</div>
-    </div>
-  </div>
- 
-  <!-- TABS -->
-  <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('overview', this)">نظرة عامة</button>
-    <button class="tab-btn" onclick="switchTab('topics', this)">المواضيع</button>
-    <button class="tab-btn" onclick="switchTab('quiz', this)">تدريب</button>
-    <button class="tab-btn" onclick="switchTab('progress', this)">تقدمي</button>
-  </div>
- 
-  <!-- ===== OVERVIEW PANEL ===== -->
-  <div class="panel active" id="panel-overview">
-    <div class="subjects-grid">
-      <div class="subject-card math selected" onclick="selectSubject('math', this)">
-        <div class="subject-header">
-          <div class="subject-icon" style="background: var(--blue-light); color: var(--blue);">∑</div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">القائمة</div>
+
+      <button class="nav-item active" id="nav-dashboard" onclick="showScreen('dashboard')">
+        <span class="nav-icon">🏠</span> لوحة التحكم
+      </button>
+      <button class="nav-item" id="nav-topics" onclick="showScreen('topics')">
+        <span class="nav-icon">📚</span> المواضيع
+      </button>
+      <button class="nav-item" id="nav-quiz" onclick="showScreen('quiz')">
+        <span class="nav-icon">✏️</span> التدريب على الأسئلة
+      </button>
+      <button class="nav-item" id="nav-progress" onclick="showScreen('progress')">
+        <span class="nav-icon">📊</span> تقدمي
+      </button>
+
+      <div class="nav-section-label" style="margin-top:18px;">المواد</div>
+
+      <button class="nav-item nav-subject math" onclick="openSubjectQuiz('math')">
+        <span class="nav-icon">➕</span> الرياضيات
+      </button>
+      <button class="nav-item nav-subject phys" onclick="openSubjectQuiz('phys')">
+        <span class="nav-icon">⚡</span> الفيزياء
+      </button>
+      <button class="nav-item nav-subject chem" onclick="openSubjectQuiz('chem')">
+        <span class="nav-icon">⚗️</span> الكيمياء
+      </button>
+      <button class="nav-item nav-subject bio" onclick="openSubjectQuiz('bio')">
+        <span class="nav-icon">🧬</span> الأحياء
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">دار الحرف · ناصر العبدالكريم</div>
+  </aside>
+
+  <!-- ══════════════════════════════════════════
+       MAIN AREA
+       ══════════════════════════════════════════ -->
+  <div class="main-area">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title" id="topbar-title">لوحة التحكم</span>
+      </div>
+      <div class="topbar-right">
+        <div class="score-pills">
+          <div class="score-pill" style="color:#1e6fc0;border-color:#b3d4f7;">
+            ➕ <span id="pill-math">—</span>
+          </div>
+          <div class="score-pill" style="color:#2e8b3a;border-color:#b3ddb8;">
+            ⚡ <span id="pill-phys">—</span>
+          </div>
+          <div class="score-pill" style="color:#7c3fbf;border-color:#c9b3e8;">
+            ⚗️ <span id="pill-chem">—</span>
+          </div>
+          <div class="score-pill" style="color:#c97020;border-color:#f2c48c;">
+            🧬 <span id="pill-bio">—</span>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="showScreen('quiz')">ابدأ التدريب ←</button>
+      </div>
+    </header>
+
+    <div class="content-area">
+
+      <!-- ══════════════════════════════════════
+           SCREEN: DASHBOARD
+           ══════════════════════════════════════ -->
+      <section class="screen active" id="screen-dashboard">
+
+        <!-- Hero -->
+        <div class="dash-hero">
           <div>
-            <div class="subject-title">الرياضيات</div>
-            <div class="subject-subtitle">القسم الأول</div>
+            <h2>مرحباً بك في حقيبتك التعليمية 👋</h2>
+            <p>تدرّب على أسئلة التحصيلي العلمي بمساعدة ذكية وموارد خارجية متخصصة</p>
+            <div class="hero-stats">
+              <div class="h-stat gold">
+                <div class="h-stat-val" id="dash-total">0</div>
+                <div class="h-stat-lbl">سؤال تدرّبتَ عليه</div>
+              </div>
+              <div class="h-stat green">
+                <div class="h-stat-val" id="dash-correct">0</div>
+                <div class="h-stat-lbl">إجابة صحيحة</div>
+              </div>
+            </div>
+          </div>
+          <!-- Readiness ring -->
+          <div class="readiness-ring">
+            <svg width="110" height="110" viewBox="0 0 110 110">
+              <circle cx="55" cy="55" r="44"
+                fill="none" stroke="rgba(255,255,255,.12)" stroke-width="10"/>
+              <circle cx="55" cy="55" r="44"
+                fill="none" stroke="#f5c518" stroke-width="10"
+                stroke-dasharray="276.46" stroke-dashoffset="276.46"
+                stroke-linecap="round"
+                class="ring-progress"
+                style="transition:stroke-dashoffset 1s ease;transform:rotate(-90deg);transform-origin:55px 55px"/>
+            </svg>
+            <div class="ring-center">
+              <span id="ring-pct">0</span>%
+              <small>الجاهزية</small>
+            </div>
           </div>
         </div>
-        <div class="progress-bar"><div class="progress-fill" style="background: var(--blue); width: 0%;" id="prog-math"></div></div>
-        <div class="progress-label"><span>المنطق · الهندسة · الإحصاء</span><span id="prog-math-pct">0%</span></div>
-      </div>
-      <div class="subject-card phys" onclick="selectSubject('phys', this)">
-        <div class="subject-header">
-          <div class="subject-icon" style="background: var(--green-light); color: var(--green);">⚡</div>
-          <div>
-            <div class="subject-title">الفيزياء</div>
-            <div class="subject-subtitle">القسم الثاني</div>
+
+        <!-- Subject cards -->
+        <div class="cards-grid">
+
+          <div class="subj-card math" onclick="openSubjectQuiz('math')">
+            <div class="sc-icon" style="background:#e6f1fb;color:#1e6fc0;">➕</div>
+            <div class="sc-name">الرياضيات</div>
+            <div class="sc-sub">القسم الأول</div>
+            <div class="sc-bar"><div class="sc-fill" id="sc-fill-math" style="background:#1e6fc0;width:0%"></div></div>
+            <div class="sc-pct" id="sc-pct-math">0%</div>
+          </div>
+
+          <div class="subj-card phys" onclick="openSubjectQuiz('phys')">
+            <div class="sc-icon" style="background:#eaf3de;color:#2e8b3a;">⚡</div>
+            <div class="sc-name">الفيزياء</div>
+            <div class="sc-sub">القسم الثاني</div>
+            <div class="sc-bar"><div class="sc-fill" id="sc-fill-phys" style="background:#2e8b3a;width:0%"></div></div>
+            <div class="sc-pct" id="sc-pct-phys">0%</div>
+          </div>
+
+          <div class="subj-card chem" onclick="openSubjectQuiz('chem')">
+            <div class="sc-icon" style="background:#f0ebfc;color:#7c3fbf;">⚗️</div>
+            <div class="sc-name">الكيمياء</div>
+            <div class="sc-sub">القسم الثالث</div>
+            <div class="sc-bar"><div class="sc-fill" id="sc-fill-chem" style="background:#7c3fbf;width:0%"></div></div>
+            <div class="sc-pct" id="sc-pct-chem">0%</div>
+          </div>
+
+          <div class="subj-card bio" onclick="openSubjectQuiz('bio')">
+            <div class="sc-icon" style="background:#fef3e2;color:#c97020;">🧬</div>
+            <div class="sc-name">الأحياء</div>
+            <div class="sc-sub">القسم الرابع</div>
+            <div class="sc-bar"><div class="sc-fill" id="sc-fill-bio" style="background:#c97020;width:0%"></div></div>
+            <div class="sc-pct" id="sc-pct-bio">0%</div>
+          </div>
+
+        </div>
+
+        <!-- Bottom two-col -->
+        <div class="dash-bottom">
+
+          <!-- Topics -->
+          <div class="dash-card">
+            <h3 id="dash-topic-title">مواضيع الرياضيات</h3>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;">
+              <button class="btn btn-outline" style="font-size:11px;padding:5px 12px;" onclick="renderDashTopics('math')">رياضيات</button>
+              <button class="btn btn-outline" style="font-size:11px;padding:5px 12px;" onclick="renderDashTopics('phys')">فيزياء</button>
+              <button class="btn btn-outline" style="font-size:11px;padding:5px 12px;" onclick="renderDashTopics('chem')">كيمياء</button>
+              <button class="btn btn-outline" style="font-size:11px;padding:5px 12px;" onclick="renderDashTopics('bio')">أحياء</button>
+            </div>
+            <div id="dash-topic-list"></div>
+          </div>
+
+          <!-- External Resources -->
+          <div class="dash-card">
+            <h3>🔗 المصادر التعليمية الخارجية</h3>
+            <div class="resource-list">
+              <div class="resource-item" onclick="openUrl('https://www.educational.gov.sa')">
+                <div class="resource-logo" style="background:#e6f0ff;color:#0066cc;font-size:14px;font-weight:900;">عين</div>
+                <div class="resource-info">
+                  <div class="resource-name">بوابة عين التعليمية</div>
+                  <div class="resource-desc">المنصة الرسمية لوزارة التعليم السعودية</div>
+                </div>
+                <span class="resource-arrow">↗</span>
+              </div>
+              <div class="resource-item" onclick="openUrl('https://mawdoo3.com')">
+                <div class="resource-logo" style="background:#fdecea;color:#e63946;font-size:20px;">📖</div>
+                <div class="resource-info">
+                  <div class="resource-name">موضوع</div>
+                  <div class="resource-desc">شرح مبسط بالعربية لجميع المواضيع</div>
+                </div>
+                <span class="resource-arrow">↗</span>
+              </div>
+              <div class="resource-item" onclick="openUrl('https://phet.colorado.edu/ar')">
+                <div class="resource-logo" style="background:#eaf3de;color:#2e7d32;font-size:20px;">⚗️</div>
+                <div class="resource-info">
+                  <div class="resource-name">PhET Simulations</div>
+                  <div class="resource-desc">محاكاة تفاعلية لفيزياء وكيمياء وأحياء</div>
+                </div>
+                <span class="resource-arrow">↗</span>
+              </div>
+              <div class="resource-item" onclick="openUrl('https://ptable.com/?lang=ar')">
+                <div class="resource-logo" style="background:#f0ebfc;color:#7c3fbf;font-size:20px;">⚛️</div>
+                <div class="resource-info">
+                  <div class="resource-name">الجدول الدوري التفاعلي</div>
+                  <div class="resource-desc">معلومات تفصيلية عن كل عنصر</div>
+                </div>
+                <span class="resource-arrow">↗</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+           SCREEN: TOPICS
+           ══════════════════════════════════════ -->
+      <section class="screen" id="screen-topics">
+        <div class="topics-header-row">
+          <div class="section-title">المواضيع حسب المادة</div>
+          <div class="subject-tabs">
+            <button class="stab active-math" onclick="switchTopicTab('math',this)">رياضيات</button>
+            <button class="stab" onclick="switchTopicTab('phys',this)">فيزياء</button>
+            <button class="stab" onclick="switchTopicTab('chem',this)">كيمياء</button>
+            <button class="stab" onclick="switchTopicTab('bio',this)">أحياء</button>
           </div>
         </div>
-        <div class="progress-bar"><div class="progress-fill" style="background: var(--green); width: 0%;" id="prog-phys"></div></div>
-        <div class="progress-label"><span>الحركة · الطاقة · الكهرباء</span><span id="prog-phys-pct">0%</span></div>
-      </div>
-      <div class="subject-card chem" onclick="selectSubject('chem', this)">
-        <div class="subject-header">
-          <div class="subject-icon" style="background: var(--purple-light); color: var(--purple);">⚗</div>
-          <div>
-            <div class="subject-title">الكيمياء</div>
-            <div class="subject-subtitle">القسم الثالث</div>
+        <div class="topics-grid" id="topics-grid"></div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+           SCREEN: QUIZ
+           ══════════════════════════════════════ -->
+      <section class="screen" id="screen-quiz">
+
+        <!-- Setup -->
+        <div id="quiz-setup">
+          <div class="quiz-setup-card">
+            <h2>✏️ التدريب على الأسئلة</h2>
+            <p>اختر المادة التي تريد التدريب عليها. سيظهر لك مساعد ذكي يوجهك عند كل سؤال مع روابط لمصادر تعليمية خارجية.</p>
+            <div class="filter-row">
+              <button class="fchip active" data-filter="all"  onclick="setFilter('all',this)">جميع المواد</button>
+              <button class="fchip"        data-filter="math" onclick="setFilter('math',this)">➕ رياضيات</button>
+              <button class="fchip"        data-filter="phys" onclick="setFilter('phys',this)">⚡ فيزياء</button>
+              <button class="fchip"        data-filter="chem" onclick="setFilter('chem',this)">⚗️ كيمياء</button>
+              <button class="fchip"        data-filter="bio"  onclick="setFilter('bio',this)">🧬 أحياء</button>
+            </div>
+            <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;font-size:15px;" onclick="startQuiz()">
+              ابدأ التدريب الآن ←
+            </button>
           </div>
         </div>
-        <div class="progress-bar"><div class="progress-fill" style="background: var(--purple); width: 0%;" id="prog-chem"></div></div>
-        <div class="progress-label"><span>المادة · التفاعلات · المحاليل</span><span id="prog-chem-pct">0%</span></div>
-      </div>
-      <div class="subject-card bio" onclick="selectSubject('bio', this)">
-        <div class="subject-header">
-          <div class="subject-icon" style="background: var(--amber-light); color: var(--amber);">🧬</div>
-          <div>
-            <div class="subject-title">الأحياء</div>
-            <div class="subject-subtitle">القسم الرابع</div>
+
+        <!-- Active quiz -->
+        <div id="quiz-active" style="display:none;">
+          <div class="quiz-shell">
+
+            <!-- Question card -->
+            <div>
+              <div class="q-card">
+                <!-- Top meta -->
+                <div class="q-top">
+                  <span class="q-tag" id="q-tag">الرياضيات</span>
+                  <span class="q-counter" id="q-counter">1 / 5</span>
+                </div>
+                <!-- Progress bar -->
+                <div class="q-progress-bar">
+                  <div class="q-progress-fill" id="q-progress-fill" style="width:0%"></div>
+                </div>
+                <!-- Question text -->
+                <div class="q-text" id="q-text"></div>
+                <!-- Options -->
+                <div class="options-list" id="options-list"></div>
+                <!-- Explanation -->
+                <div class="explanation-box" id="explanation-box"></div>
+                <!-- Navigation -->
+                <div class="q-nav-row">
+                  <div class="q-dots" id="q-dots"></div>
+                  <button class="btn btn-primary" id="q-next-btn"
+                          style="display:none;" onclick="nextQ()">التالي ←</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Assistant panel -->
+            <div class="assistant-panel">
+
+              <!-- Hint card -->
+              <div class="hint-card">
+                <div class="hint-header">
+                  <div class="ai-dot"></div>
+                  🤖 المساعد الذكي
+                </div>
+                <div class="hint-body">
+                  <div class="hint-text" id="hint-text"></div>
+
+                  <!-- Steps (hidden until requested) -->
+                  <div id="hint-steps-wrap" style="display:none;">
+                    <ul class="hint-steps" id="hint-steps-list"></ul>
+                  </div>
+
+                  <div class="hint-action">
+                    <button class="hint-btn primary" id="hint-show-btn" onclick="showHint()">
+                      💡 أرِني التلميح
+                    </button>
+                    <button class="hint-btn" id="hint-hide-btn"
+                            style="display:none;" onclick="hideHint()">
+                      إخفاء
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Resources card -->
+              <div class="resources-card">
+                <div class="resources-header">
+                  🔗 مصادر تعليمية للسؤال
+                </div>
+                <div class="resources-body" id="resources-body"></div>
+              </div>
+
+            </div>
+            <!-- /assistant-panel -->
+
+          </div>
+          <!-- /quiz-shell -->
+        </div>
+
+        <!-- Score screen -->
+        <div id="quiz-score" style="display:none;">
+          <div class="score-screen">
+            <div class="score-ring" id="score-ring">
+              <div class="score-num" id="score-num">0</div>
+              <div class="score-denom" id="score-denom">من 0</div>
+            </div>
+            <div class="score-title" id="score-title"></div>
+            <div class="score-msg"   id="score-msg"></div>
+            <div class="score-breakdown" id="score-breakdown"></div>
+            <div style="display:flex;gap:10px;margin-top:20px;justify-content:center;flex-wrap:wrap;">
+              <button class="btn btn-primary" onclick="restartQuiz()">🔄 تدريب جديد</button>
+              <button class="btn btn-outline" onclick="showScreen('progress')">📊 عرض تقدمي</button>
+            </div>
           </div>
         </div>
-        <div class="progress-bar"><div class="progress-fill" style="background: var(--amber); width: 0%;" id="prog-bio"></div></div>
-        <div class="progress-label"><span>الخلية · الوراثة · البيئة</span><span id="prog-bio-pct">0%</span></div>
-      </div>
-    </div>
- 
-    <div class="topics-section" id="overview-topics-box">
-      <div class="topics-header" id="overview-topics-title">
-        <span style="width:10px;height:10px;border-radius:50%;background:var(--blue);display:inline-block;"></span>
-        مواضيع الرياضيات
-      </div>
-      <div id="overview-topics-list"></div>
-    </div>
-  </div>
- 
-  <!-- ===== TOPICS PANEL ===== -->
-  <div class="panel" id="panel-topics">
-    <div class="all-topics-wrap">
-      <div class="topics-section">
-        <div class="topics-header" style="background: var(--blue-light);">
-          <span style="width:10px;height:10px;border-radius:50%;background:var(--blue);display:inline-block;"></span>
-          <span style="color: var(--blue-text); font-weight: 700;">01 — الرياضيات</span>
-        </div>
-        <div id="all-math-topics"></div>
-      </div>
-      <div class="topics-section">
-        <div class="topics-header" style="background: var(--green-light);">
-          <span style="width:10px;height:10px;border-radius:50%;background:var(--green);display:inline-block;"></span>
-          <span style="color: var(--green-text); font-weight: 700;">02 — الفيزياء</span>
-        </div>
-        <div id="all-phys-topics"></div>
-      </div>
-      <div class="topics-section">
-        <div class="topics-header" style="background: var(--purple-light);">
-          <span style="width:10px;height:10px;border-radius:50%;background:var(--purple);display:inline-block;"></span>
-          <span style="color: var(--purple-text); font-weight: 700;">03 — الكيمياء</span>
-        </div>
-        <div id="all-chem-topics"></div>
-      </div>
-      <div class="topics-section">
-        <div class="topics-header" style="background: var(--amber-light);">
-          <span style="width:10px;height:10px;border-radius:50%;background:var(--amber);display:inline-block;"></span>
-          <span style="color: var(--amber-text); font-weight: 700;">04 — الأحياء</span>
-        </div>
-        <div id="all-bio-topics"></div>
-      </div>
-    </div>
-  </div>
- 
-  <!-- ===== QUIZ PANEL ===== -->
-  <div class="panel" id="panel-quiz">
-    <div id="quiz-setup-view">
-      <div class="quiz-setup">
-        <h3>اختري المادة للتدريب</h3>
-        <div class="quiz-filter-row">
-          <button class="filter-chip active" onclick="setFilter('all', this)">جميع المواد</button>
-          <button class="filter-chip" onclick="setFilter('math', this)">رياضيات</button>
-          <button class="filter-chip" onclick="setFilter('phys', this)">فيزياء</button>
-          <button class="filter-chip" onclick="setFilter('chem', this)">كيمياء</button>
-          <button class="filter-chip" onclick="setFilter('bio', this)">أحياء</button>
-        </div>
-        <button class="start-btn" onclick="startQuiz()">ابدأي التدريب ←</button>
-      </div>
-    </div>
-    <div id="quiz-active-view" style="display:none;">
-      <div class="question-card" id="question-area"></div>
-    </div>
-    <div id="quiz-score-view" style="display:none;">
-      <div class="question-card">
-        <div class="score-display">
-          <div class="score-circle" id="score-circle">
-            <div class="score-num" id="score-num">0</div>
-            <div class="score-of" id="score-of">من 5</div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════
+           SCREEN: PROGRESS
+           ══════════════════════════════════════ -->
+      <section class="screen" id="screen-progress">
+
+        <div class="progress-grid">
+
+          <!-- Overall readiness -->
+          <div class="prog-card">
+            <h3>🎯 مقياس الجاهزية الكلي</h3>
+            <div style="font-size:13px;color:var(--text2);margin-bottom:8px;">يتحدث تلقائياً بعد كل جلسة تدريب</div>
+            <div class="big-progress-bar">
+              <div class="big-progress-fill" id="big-fill" style="width:0%"></div>
+            </div>
+            <div class="big-pct" id="big-pct">0%</div>
+            <div style="display:flex;gap:24px;margin-top:16px;">
+              <div>
+                <div style="font-size:22px;font-weight:900;color:var(--blue);" id="prog-total">0</div>
+                <div style="font-size:11px;color:var(--text3);">أسئلة أُجيبت</div>
+              </div>
+              <div>
+                <div style="font-size:22px;font-weight:900;color:var(--success);" id="prog-correct">0</div>
+                <div style="font-size:11px;color:var(--text3);">إجابات صحيحة</div>
+              </div>
+            </div>
           </div>
-          <h3 id="score-title" style="font-size: 20px; font-weight: 700; margin-bottom: 8px;"></h3>
-          <p id="score-msg" style="font-size: 14px; color: var(--text-muted); margin-bottom: 1.8rem; line-height: 1.7;"></p>
-          <button class="start-btn" style="max-width: 220px; margin: 0 auto; display: block;" onclick="restartQuiz()">تدريب جديد</button>
+
+          <!-- Per-subject breakdown -->
+          <div class="prog-card">
+            <h3>📚 الأداء حسب المادة</h3>
+            <div id="progress-rows"></div>
+
+            <div class="empty-progress" id="empty-progress">
+              <div class="empty-icon">📊</div>
+              <p>ابدأ التدريب لرؤية تقدمك</p>
+              <button class="btn btn-primary" onclick="showScreen('quiz')" style="margin-top:12px;">
+                ابدأ التدريب ←
+              </button>
+            </div>
+          </div>
+
+          <!-- Resources panel (full width) -->
+          <div class="prog-card" style="grid-column:1/-1;">
+            <h3>🔗 المصادر التعليمية المرتبطة</h3>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:4px;">
+
+              <div class="res-link" onclick="openUrl('https://www.educational.gov.sa')">
+                <div class="res-logo" style="background:#e6f0ff;color:#0066cc;font-size:14px;font-weight:900;">عين</div>
+                <div class="res-info">
+                  <div class="res-name">بوابة عين التعليمية</div>
+                  <div class="res-sub">وزارة التعليم السعودية</div>
+                </div>
+                <span class="res-arrow">↗</span>
+              </div>
+
+              <div class="res-link" onclick="openUrl('https://mawdoo3.com')">
+                <div class="res-logo" style="background:#fdecea;color:#e63946;">📖</div>
+                <div class="res-info">
+                  <div class="res-name">موضوع</div>
+                  <div class="res-sub">شرح مبسط بالعربية</div>
+                </div>
+                <span class="res-arrow">↗</span>
+              </div>
+
+              <div class="res-link" onclick="openUrl('https://www.youtube.com/results?search_query=تحصيلي+علمي+شرح')">
+                <div class="res-logo" style="background:#fff0f0;color:#ff0000;">▶️</div>
+                <div class="res-info">
+                  <div class="res-name">يوتيوب تعليمي</div>
+                  <div class="res-sub">فيديوهات شرح بالعربية</div>
+                </div>
+                <span class="res-arrow">↗</span>
+              </div>
+
+              <div class="res-link" onclick="openUrl('https://phet.colorado.edu/ar')">
+                <div class="res-logo" style="background:#eaf3de;color:#2e7d32;">⚗️</div>
+                <div class="res-info">
+                  <div class="res-name">PhET Simulations</div>
+                  <div class="res-sub">محاكاة تفاعلية مجانية</div>
+                </div>
+                <span class="res-arrow">↗</span>
+              </div>
+
+              <div class="res-link" onclick="openUrl('https://ptable.com/?lang=ar')">
+                <div class="res-logo" style="background:#f0ebfc;color:#7c3fbf;">⚛️</div>
+                <div class="res-info">
+                  <div class="res-name">الجدول الدوري التفاعلي</div>
+                  <div class="res-sub">ptable.com</div>
+                </div>
+                <span class="res-arrow">↗</span>
+              </div>
+
+              <div class="res-link" onclick="openUrl('https://www.desmos.com/geometry')">
+                <div class="res-logo" style="background:#e6f1fb;color:#1a6fc0;">📐</div>
+                <div class="res-info">
+                  <div class="res-name">Desmos</div>
+                  <div class="res-sub">رسم هندسي وبياني تفاعلي</div>
+                </div>
+                <span class="res-arrow">↗</span>
+              </div>
+
+            </div>
+          </div>
+
         </div>
-      </div>
-    </div>
-  </div>
- 
-  <!-- ===== PROGRESS PANEL ===== -->
-  <div class="panel" id="panel-progress">
-    <div class="readiness-bar-wrap">
-      <div class="readiness-label">مقياس الجاهزية للاختبار</div>
-      <div class="readiness-sub">يتحدث تلقائياً بعد كل جلسة تدريب</div>
-      <div class="big-bar"><div class="big-bar-fill" id="readiness-fill" style="width: 0%;"></div></div>
-      <div class="readiness-pct" id="readiness-pct">0%</div>
-    </div>
-    <div class="subject-progress-list">
-      <div class="subj-row">
-        <div class="subj-name">الرياضيات</div>
-        <div class="subj-bar-wrap"><div class="subj-bar"><div class="subj-bar-fill" id="sp-math" style="background: var(--blue); width: 0%;"></div></div></div>
-        <div class="subj-pct" id="sp-math-pct" style="color: var(--blue);">0%</div>
-      </div>
-      <div class="subj-row">
-        <div class="subj-name">الفيزياء</div>
-        <div class="subj-bar-wrap"><div class="subj-bar"><div class="subj-bar-fill" id="sp-phys" style="background: var(--green); width: 0%;"></div></div></div>
-        <div class="subj-pct" id="sp-phys-pct" style="color: var(--green);">0%</div>
-      </div>
-      <div class="subj-row">
-        <div class="subj-name">الكيمياء</div>
-        <div class="subj-bar-wrap"><div class="subj-bar"><div class="subj-bar-fill" id="sp-chem" style="background: var(--purple); width: 0%;"></div></div></div>
-        <div class="subj-pct" id="sp-chem-pct" style="color: var(--purple);">0%</div>
-      </div>
-      <div class="subj-row">
-        <div class="subj-name">الأحياء</div>
-        <div class="subj-bar-wrap"><div class="subj-bar"><div class="subj-bar-fill" id="sp-bio" style="background: var(--amber); width: 0%;"></div></div></div>
-        <div class="subj-pct" id="sp-bio-pct" style="color: var(--amber);">0%</div>
-      </div>
-    </div>
-    <div class="empty-progress">
-      <div class="empty-icon">📊</div>
-      <p>ابدئي التدريب لتحديث مقياس الجاهزية</p>
-      <button class="outline-btn" onclick="switchTab('quiz', document.querySelectorAll('.tab-btn')[2])">اذهبي للتدريب ←</button>
-    </div>
-  </div>
- 
-</div><!-- end .app -->
- 
+      </section>
+
+    </div><!-- /content-area -->
+  </div><!-- /main-area -->
+</div><!-- /app-shell -->
+
 <script src="script.js"></script>
 </body>
 </html>
- 
