@@ -43,7 +43,6 @@ body{font-family:'Cairo','Segoe UI',sans-serif;direction:rtl;background:var(--su
 .nav-subject.phys{border-color:#66bb6a;color:#a5d6a7;}
 .nav-subject.chem{border-color:#ab47bc;color:#ce93d8;}
 .nav-subject.bio{border-color:#ffa726;color:#ffcc80;}
-.sidebar-footer{padding:12px 16px;border-top:1px solid rgba(255,255,255,.07);font-size:11px;color:rgba(255,255,255,.22);text-align:center;}
 
 /* ── Main ── */
 .main-area{display:flex;flex-direction:column;min-height:100vh;}
