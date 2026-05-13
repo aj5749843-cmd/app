@@ -8,6 +8,47 @@
 </head>
 <body>
 
+<!-- ══════════════════════════════════════════
+     نافذة تسجيل المستخدم
+     ══════════════════════════════════════════ -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-modal">
+    <div class="login-logo">🎓</div>
+    <h2>حقيبة التحصيلي العلمي</h2>
+    <p>أدخل بياناتك لحفظ نتائجك وتقدمك تلقائياً</p>
+
+    <div class="login-form">
+      <div class="lf-group">
+        <label class="lf-label">الاسم الكامل</label>
+        <div class="lf-input-wrap">
+          <span class="lf-icon">👤</span>
+          <input type="text" id="inputName" class="lf-input"
+                 placeholder="أدخل اسمك هنا..." maxlength="60" autocomplete="name"/>
+        </div>
+        <span class="lf-error" id="nameError"></span>
+      </div>
+
+      <div class="lf-group">
+        <label class="lf-label">البريد الإلكتروني</label>
+        <div class="lf-input-wrap">
+          <span class="lf-icon">✉️</span>
+          <input type="email" id="inputEmail" class="lf-input"
+                 placeholder="example@email.com" maxlength="100" autocomplete="email"/>
+        </div>
+        <span class="lf-error" id="emailError"></span>
+      </div>
+
+      <button class="lf-btn" id="loginBtn" onclick="submitLogin()">
+        ابدأ التدريب ←
+      </button>
+
+      <button class="lf-skip" onclick="skipLogin()">
+        تخطّ وابدأ بدون حفظ
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- نافذة الإنجاز التحفيزية -->
 <div class="achievement-popup" id="achievement-popup">
   <div class="ach-icon" id="ach-icon">🏅</div>
@@ -67,6 +108,10 @@
         <span class="topbar-title" id="topbar-title">لوحة التحكم</span>
       </div>
       <div class="topbar-right">
+        <div class="user-chip" id="userChip" style="display:none;" onclick="showUserCard()">
+          <span class="user-avatar" id="userAvatar">؟</span>
+          <span class="user-name-short" id="userNameShort">—</span>
+        </div>
         <div class="score-pills">
           <div class="score-pill" style="color:#1e6fc0;border-color:#b3d4f7;">➕ <span id="pill-math">—</span></div>
           <div class="score-pill" style="color:#2e8b3a;border-color:#b3ddb8;">⚡ <span id="pill-phys">—</span></div>
@@ -202,6 +247,31 @@
             <div class="res-link-dash" onclick="openUrl('https://www.desmos.com/geometry')">
               <span style="font-size:16px;flex-shrink:0;">📐</span>
               <span class="r-name">Desmos — رسم هندسي</span>
+              <span class="r-arrow">↗</span>
+            </div>
+
+            <!-- GeoGebra -->
+            <div style="font-size:10px;font-weight:700;color:var(--text3);margin:10px 0 6px;padding-top:8px;border-top:1px solid var(--border);">
+              🔷 جيوجيبرا GeoGebra — رياضيات
+            </div>
+            <div class="res-link-dash" onclick="openUrl('https://www.geogebra.org/classic?lang=ar')">
+              <span style="background:#f0f4ff;color:#2d4a9e;padding:3px 7px;border-radius:5px;font-size:10px;font-weight:900;flex-shrink:0;">GGB</span>
+              <span class="r-name">GeoGebra Classic — جبر وهندسة وإحصاء</span>
+              <span class="r-arrow">↗</span>
+            </div>
+            <div class="res-link-dash" onclick="openUrl('https://www.geogebra.org/geometry?lang=ar')">
+              <span style="background:#f0f4ff;color:#2d4a9e;padding:3px 7px;border-radius:5px;font-size:10px;font-weight:900;flex-shrink:0;">GGB</span>
+              <span class="r-name">GeoGebra Geometry — رسم الزوايا والأشكال</span>
+              <span class="r-arrow">↗</span>
+            </div>
+            <div class="res-link-dash" onclick="openUrl('https://www.geogebra.org/graphing?lang=ar')">
+              <span style="background:#f0f4ff;color:#2d4a9e;padding:3px 7px;border-radius:5px;font-size:10px;font-weight:900;flex-shrink:0;">GGB</span>
+              <span class="r-name">GeoGebra Graphing — رسم الدوال البيانية</span>
+              <span class="r-arrow">↗</span>
+            </div>
+            <div class="res-link-dash" onclick="openUrl('https://www.geogebra.org/cas?lang=ar')">
+              <span style="background:#f0f4ff;color:#2d4a9e;padding:3px 7px;border-radius:5px;font-size:10px;font-weight:900;flex-shrink:0;">GGB</span>
+              <span class="r-name">GeoGebra CAS — الجبر الرمزي والمشتقات</span>
               <span class="r-arrow">↗</span>
             </div>
           </div>
@@ -419,6 +489,28 @@
                 <div class="res-info"><div class="res-name">Desmos — رسم هندسي</div><div style="font-size:10px;color:var(--text3);">تفاعلي مجاني</div></div>
                 <span class="res-arrow">↗</span>
               </div>
+
+              <!-- GeoGebra -->
+              <div class="res-link" onclick="openUrl('https://www.geogebra.org/classic?lang=ar')">
+                <div class="res-icon"><span style="background:#f0f4ff;color:#2d4a9e;padding:3px 6px;border-radius:5px;font-size:9px;font-weight:900;">GGB</span></div>
+                <div class="res-info"><div class="res-name">GeoGebra Classic</div><div style="font-size:10px;color:var(--text3);">جبر وهندسة وإحصاء</div></div>
+                <span class="res-arrow">↗</span>
+              </div>
+              <div class="res-link" onclick="openUrl('https://www.geogebra.org/geometry?lang=ar')">
+                <div class="res-icon"><span style="background:#f0f4ff;color:#2d4a9e;padding:3px 6px;border-radius:5px;font-size:9px;font-weight:900;">GGB</span></div>
+                <div class="res-info"><div class="res-name">GeoGebra Geometry</div><div style="font-size:10px;color:var(--text3);">رسم الزوايا والأشكال</div></div>
+                <span class="res-arrow">↗</span>
+              </div>
+              <div class="res-link" onclick="openUrl('https://www.geogebra.org/graphing?lang=ar')">
+                <div class="res-icon"><span style="background:#f0f4ff;color:#2d4a9e;padding:3px 6px;border-radius:5px;font-size:9px;font-weight:900;">GGB</span></div>
+                <div class="res-info"><div class="res-name">GeoGebra Graphing</div><div style="font-size:10px;color:var(--text3);">رسم الدوال البيانية</div></div>
+                <span class="res-arrow">↗</span>
+              </div>
+              <div class="res-link" onclick="openUrl('https://www.geogebra.org/cas?lang=ar')">
+                <div class="res-icon"><span style="background:#f0f4ff;color:#2d4a9e;padding:3px 6px;border-radius:5px;font-size:9px;font-weight:900;">GGB</span></div>
+                <div class="res-info"><div class="res-name">GeoGebra CAS</div><div style="font-size:10px;color:var(--text3);">الجبر الرمزي والمشتقات</div></div>
+                <span class="res-arrow">↗</span>
+              </div>
             </div>
           </div>
 
@@ -428,6 +520,31 @@
     </div><!-- /content-area -->
   </div><!-- /main-area -->
 </div><!-- /app-shell -->
+
+<!-- بطاقة معلومات المستخدم -->
+<div class="modal-overlay" id="userCardOverlay" onclick="closeUserCard()" style="display:none;">
+  <div class="user-card" onclick="event.stopPropagation()">
+    <div class="uc-avatar" id="ucAvatar">؟</div>
+    <div class="uc-name"  id="ucName">—</div>
+    <div class="uc-email" id="ucEmail">—</div>
+    <div class="uc-stats">
+      <div class="uc-stat">
+        <div class="uc-stat-val" id="ucTotal">0</div>
+        <div class="uc-stat-lbl">سؤال</div>
+      </div>
+      <div class="uc-stat">
+        <div class="uc-stat-val" id="ucCorrect">0</div>
+        <div class="uc-stat-lbl">صحيح</div>
+      </div>
+      <div class="uc-stat">
+        <div class="uc-stat-val" id="ucBadges">0</div>
+        <div class="uc-stat-lbl">وسام</div>
+      </div>
+    </div>
+    <div class="uc-saved">💾 بياناتك محفوظة على هذا الجهاز</div>
+    <button class="uc-logout" onclick="logoutUser()">تسجيل خروج وإعادة تعيين</button>
+  </div>
+</div>
 
 <script src="script.js"></script>
 </body>
