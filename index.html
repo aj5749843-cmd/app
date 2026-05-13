@@ -21,21 +21,24 @@
       direction:rtl;
       min-height:100vh;
       display:flex;
+      flex-direction:row;
       background:#0d1117;
       overflow:hidden;
     }
 
     /* ── شريط المعلومات الجانبي ── */
     .login-side {
-      width:45%;
+      width:42%;
+      min-width:300px;
       background:linear-gradient(160deg,#1a1a2e 0%,#0f3060 50%,#0d2340 100%);
       display:flex;
       flex-direction:column;
       justify-content:center;
       align-items:center;
-      padding:60px 48px;
+      padding:60px 40px;
       position:relative;
       overflow:hidden;
+      flex-shrink:0;
     }
     .login-side::before{
       content:'';position:absolute;top:-80px;right:-80px;
@@ -54,9 +57,10 @@
       filter:drop-shadow(0 4px 24px rgba(245,197,24,.3));
     }
     .side-title{
-      font-size:30px;font-weight:900;
+      font-size:26px;font-weight:900;
       color:#fff;line-height:1.3;margin-bottom:8px;
       text-align:center;
+      white-space:nowrap;
     }
     .side-subtitle{
       font-size:16px;font-weight:600;
@@ -77,6 +81,7 @@
       align-items:center;
       padding:48px 40px;
       position:relative;
+      min-height:100vh;
     }
     .login-main::before{
       content:'';position:absolute;top:0;right:0;bottom:0;
@@ -196,13 +201,14 @@
 
     /* Responsive */
     @media(max-width:768px){
-      body{flex-direction:column;}
-      .login-side{width:100%;padding:36px 24px 28px;min-height:auto;}
-      .login-main{padding:32px 24px;}
+      body{flex-direction:column;overflow:auto;}
+      .login-side{width:100%;min-width:unset;padding:40px 24px 32px;min-height:auto;flex-shrink:0;}
+      .login-main{padding:32px 24px;min-height:auto;}
       .login-side::before,.login-side::after{display:none;}
+      .side-title{white-space:normal;}
     }
     @media(max-width:480px){
-      .side-title{font-size:22px;}
+      .side-title{font-size:20px;}
       .steps-bar{display:none;}
     }
   
@@ -231,7 +237,9 @@
   --shadow-md:0 4px 24px rgba(30,30,80,.14);
 }
 
-body{font-family:'Cairo','Segoe UI',sans-serif;direction:rtl;background:var(--surface2);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6;}
+body{font-family:'Cairo','Segoe UI',sans-serif;direction:rtl;color:var(--text);font-size:15px;line-height:1.6;}
+#appPage ~ * body, body:has(#appPage[style*="block"]){background:var(--surface2);}
+#appPage{background:var(--surface2);min-height:100vh;}
 
 /* ── Layout ── */
 .app-shell{display:grid;grid-template-columns:240px 1fr;min-height:100vh;}
