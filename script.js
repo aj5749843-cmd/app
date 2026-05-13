@@ -34,6 +34,7 @@ const DATA = {
           { name: 'بوابة عين — المثال المضاد', url: 'https://ien.edu.sa' },
           { name: 'عين دروس (يوتيوب رسمي) — المثال المضاد', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
           { name: 'يوتيوب — شرح المثال المضاد', url: 'https://www.youtube.com/results?search_query=%D8%A7%D9%84%D9%85%D8%AB%D8%A7%D9%84+%D8%A7%D9%84%D9%85%D8%B6%D8%A7%D8%AF+%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
+          { name: 'GeoGebra Classic — استكشاف الجبر', url: 'https://www.geogebra.org/classic?lang=ar' },
         ]
       },
       {
@@ -48,6 +49,7 @@ const DATA = {
           { name: 'بوابة عين — المنطق الرياضي', url: 'https://ien.edu.sa' },
           { name: 'عين دروس (يوتيوب رسمي) — المنطق الرياضي', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
           { name: 'يوتيوب — جدول الحقيقة', url: 'https://www.youtube.com/results?search_query=%D8%AC%D8%AF%D9%88%D9%84+%D8%A7%D9%84%D8%AD%D9%82%D9%8A%D9%82%D8%A9+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
+          { name: 'GeoGebra Classic — الرسم البياني', url: 'https://www.geogebra.org/classic?lang=ar' },
         ]
       },
       {
@@ -67,6 +69,7 @@ const DATA = {
           { name: 'بوابة عين — العبارات الشرطية', url: 'https://ien.edu.sa' },
           { name: 'عين دروس (يوتيوب رسمي) — العبارات الشرطية', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
           { name: 'يوتيوب — المعاكس الإيجابي', url: 'https://www.youtube.com/results?search_query=%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%83%D8%B3+%D8%A7%D9%84%D8%A5%D9%8A%D8%AC%D8%A7%D8%A8%D9%8A+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
+          { name: 'GeoGebra Classic — الجبر التفاعلي', url: 'https://www.geogebra.org/classic?lang=ar' },
         ]
       },
       {
@@ -81,6 +84,7 @@ const DATA = {
           { name: 'بوابة عين — الزوايا', url: 'https://ien.edu.sa' },
           { name: 'عين دروس (يوتيوب رسمي) — الزوايا', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
           { name: 'Desmos — رسم الزوايا تفاعلياً', url: 'https://www.desmos.com/geometry' },
+          { name: 'GeoGebra Geometry — رسم الزوايا', url: 'https://www.geogebra.org/geometry?lang=ar' },
         ]
       },
       {
@@ -95,6 +99,7 @@ const DATA = {
           { name: 'بوابة عين — المنطق الرياضي', url: 'https://ien.edu.sa' },
           { name: 'عين دروس (يوتيوب رسمي) — المنطق الرياضي', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
           { name: 'يوتيوب — الفصل والوصل', url: 'https://www.youtube.com/results?search_query=%D8%A7%D9%84%D9%81%D8%B5%D9%84+%D9%88%D8%A7%D9%84%D9%88%D8%B5%D9%84+%D8%A7%D9%84%D9%85%D9%86%D8%B7%D9%82+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
+          { name: 'GeoGebra Classic — الرسم البياني', url: 'https://www.geogebra.org/classic?lang=ar' },
         ]
       },
     ]
@@ -336,14 +341,123 @@ let state = {
   quizQuestions : [],
   currentQ      : 0,
   answered      : false,
-  firstAttempt  : true,   // هل لم يُستخدم التلميح بعد؟
+  firstAttempt  : true,
   score         : { math:{c:0,t:0}, phys:{c:0,t:0}, chem:{c:0,t:0}, bio:{c:0,t:0} },
-  totalCorrect  : 0,       // مجموع الصحيح من أول محاولة
+  totalCorrect  : 0,
   sessionCorrect: 0,
   sessionTotal  : 0,
-  earnedBadges  : [],      // معرّفات الأوسمة المكتسبة
+  earnedBadges  : [],
   stars         : 0,
+  /* بيانات المستخدم */
+  user          : null,   /* { name, email, joinDate } */
 };
+
+/* ============================================================
+   SAVE / LOAD — localStorage
+   ============================================================ */
+const STORAGE_KEY = 'tahsili_user_data_v1';
+
+function saveAll() {
+  try {
+    const data = {
+      user        : state.user,
+      score       : state.score,
+      totalCorrect: state.totalCorrect,
+      earnedBadges: state.earnedBadges,
+      stars       : state.stars,
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch(e) {}
+}
+
+function loadAll() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return false;
+    const data = JSON.parse(raw);
+    if (data.user)         state.user         = data.user;
+    if (data.score)        state.score        = data.score;
+    if (data.totalCorrect) state.totalCorrect = data.totalCorrect;
+    if (data.earnedBadges) state.earnedBadges = data.earnedBadges;
+    if (data.stars)        state.stars        = data.stars;
+    return true;
+  } catch(e) { return false; }
+}
+
+/* ============================================================
+   LOGIN
+   ============================================================ */
+function submitLogin() {
+  const nameVal  = $('inputName').value.trim();
+  const emailVal = $('inputEmail').value.trim();
+  let valid = true;
+
+  $('nameError').textContent  = '';
+  $('emailError').textContent = '';
+
+  if (!nameVal) {
+    $('nameError').textContent = '⚠️ الاسم مطلوب';
+    valid = false;
+  }
+  if (!emailVal) {
+    $('emailError').textContent = '⚠️ البريد الإلكتروني مطلوب';
+    valid = false;
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+    $('emailError').textContent = '⚠️ صيغة البريد غير صحيحة';
+    valid = false;
+  }
+  if (!valid) return;
+
+  state.user = {
+    name    : nameVal,
+    email   : emailVal,
+    joinDate: new Date().toLocaleDateString('ar-SA'),
+  };
+  saveAll();
+  closeLoginAndStart();
+}
+
+function skipLogin() {
+  state.user = { name: 'ضيف', email: '—', joinDate: '' };
+  closeLoginAndStart();
+}
+
+function closeLoginAndStart() {
+  $('loginOverlay').style.display = 'none';
+  applyUserToUI();
+}
+
+function applyUserToUI() {
+  if (!state.user) return;
+  const chip   = $('userChip');
+  const avatar = $('userAvatar');
+  const nameS  = $('userNameShort');
+  if (chip) chip.style.display = 'flex';
+  if (avatar) avatar.textContent = state.user.name.charAt(0).toUpperCase();
+  if (nameS)  nameS.textContent  = state.user.name;
+}
+
+function showUserCard() {
+  if (!state.user) return;
+  $('ucAvatar').textContent  = state.user.name.charAt(0).toUpperCase();
+  $('ucName').textContent    = state.user.name;
+  $('ucEmail').textContent   = state.user.email;
+
+  let allC=0, allT=0;
+  Object.values(state.score).forEach(s => { allC+=s.c; allT+=s.t; });
+  $('ucTotal').textContent   = allT;
+  $('ucCorrect').textContent = allC;
+  $('ucBadges').textContent  = state.earnedBadges.length;
+
+  $('userCardOverlay').style.display = 'flex';
+}
+function closeUserCard() { $('userCardOverlay').style.display = 'none'; }
+
+function logoutUser() {
+  if (!confirm('هل تريد تسجيل الخروج وحذف جميع بياناتك؟')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  location.reload();
+}
 
 /* ============================================================
    HELPERS
@@ -416,6 +530,7 @@ function updatePills() {
     const sc=state.score[s];
     el.textContent = sc.t ? `${sc.c}/${sc.t}` : '—';
   });
+  saveAll();
 }
 
 function renderBadgeStrip() {
@@ -554,6 +669,7 @@ function renderAssistant(q) {
 }
 
 function getResIcon(name) {
+  if(name.includes('GeoGebra')) return '<span style="background:#f0f4ff;color:#2d4a9e;padding:4px 7px;border-radius:6px;font-size:10px;font-weight:900;">GGB</span>';
   if(name.includes('عين دروس')) return '<span style="background:#fff3e0;color:#e65100;padding:4px 7px;border-radius:6px;font-size:11px;font-weight:900;">▶عين</span>';
   if(name.includes('عين'))   return '<span style="background:#e6f0ff;color:#0066cc;padding:4px 7px;border-radius:6px;font-size:11px;font-weight:900;">عين</span>';
   if(name.includes('يوتيوب'))return '<span style="background:#fff0f0;color:#ff0000;font-size:18px;">▶️</span>';
@@ -662,6 +778,7 @@ function nextQ() {
 function showScore() {
   /* فحص وسام الجلسة الكاملة */
   checkBadges(true);
+  saveAll();
 
   $('quiz-active').style.display='none';
   $('quiz-score').style.display='block';
@@ -749,8 +866,33 @@ function renderProgress() {
    INIT
    ============================================================ */
 document.addEventListener('DOMContentLoaded', ()=>{
+  const hasSaved = loadAll();
+
+  if (hasSaved && state.user && state.user.name !== 'ضيف') {
+    /* مستخدم مسجّل سابقاً — ادخل مباشرة */
+    $('loginOverlay').style.display = 'none';
+    applyUserToUI();
+  } else if (hasSaved && state.user) {
+    /* كان ضيفاً — أظهر الشاشة بدون تسجيل */
+    $('loginOverlay').style.display = 'none';
+    applyUserToUI();
+  } else {
+    /* مستخدم جديد — أظهر نافذة التسجيل */
+    $('loginOverlay').style.display = 'flex';
+  }
+
   renderDashTopics('math');
   renderTopicsGrid('math');
   updateDashboard();
   document.querySelector('.stab').className='stab active-math';
+
+  /* Enter في حقل الإيميل يُشغّل التسجيل */
+  const emailInput = $('inputEmail');
+  if (emailInput) emailInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') submitLogin();
+  });
+  const nameInput = $('inputName');
+  if (nameInput) nameInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { $('inputEmail').focus(); }
+  });
 });
