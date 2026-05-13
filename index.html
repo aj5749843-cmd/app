@@ -1,0 +1,2176 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>الحقيبة التعليمية التفاعلية — تحصيلي</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --blue:#1e6fc0; --blue-l:#e6f1fb;
+      --gold:#f5c518; --gold-d:#d4a800;
+      --text:#1a1a2e; --text2:#4a4a6a; --text3:#9090b0;
+      --border:#e2e5f0; --danger:#dd3344;
+      --surface:#fff; --surface2:#f7f8fc;
+    }
+    html,body{height:100%;}
+    body{
+      font-family:'Cairo','Segoe UI',sans-serif;
+      direction:rtl;
+      min-height:100vh;
+      display:flex;
+      background:#0d1117;
+      overflow:hidden;
+    }
+
+    /* ── شريط المعلومات الجانبي ── */
+    .login-side {
+      width:45%;
+      background:linear-gradient(160deg,#1a1a2e 0%,#0f3060 50%,#0d2340 100%);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      padding:60px 48px;
+      position:relative;
+      overflow:hidden;
+    }
+    .login-side::before{
+      content:'';position:absolute;top:-80px;right:-80px;
+      width:300px;height:300px;border-radius:50%;
+      background:rgba(245,197,24,.06);
+    }
+    .login-side::after{
+      content:'';position:absolute;bottom:-60px;left:-60px;
+      width:220px;height:220px;border-radius:50%;
+      background:rgba(30,111,192,.12);
+    }
+    .side-content{position:relative;z-index:1;text-align:center;}
+
+    .side-logo{
+      font-size:56px;margin-bottom:20px;
+      filter:drop-shadow(0 4px 24px rgba(245,197,24,.3));
+    }
+    .side-title{
+      font-size:30px;font-weight:900;
+      color:#fff;line-height:1.3;margin-bottom:8px;
+      text-align:center;
+    }
+    .side-subtitle{
+      font-size:16px;font-weight:600;
+      color:#f5c518;
+      margin-bottom:44px;
+      text-align:center;
+    }
+
+
+
+    /* ── نموذج الدخول ── */
+    .login-main{
+      flex:1;
+      background:#fff;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      padding:48px 40px;
+      position:relative;
+    }
+    .login-main::before{
+      content:'';position:absolute;top:0;right:0;bottom:0;
+      width:1px;background:linear-gradient(to bottom,transparent,#e2e5f0 20%,#e2e5f0 80%,transparent);
+    }
+
+    .form-box{width:100%;max-width:400px;}
+
+    /* Form groups */
+    .fg{margin-bottom:20px;}
+    .fg-label{
+      display:flex;align-items:center;gap:6px;
+      font-size:13px;font-weight:700;color:var(--text);
+      margin-bottom:8px;
+    }
+    .fg-label-icon{font-size:15px;}
+    .fg-input-wrap{
+      display:flex;align-items:center;
+      border:2px solid var(--border);
+      border-radius:12px;
+      background:var(--surface2);
+      transition:all .2s;
+      overflow:hidden;
+    }
+    .fg-input-wrap:focus-within{
+      border-color:var(--blue);
+      background:#fff;
+      box-shadow:0 0 0 4px rgba(30,111,192,.08);
+    }
+    .fg-input-wrap.error{border-color:var(--danger);}
+    .fg-prefix{
+      padding:0 14px;
+      font-size:18px;
+      color:var(--text3);
+      flex-shrink:0;
+      border-left:2px solid var(--border);/* عكس RTL */
+    }
+    .fg-input-wrap:focus-within .fg-prefix{border-color:var(--blue-l);color:var(--blue);}
+    .fg-input{
+      flex:1;border:none;background:transparent;
+      font-family:'Cairo',sans-serif;font-size:14px;
+      color:var(--text);padding:14px 12px;
+      outline:none;direction:rtl;
+    }
+    .fg-input::placeholder{color:var(--text3);}
+    .fg-error{
+      display:flex;align-items:center;gap:4px;
+      font-size:11px;color:var(--danger);
+      margin-top:6px;min-height:18px;
+      font-weight:600;
+    }
+
+    /* Submit */
+    .submit-btn{
+      width:100%;padding:15px;
+      background:linear-gradient(135deg,#1a1a2e 0%,#0f3060 100%);
+      color:var(--gold);border:none;border-radius:12px;
+      font-family:'Cairo',sans-serif;font-size:15px;font-weight:900;
+      cursor:pointer;
+      display:flex;align-items:center;justify-content:center;gap:10px;
+      transition:all .2s;
+      box-shadow:0 4px 20px rgba(15,48,96,.25);
+      margin-bottom:14px;
+    }
+    .submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(15,48,96,.35);}
+    .submit-btn:active{transform:translateY(0);}
+    .submit-btn .btn-arrow{
+      font-size:18px;
+      transition:transform .2s;
+    }
+    .submit-btn:hover .btn-arrow{transform:translateX(-4px);}
+
+    .skip-btn{
+      width:100%;padding:11px;
+      background:transparent;border:1.5px solid var(--border);
+      border-radius:12px;
+      font-family:'Cairo',sans-serif;font-size:13px;
+      color:var(--text3);cursor:pointer;
+      transition:all .2s;
+    }
+    .skip-btn:hover{border-color:#999;color:var(--text2);background:var(--surface2);}
+
+    /* Responsive */
+    .submit-btn.loading{pointer-events:none;opacity:.7;}
+    .spinner{
+      width:18px;height:18px;border:2px solid rgba(245,197,24,.3);
+      border-top-color:var(--gold);border-radius:50%;
+      animation:spin .6s linear infinite;
+    }
+    @keyframes spin{to{transform:rotate(360deg);}}
+
+    /* Success state */
+    .success-overlay{
+      position:absolute;inset:0;
+      background:#fff;
+      display:none;flex-direction:column;
+      align-items:center;justify-content:center;
+      z-index:10;
+      animation:fadeIn .3s ease;
+    }
+    .success-overlay.show{display:flex;}
+    @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+    .success-checkmark{
+      width:80px;height:80px;border-radius:50%;
+      background:linear-gradient(135deg,#22a855,#16a34a);
+      display:flex;align-items:center;justify-content:center;
+      font-size:38px;margin-bottom:20px;
+      box-shadow:0 8px 32px rgba(34,168,85,.3);
+      animation:scaleIn .4s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes scaleIn{from{transform:scale(0);}to{transform:scale(1);}}
+    .success-overlay h2{font-size:22px;font-weight:900;color:var(--text);margin-bottom:6px;}
+    .success-overlay p{font-size:13px;color:var(--text3);margin-bottom:24px;}
+    .success-bar-wrap{width:200px;height:4px;background:var(--border);border-radius:2px;overflow:hidden;}
+    .success-bar{height:100%;background:var(--blue);border-radius:2px;animation:fillBar 1.5s ease forwards;}
+    @keyframes fillBar{from{width:0;}to{width:100%;}}
+
+    /* Responsive */
+    @media(max-width:768px){
+      body{flex-direction:column;}
+      .login-side{width:100%;padding:36px 24px 28px;min-height:auto;}
+      .login-main{padding:32px 24px;}
+      .login-side::before,.login-side::after{display:none;}
+    }
+    @media(max-width:480px){
+      .side-title{font-size:22px;}
+      .steps-bar{display:none;}
+    }
+  
+  </style>
+  <style>
+/* ============================================================
+   TAHSILI — style.css v4
+   نظام تحفيزي + مصادر تعليمية حقيقية
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;900&display=swap');
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+:root{
+  --blue:#1e6fc0;    --blue-l:#e6f1fb;  --blue-d:#0c447c;
+  --green:#2e8b3a;   --green-l:#eaf3de; --green-d:#1a5c25;
+  --purple:#7c3fbf;  --purple-l:#f0ebfc;--purple-d:#4a2080;
+  --amber:#c97020;   --amber-l:#fef3e2; --amber-d:#7a4010;
+  --gold:#f5c518;
+  --surface:#fff;    --surface2:#f7f8fc;--surface3:#eef0f7;
+  --border:#e2e5f0;  --text:#1a1a2e;
+  --text2:#4a4a6a;   --text3:#9090b0;
+  --success:#22a855; --danger:#dd3344;  --warn:#e0901a;
+  --radius:14px;     --radius-sm:8px;
+  --shadow:0 2px 12px rgba(30,30,80,.08);
+  --shadow-md:0 4px 24px rgba(30,30,80,.14);
+}
+
+body{font-family:'Cairo','Segoe UI',sans-serif;direction:rtl;background:var(--surface2);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6;}
+
+/* ── Layout ── */
+.app-shell{display:grid;grid-template-columns:240px 1fr;min-height:100vh;}
+
+/* ── Sidebar ── */
+.sidebar{background:#1a1a2e;color:#fff;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;z-index:100;}
+.sidebar-logo{padding:22px 18px 16px;border-bottom:1px solid rgba(255,255,255,.08);}
+.logo-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#f5c518,#e0901a);color:#1a1a2e;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:8px;}
+.sidebar-logo h1{font-size:16px;font-weight:700;color:#fff;line-height:1.3;}
+.sidebar-logo p{font-size:11px;color:rgba(255,255,255,.4);margin-top:3px;}
+.sidebar-nav{padding:12px 8px;flex:1;}
+.nav-section-label{font-size:10px;color:rgba(255,255,255,.3);letter-spacing:1px;text-transform:uppercase;padding:10px 10px 4px;font-weight:600;}
+.nav-item{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:10px;cursor:pointer;color:rgba(255,255,255,.6);font-size:13px;font-weight:500;transition:all .15s;border:none;background:none;width:100%;text-align:right;font-family:inherit;margin-bottom:2px;}
+.nav-item:hover{background:rgba(255,255,255,.07);color:#fff;}
+.nav-item.active{background:rgba(245,197,24,.15);color:#f5c518;font-weight:700;}
+.nav-icon{font-size:16px;width:20px;text-align:center;flex-shrink:0;}
+.nav-subject{border-right:3px solid transparent;padding-right:14px;font-size:12px;}
+.nav-subject.math{border-color:#42a5f5;color:#90caf9;}
+.nav-subject.phys{border-color:#66bb6a;color:#a5d6a7;}
+.nav-subject.chem{border-color:#ab47bc;color:#ce93d8;}
+.nav-subject.bio{border-color:#ffa726;color:#ffcc80;}
+
+/* ── Main ── */
+.main-area{display:flex;flex-direction:column;min-height:100vh;}
+
+/* ── Topbar ── */
+.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:12px 26px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;gap:10px;flex-wrap:wrap;}
+.topbar-left{display:flex;align-items:center;gap:10px;}
+.topbar-title{font-size:16px;font-weight:700;}
+.topbar-right{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
+.score-pills{display:flex;gap:5px;flex-wrap:wrap;}
+.score-pill{display:flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700;border:1.5px solid var(--border);background:var(--surface2);}
+
+/* ── Content ── */
+.content-area{padding:24px;flex:1;}
+
+/* ── Buttons ── */
+.btn{display:inline-flex;align-items:center;gap:5px;padding:8px 16px;border-radius:var(--radius-sm);font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;border:none;transition:all .15s;white-space:nowrap;}
+.btn:disabled{opacity:.4;cursor:default;}
+.btn-primary{background:#1a1a2e;color:#f5c518;}
+.btn-primary:hover:not(:disabled){background:#0f3060;transform:translateY(-1px);}
+.btn-outline{background:transparent;color:var(--text);border:1.5px solid var(--border);}
+.btn-outline:hover:not(:disabled){border-color:#999;background:var(--surface2);}
+
+/* ── Screens ── */
+.screen{display:none;}
+.screen.active{display:block;animation:fadeUp .25s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:translateY(0);}}
+
+/* ============================================================
+   ACHIEVEMENT POPUP
+   ============================================================ */
+.achievement-popup{
+  position:fixed;top:24px;left:50%;transform:translateX(-50%) translateY(-80px);
+  background:linear-gradient(135deg,#1a1a2e,#0f3060);
+  color:#fff;padding:16px 24px;border-radius:16px;
+  box-shadow:0 8px 32px rgba(0,0,0,.35);
+  z-index:9999;display:flex;align-items:center;gap:14px;
+  min-width:280px;max-width:360px;
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1),opacity .3s;
+  opacity:0;
+}
+.achievement-popup.show{transform:translateX(-50%) translateY(0);opacity:1;}
+.ach-icon{font-size:38px;flex-shrink:0;}
+.ach-text h4{font-size:14px;font-weight:700;color:#f5c518;margin-bottom:2px;}
+.ach-text p{font-size:12px;color:rgba(255,255,255,.7);}
+.ach-close{margin-right:auto;background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:18px;line-height:1;padding:0 4px;}
+
+/* ── Toast ── */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#1a1a2e;color:#fff;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:var(--shadow-md);z-index:9998;display:none;}
+.toast.show{display:block;}
+
+/* ============================================================
+   DASHBOARD
+   ============================================================ */
+.dash-hero{background:linear-gradient(135deg,#1a1a2e 0%,#0f3060 60%,#1e6fc0 100%);border-radius:18px;padding:26px 30px;color:#fff;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+.dash-hero h2{font-size:20px;font-weight:700;margin-bottom:5px;}
+.dash-hero p{font-size:13px;color:rgba(255,255,255,.6);}
+.hero-stats{display:flex;gap:22px;margin-top:16px;flex-wrap:wrap;}
+.h-stat-val{font-size:26px;font-weight:900;}
+.h-stat-lbl{font-size:11px;color:rgba(255,255,255,.5);}
+.h-stat.gold .h-stat-val{color:#f5c518;}
+.h-stat.green .h-stat-val{color:#6ee7a0;}
+.readiness-ring{position:relative;width:100px;height:100px;flex-shrink:0;}
+.readiness-ring svg{transform:rotate(-90deg);}
+.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#f5c518;line-height:1;}
+.ring-center small{font-size:10px;color:rgba(255,255,255,.5);font-weight:400;}
+
+/* Badge strip */
+.badge-strip-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-bottom:20px;}
+.badge-strip-wrap h3{font-size:13px;font-weight:700;margin-bottom:12px;}
+.badge-strip{display:flex;gap:10px;flex-wrap:wrap;}
+.badge-item{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 14px;border-radius:10px;border:1.5px solid var(--border);background:var(--surface2);min-width:80px;text-align:center;transition:all .2s;}
+.badge-item.earned{background:linear-gradient(135deg,#fffbea,#fef3c7);border-color:#f5c518;box-shadow:0 2px 8px rgba(245,197,24,.2);}
+.badge-item.locked{opacity:.5;}
+.badge-item.star-item{background:linear-gradient(135deg,#fffbea,#fde68a);border-color:#f59e0b;}
+.badge-icon{font-size:24px;line-height:1;}
+.badge-name{font-size:10px;font-weight:700;color:var(--text2);}
+
+/* Subject cards */
+.cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+.subj-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px 14px;cursor:pointer;transition:all .18s;border-top-width:4px;}
+.subj-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
+.subj-card.math{border-top-color:var(--blue);}
+.subj-card.phys{border-top-color:var(--green);}
+.subj-card.chem{border-top-color:var(--purple);}
+.subj-card.bio{border-top-color:var(--amber);}
+.sc-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:9px;}
+.sc-name{font-size:13px;font-weight:700;}
+.sc-sub{font-size:11px;color:var(--text3);margin-top:1px;}
+.sc-bar{height:4px;background:var(--border);border-radius:2px;margin-top:9px;overflow:hidden;}
+.sc-fill{height:100%;border-radius:2px;transition:width .5s ease;}
+.sc-pct{font-size:11px;color:var(--text3);margin-top:3px;}
+
+/* Two-col bottom */
+.dash-bottom{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.dash-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);}
+.dash-card h3{font-size:13px;font-weight:700;margin-bottom:12px;}
+.topic-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.topic-row:last-child{border-bottom:none;}
+.t-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.t-badge{margin-right:auto;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;}
+
+/* Resource links in dashboard */
+.res-link-dash{display:flex;align-items:center;gap:8px;padding:9px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:all .15s;margin-bottom:6px;}
+.res-link-dash:hover{background:var(--blue-l,#e6f1fb);border-color:var(--blue);}
+.res-link-dash .r-name{font-size:12px;font-weight:700;flex:1;}
+.res-link-dash .r-arrow{font-size:13px;color:var(--text3);}
+
+/* ============================================================
+   TOPICS
+   ============================================================ */
+.topics-header-row{display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap;}
+.subject-tabs{display:flex;gap:3px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:4px;}
+.stab{padding:6px 16px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;border:none;background:transparent;color:var(--text2);font-family:inherit;transition:all .15s;}
+.stab.active-math{background:var(--blue);color:#fff;}
+.stab.active-phys{background:var(--green);color:#fff;}
+.stab.active-chem{background:var(--purple);color:#fff;}
+.stab.active-bio{background:var(--amber);color:#fff;}
+.topics-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+.topic-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;display:flex;align-items:center;gap:10px;}
+.tc-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.tc-name{flex:1;font-size:12px;font-weight:600;}
+
+/* ============================================================
+   QUIZ
+   ============================================================ */
+.quiz-setup-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;max-width:580px;box-shadow:var(--shadow);}
+.quiz-setup-card h2{font-size:17px;font-weight:700;margin-bottom:5px;}
+.quiz-setup-card>p{font-size:13px;color:var(--text2);margin-bottom:20px;}
+.filter-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px;}
+.fchip{padding:6px 14px;border:1.5px solid var(--border);border-radius:20px;font-size:12px;cursor:pointer;background:transparent;color:var(--text2);font-family:inherit;font-weight:700;transition:all .15s;}
+.fchip.active{background:var(--blue-l,#e6f1fb);color:var(--blue-d,#0c447c);border-color:var(--blue);}
+
+/* Quiz shell */
+.quiz-shell{display:grid;grid-template-columns:1fr 290px;gap:18px;align-items:start;}
+
+/* Q card */
+.q-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);}
+.q-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;gap:8px;flex-wrap:wrap;}
+.q-tag{padding:3px 11px;border-radius:20px;font-size:11px;font-weight:700;}
+.q-counter{font-size:12px;color:var(--text3);}
+.q-progress-bar{height:4px;background:var(--border);border-radius:2px;margin-bottom:18px;overflow:hidden;}
+.q-progress-fill{height:100%;background:var(--blue);border-radius:2px;transition:width .3s ease;}
+.q-text{font-size:16px;font-weight:600;line-height:1.75;margin-bottom:18px;}
+.options-list{display:grid;gap:9px;}
+.option{display:flex;align-items:center;gap:12px;padding:12px 14px;border:2px solid var(--border);border-radius:9px;cursor:pointer;font-size:13px;font-weight:500;font-family:inherit;text-align:right;background:var(--surface);transition:all .15s;color:var(--text);width:100%;}
+.option:hover:not(:disabled){border-color:var(--blue);background:var(--blue-l,#e6f1fb);transform:translateX(-2px);}
+.option.correct{border-color:var(--success)!important;background:#eafaf1!important;color:#155a2a!important;}
+.option.wrong{border-color:var(--danger)!important;background:#fdecea!important;color:#7a1520!important;}
+.opt-letter{width:26px;height:26px;border-radius:50%;background:var(--surface2);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;transition:all .15s;}
+.option.correct .opt-letter{background:var(--success);color:#fff;border-color:var(--success);}
+.option.wrong   .opt-letter{background:var(--danger);color:#fff;border-color:var(--danger);}
+
+.explanation-box{margin-top:14px;padding:14px;border-radius:9px;border-right:4px solid var(--blue);background:var(--blue-l,#e6f1fb);font-size:13px;line-height:1.8;color:var(--blue-d,#0c447c);display:none;animation:slideIn .2s ease;}
+.explanation-box.show{display:block;}
+.explanation-box.correct-exp{border-color:var(--success);background:#eafaf1;color:#155a2a;}
+.explanation-box.wrong-exp{border-color:var(--danger);background:#fdecea;color:#7a1520;}
+@keyframes slideIn{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:translateY(0);}}
+
+.q-nav-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;gap:8px;}
+.q-dots{display:flex;gap:4px;}
+.qdot{width:7px;height:7px;border-radius:50%;background:var(--border);transition:all .2s;}
+.qdot.done{background:var(--success);}
+.qdot.current{background:var(--blue);width:18px;border-radius:4px;}
+
+/* ── Assistant panel ── */
+.assistant-panel{display:flex;flex-direction:column;gap:12px;}
+
+.hint-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
+.hint-header{display:flex;align-items:center;gap:7px;padding:11px 14px;background:linear-gradient(135deg,#1a1a2e,#0f3060);color:#fff;font-size:12px;font-weight:700;}
+.ai-dot{width:7px;height:7px;border-radius:50%;background:#6ee7a0;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+.hint-body{padding:12px 14px;}
+.hint-text{font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:10px;}
+.hint-steps{list-style:none;display:flex;flex-direction:column;gap:5px;}
+.hint-steps li{display:flex;gap:7px;font-size:11px;color:var(--text2);padding:5px 8px;background:var(--surface2);border-radius:6px;line-height:1.5;}
+.step-num{width:16px;height:16px;background:var(--blue);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;margin-top:1px;}
+.hint-action{display:flex;gap:5px;margin-top:9px;}
+.hint-btn{flex:1;padding:7px 8px;border-radius:6px;font-size:11px;font-weight:700;font-family:inherit;cursor:pointer;border:1.5px solid var(--border);background:var(--surface);color:var(--text2);transition:all .15s;display:flex;align-items:center;justify-content:center;gap:3px;}
+.hint-btn:hover{border-color:var(--blue);color:var(--blue);}
+.hint-btn.primary{background:#1a1a2e;color:#f5c518;border-color:#1a1a2e;}
+.hint-btn.primary:hover{background:#0f3060;}
+
+/* Resources per question */
+.resources-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
+.resources-header{padding:10px 14px;border-bottom:1px solid var(--border);font-size:12px;font-weight:700;display:flex;align-items:center;gap:5px;}
+.resources-body{padding:8px;display:flex;flex-direction:column;gap:5px;}
+.res-link{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);cursor:pointer;transition:all .15s;}
+.res-link:hover{background:var(--blue-l,#e6f1fb);border-color:var(--blue);transform:translateX(-2px);}
+.res-icon{flex-shrink:0;display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:7px;overflow:hidden;}
+.res-info{flex:1;min-width:0;}
+.res-name{font-size:11px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.res-arrow{color:var(--text3);font-size:11px;flex-shrink:0;}
+.res-link:hover .res-arrow{color:var(--blue);}
+
+/* ── Score screen ── */
+.score-screen{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:36px 22px;text-align:center;max-width:500px;box-shadow:var(--shadow-md);}
+.score-ring{width:110px;height:110px;border-radius:50%;border:6px solid;margin:0 auto 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.score-num{font-size:34px;font-weight:900;}
+.score-denom{font-size:12px;color:var(--text2);}
+.score-title{font-size:19px;font-weight:700;margin-bottom:6px;}
+.score-msg{font-size:12px;color:var(--text2);margin-bottom:16px;}
+.score-badges-wrap{margin-bottom:16px;}
+.score-badges-wrap h4{font-size:12px;font-weight:700;margin-bottom:8px;text-align:right;}
+.score-badges{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;}
+.score-badge{padding:5px 12px;background:#fffbea;border:1.5px solid #f5c518;border-radius:20px;font-size:12px;font-weight:700;color:#7a4f00;}
+.score-badge.star{background:#fef3c7;border-color:#f59e0b;}
+.score-breakdown{text-align:right;margin-bottom:18px;}
+.sb-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.sb-row:last-child{border-bottom:none;}
+.sb-label{flex:1;font-weight:600;}
+.sb-bar-wrap{flex:2;background:var(--border);border-radius:3px;height:5px;overflow:hidden;}
+.sb-bar{height:100%;border-radius:3px;}
+.sb-val{font-size:11px;font-weight:700;min-width:34px;text-align:center;}
+
+/* ============================================================
+   PROGRESS
+   ============================================================ */
+.progress-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.prog-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);}
+.prog-card h3{font-size:13px;font-weight:700;margin-bottom:14px;}
+.big-progress-bar{height:11px;background:var(--border);border-radius:6px;overflow:hidden;margin-top:8px;}
+.big-progress-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--green));border-radius:6px;transition:width .6s ease;}
+.big-pct{font-size:26px;font-weight:900;color:var(--blue);margin-top:6px;}
+.subj-row{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid var(--border);}
+.subj-row:last-child{border-bottom:none;}
+.subj-name{font-size:12px;font-weight:600;min-width:65px;}
+.subj-bar{flex:1;background:var(--border);border-radius:3px;height:6px;overflow:hidden;}
+.subj-fill{height:100%;border-radius:3px;transition:width .5s ease;}
+.subj-pct{font-size:11px;font-weight:700;min-width:32px;text-align:center;}
+.empty-progress{text-align:center;padding:30px 16px;color:var(--text2);font-size:13px;}
+.empty-icon{font-size:36px;margin-bottom:10px;}
+
+/* Badges in progress */
+.prog-badges-wrap{grid-column:1/-1;}
+.prog-badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;}
+.prog-badge{display:flex;flex-direction:column;align-items:center;gap:5px;padding:14px 10px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface2);text-align:center;transition:all .2s;}
+.prog-badge.earned{background:linear-gradient(135deg,#fffbea,#fef3c7);border-color:#f5c518;box-shadow:0 2px 10px rgba(245,197,24,.18);}
+.prog-badge.locked{opacity:.45;}
+.pb-icon{font-size:30px;}
+.pb-name{font-size:12px;font-weight:700;}
+.pb-desc{font-size:10px;color:var(--text3);}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:1024px){
+  .app-shell{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .cards-grid{grid-template-columns:repeat(2,1fr);}
+  .quiz-shell{grid-template-columns:1fr;}
+  .assistant-panel{flex-direction:row;flex-wrap:wrap;}
+  .hint-card,.resources-card{flex:1 1 260px;}
+}
+@media(max-width:640px){
+  .cards-grid{grid-template-columns:1fr 1fr;}
+  .dash-bottom{grid-template-columns:1fr;}
+  .progress-grid{grid-template-columns:1fr;}
+  .topics-grid{grid-template-columns:1fr;}
+  .content-area{padding:14px;}
+  .topbar{padding:10px 14px;}
+}
+
+/* ============================================================
+   LOGIN OVERLAY
+   ============================================================ */
+.login-overlay {
+  position: fixed; inset: 0;
+  background: linear-gradient(135deg,#1a1a2e 0%,#0f3060 60%,#1e3a6e 100%);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 99999;
+  padding: 20px;
+}
+.login-modal {
+  background: #fff;
+  border-radius: 22px;
+  padding: 36px 32px;
+  width: 100%; max-width: 420px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+  animation: popIn .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{opacity:0;transform:scale(.88);} to{opacity:1;transform:scale(1);} }
+
+.login-logo { font-size: 48px; margin-bottom: 10px; }
+.login-modal h2 {
+  font-size: 20px; font-weight: 900;
+  color: #1a1a2e; margin-bottom: 6px;
+}
+.login-modal > p {
+  font-size: 13px; color: var(--text2);
+  margin-bottom: 28px; line-height: 1.6;
+}
+
+.login-form { text-align: right; }
+.lf-group   { margin-bottom: 18px; }
+.lf-label   { font-size: 13px; font-weight: 700; display: block; margin-bottom: 7px; }
+
+.lf-input-wrap {
+  display: flex; align-items: center; gap: 8px;
+  border: 2px solid var(--border);
+  border-radius: 10px; padding: 0 14px;
+  background: var(--surface2);
+  transition: border-color .2s;
+}
+.lf-input-wrap:focus-within { border-color: var(--blue); background: #fff; }
+.lf-icon  { font-size: 18px; flex-shrink: 0; }
+.lf-input {
+  flex: 1; border: none; background: transparent;
+  font-family: inherit; font-size: 14px; color: var(--text);
+  padding: 12px 4px; outline: none;
+  direction: rtl; text-align: right;
+}
+.lf-input::placeholder { color: var(--text3); }
+.lf-error {
+  font-size: 11px; color: var(--danger);
+  margin-top: 4px; display: block; min-height: 16px;
+}
+
+.lf-btn {
+  width: 100%; padding: 14px;
+  background: linear-gradient(135deg,#1a1a2e,#0f3060);
+  color: #f5c518; border: none; border-radius: 10px;
+  font-size: 15px; font-weight: 900; font-family: inherit;
+  cursor: pointer; margin-top: 6px;
+  transition: all .2s;
+}
+.lf-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.2); }
+.lf-btn:active { transform: translateY(0); }
+
+.lf-skip {
+  width: 100%; padding: 10px;
+  background: transparent; border: none;
+  font-size: 12px; color: var(--text3);
+  font-family: inherit; cursor: pointer;
+  margin-top: 10px; text-decoration: underline;
+  transition: color .15s;
+}
+.lf-skip:hover { color: var(--text2); }
+
+/* ── User chip in topbar ── */
+.user-chip {
+  display: flex; align-items: center; gap: 7px;
+  padding: 5px 12px 5px 7px;
+  border: 1.5px solid var(--border);
+  border-radius: 24px; background: var(--surface2);
+  cursor: pointer; transition: all .15s;
+}
+.user-chip:hover { border-color: var(--blue); background: var(--blue-l,#e6f1fb); }
+.user-avatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(135deg,#1a1a2e,#1e6fc0);
+  color: #f5c518; font-size: 13px; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+}
+.user-name-short { font-size: 12px; font-weight: 700; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ── User card modal ── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.5);
+  z-index: 5000;
+  display: flex; align-items: flex-start; justify-content: flex-left;
+  padding: 70px 20px 20px;
+}
+.user-card {
+  background: var(--surface);
+  border-radius: 18px;
+  padding: 28px 24px;
+  width: 280px;
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  animation: fadeUp .2s ease;
+  margin-right: auto;
+  margin-left: 20px;
+}
+.uc-avatar {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: linear-gradient(135deg,#1a1a2e,#1e6fc0);
+  color: #f5c518; font-size: 28px; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 12px;
+}
+.uc-name  { font-size: 16px; font-weight: 900; margin-bottom: 4px; }
+.uc-email { font-size: 12px; color: var(--text3); margin-bottom: 18px; word-break: break-all; }
+
+.uc-stats { display: flex; gap: 8px; margin-bottom: 16px; }
+.uc-stat  {
+  flex: 1; background: var(--surface2);
+  border-radius: 10px; padding: 10px 6px;
+}
+.uc-stat-val { font-size: 20px; font-weight: 900; color: var(--blue); }
+.uc-stat-lbl { font-size: 10px; color: var(--text3); }
+
+.uc-saved {
+  font-size: 11px; color: var(--success);
+  background: #eafaf1; border-radius: 8px;
+  padding: 7px 10px; margin-bottom: 14px;
+}
+.uc-logout {
+  width: 100%; padding: 9px;
+  background: #fdecea; color: var(--danger);
+  border: 1.5px solid #f5c6c6;
+  border-radius: 9px; font-size: 12px; font-weight: 700;
+  font-family: inherit; cursor: pointer;
+  transition: all .15s;
+}
+.uc-logout:hover { background: var(--danger); color: #fff; }
+
+/* ── GeoGebra resource highlight ── */
+.res-link-dash[onclick*="geogebra"],
+.res-link[onclick*="geogebra"] {
+  border-color: #c7d4f5;
+  background: #f5f7ff;
+}
+.res-link-dash[onclick*="geogebra"]:hover,
+.res-link[onclick*="geogebra"]:hover {
+  background: #e8eeff;
+  border-color: #2d4a9e;
+}
+
+/* ============================================================
+   USER INFO BAR  (topbar)
+   ============================================================ */
+.user-info-bar {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px 6px 8px;
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  border-radius: 40px;
+  cursor: default;
+  transition: all .2s;
+  max-width: 240px;
+}
+.user-info-bar.visible { display: flex; }
+.user-info-bar:hover   { border-color: var(--blue); background: var(--blue-l,#e6f1fb); }
+
+.uib-avatar {
+  width: 34px; height: 34px;
+  border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg,#1a1a2e,#1e6fc0);
+  color: #f5c518;
+  font-size: 15px; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+}
+.uib-details {
+  display: flex; flex-direction: column;
+  min-width: 0; flex: 1;
+}
+.uib-name {
+  font-size: 13px; font-weight: 700;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  color: var(--text);
+}
+.uib-email {
+  font-size: 10px; color: var(--text3);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.uib-logout {
+  width: 28px; height: 28px;
+  border-radius: 50%; border: 1.5px solid var(--border);
+  background: #fff; color: var(--text3);
+  font-size: 14px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s; flex-shrink: 0;
+}
+.uib-logout:hover { background: var(--danger); color: #fff; border-color: var(--danger); }
+
+/* حذف الـ user-card القديم */
+.modal-overlay { display: none !important; }
+
+  </style>
+</head>
+<body>
+
+<!-- ══ صفحة الدخول ══ -->
+<div id="loginPage">
+<!-- ── الجانب التعريفي (كحلي) ── -->
+<div class="login-side">
+  <div class="side-content">
+    <div class="side-logo">📚</div>
+    <div class="side-title">الحقيبة التعليمية التفاعلية</div>
+    <div class="side-subtitle">تحصيلي — بنين وبنات</div>
+
+  </div>
+</div>
+
+<!-- ── نموذج الدخول ── -->
+<div class="login-main">
+
+  <!-- Success overlay -->
+  <div class="success-overlay" id="successOverlay">
+    <div class="success-checkmark">✓</div>
+    <h2 id="successName">مرحباً!</h2>
+    <p>جاري الانتقال للوحة التحكم…</p>
+    <div class="success-bar-wrap">
+      <div class="success-bar"></div>
+    </div>
+  </div>
+
+  <div class="form-box">
+
+    <!-- الاسم -->
+    <div class="fg">
+      <label class="fg-label">
+        <span class="fg-label-icon">👤</span> الاسم الكامل
+      </label>
+      <div class="fg-input-wrap" id="nameWrap">
+        <input type="text" id="inputName" class="fg-input"
+               placeholder="أدخل اسمك الكامل..."
+               maxlength="60" autocomplete="name"
+               oninput="onNameInput()" onkeydown="if(event.key==='Enter')document.getElementById('inputEmail').focus()"/>
+        <div class="fg-prefix">✏️</div>
+      </div>
+      <div class="fg-error" id="nameError"></div>
+    </div>
+
+    <!-- البريد -->
+    <div class="fg">
+      <label class="fg-label">
+        <span class="fg-label-icon">✉️</span> البريد الإلكتروني
+      </label>
+      <div class="fg-input-wrap" id="emailWrap">
+        <input type="email" id="inputEmail" class="fg-input"
+               placeholder="example@email.com"
+               maxlength="100" autocomplete="email"
+               oninput="onEmailInput()" onkeydown="if(event.key==='Enter')submitLogin()"/>
+        <div class="fg-prefix">@</div>
+      </div>
+      <div class="fg-error" id="emailError"></div>
+    </div>
+
+    <!-- Privacy -->
+    <div class="privacy-note">
+      <span class="pn-icon">🔒</span>
+      بياناتك محفوظة على جهازك فقط ولا تُرسل لأي جهة خارجية.
+    </div>
+
+    <!-- Submit -->
+    <button class="submit-btn" id="submitBtn" onclick="submitLogin()">
+      <span id="btnText">ابدأ التدريب</span>
+      <span class="btn-arrow" id="btnArrow">←</span>
+    </button>
+
+    <button class="skip-btn" onclick="skipLogin()">
+      تخطّ وابدأ بدون حفظ البيانات
+    </button>
+  </div>
+</div>
+</div>
+
+<!-- ══ التطبيق الرئيسي (مخفي في البداية) ══ -->
+<div id="appPage" style="display:none;">
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<div class="app-shell">
+
+  <!-- ══════════════════════════════════════════
+       SIDEBAR
+       ══════════════════════════════════════════ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-badge">🎓 التحصيلي 2025</div>
+      <h1>الحقيبة التعليمية التفاعلية</h1>
+      <p>للتخصصات العلمية — بنين وبنات</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">القائمة</div>
+
+      <button class="nav-item active" id="nav-dashboard" onclick="showScreen('dashboard')">
+        <span class="nav-icon">🏠</span> لوحة التحكم
+      </button>
+      <button class="nav-item" id="nav-topics" onclick="showScreen('topics')">
+        <span class="nav-icon">📚</span> المواضيع
+      </button>
+      <button class="nav-item" id="nav-quiz" onclick="showScreen('quiz')">
+        <span class="nav-icon">✏️</span> التدريب على الأسئلة
+      </button>
+      <button class="nav-item" id="nav-progress" onclick="showScreen('progress')">
+        <span class="nav-icon">📊</span> تقدمي
+      </button>
+
+      <div class="nav-section-label" style="margin-top:18px;">المواد</div>
+
+      <button class="nav-item nav-subject math" onclick="openSubjectQuiz('math')">
+        <span class="nav-icon">➕</span> الرياضيات
+      </button>
+      <button class="nav-item nav-subject phys" onclick="openSubjectQuiz('phys')">
+        <span class="nav-icon">⚡</span> الفيزياء
+      </button>
+      <button class="nav-item nav-subject chem" onclick="openSubjectQuiz('chem')">
+        <span class="nav-icon">⚗️</span> الكيمياء
+      </button>
+      <button class="nav-item nav-subject bio" onclick="openSubjectQuiz('bio')">
+        <span class="nav-icon">🧬</span> الأحياء
+      </button>
+    </nav>
+
+  </aside>
+
+  <!-- ══════════════════════════════════════════
+       MAIN AREA
+       ══════════════════════════════════════════ -->
+  <div class="main-area">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title" id="topbar-title">لوحة التحكم</span>
+      </div>
+      <div class="topbar-right">
+        <div class="score-pills">
+          <div class="score-pill" style="color:#1e6fc0;border-color:#b3d4f7;">
+            ➕ <span id="pill-math">—</span>
+          </div>
+          <div class="score-pill" style="color:#2e8b3a;border-color:#b3ddb8;">
+            ⚡ <span id="pill-phys">—</span>
+          </div>
+          <div class="score-pill" style="color:#7c3fbf;border-color:#c9b3e8;">
+            ⚗️ <span id="pill-chem">—</span>
+          </div>
+          <div class="score-pill" style="color:#c97020;border-color:#f2c48c;">
+            🧬 <span id="pill-bio">—</span>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="showScreen('quiz')">ابدأ التدريب ←</button>
+      </div>
+    </header>
+
+    <div class="content-area">
+
+      <!-- ══════════════════════════════════════
+           SCREEN: DASHBOARD
+           ══════════════════════════════════════ -->
+      <section class="screen active" id="screen-dashboard">
+
+        <!-- Hero -->
+        <div class="dash-hero">
+          <div>
+            <h2>مرحباً بك في حقيبتك التعليمية 👋</h2>
+            <p>تدرّب على أسئلة التحصيلي العلمي بمساعدة ذكية وموارد خارجية متخصصة</p>
+            <div class="hero-stats">
+              <div class="h-stat gold">
+                <div class="h-stat-val" id="dash-total">0</div>
+                <div class="h-stat-lbl">سؤال تدرّبتَ عليه</div>
+              </div>
+              <div class="h-stat green">
+                <div class="h-stat-val" id="dash-correct">0</div>
+                <div class="h-stat-lbl">إجابة صحيحة</div>
+              </div>
+            </div>
+          </div>
+          <!-- Readiness ring -->
+          <div class="readiness-ring">
+            <svg width="110" height="110" viewBox="0 0 110 110">
+              <circle cx="55" cy="55" r="44"
+                fill="none" stroke="rgba(255,255,255,.12)" stroke-width="10"/>
+              <circle cx="55" cy="55" r="44"
+                fill="none" stroke="#f5c518" stroke-width="10"
+                stroke-dasharray="276.46" stroke-dashoffset="276.46"
+                stroke-linecap="round"
+                class="ring-progress"
+                style="transition:stroke-dashoffset 1s ease;transform:rotate(-90deg);transform-origin:55px 55px"/>
+            </svg>
+            <div class="ring-center">
+              <span id="ring-pct">0</span>%
+              <small>الجاهزية</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subject cards -->
+        <div class="cards-grid">
+
+          <div class="subj-card math" onclick="openSubjectQuiz('math')">
+            <div class="sc-icon" style="background:#e6f1fb;color:#1e6fc0;">➕</div>
+            <div class="sc-name">الرياضيات</div>
+            <div class="sc-sub">القسم الأول</div>
+            <div class="sc-bar"><div class="sc-fill" id="sc-fill-math" style="background:#1e6fc0;width:0%"></div></div>
+            <div class="sc-pct" id="sc-pct-math">0%</div>
+          </div>
+
+          <div class="subj-card phys" onclick="openSubjectQuiz('phys')">
+            <div class="sc-icon" style="background:#eaf3de;color:#2e8b3a;">⚡</div>
+            <div class="sc-name">الفيزياء</div>
+            <div class="sc-sub">القسم الثاني</div>
+            <div class="sc-bar"><div class="sc-fill" id="sc-fill-phys" style="background:#2e8b3a;width:0%"></div></div>
+            <div class="sc-pct" id="sc-pct-phys">0%</div>
+          </div>
+
+          <div class="subj-card chem" onclick="openSubjectQuiz('chem')">
+            <div class="sc-icon" style="background:#f0ebfc;color:#7c3fbf;">⚗️</div>
+            <div class="sc-name">الكيمياء</div>
+            <div class="sc-sub">القسم الثالث</div>
+            <div class="sc-bar"><div class="sc-fill" id="sc-fill-chem" style="background:#7c3fbf;width:0%"></div></div>
+            <div class="sc-pct" id="sc-pct-chem">0%</div>
+          </div>
+
+          <div class="subj-card bio" onclick="openSubjectQuiz('bio')">
+            <div class="sc-icon" style="background:#fef3e2;color:#c97020;">🧬</div>
+            <div class="sc-name">الأحياء</div>
+            <div class="sc-sub">القسم الرابع</div>
+            <div class="sc-bar"><div class="sc-fill" id="sc-fill-bio" style="background:#c97020;width:0%"></div></div>
+            <div class="sc-pct" id="sc-pct-bio">0%</div>
+          </div>
+
+        </div>
+
+        <!-- Bottom two-col -->
+        <div class="dash-bottom">
+
+          <!-- Topics -->
+          <div class="dash-card">
+            <h3 id="dash-topic-title">مواضيع الرياضيات</h3>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;">
+              <button class="btn btn-outline" style="font-size:11px;padding:5px 12px;" onclick="renderDashTopics('math')">رياضيات</button>
+              <button class="btn btn-outline" style="font-size:11px;padding:5px 12px;" onclick="renderDashTopics('phys')">فيزياء</button>
+              <button class="btn btn-outline" style="font-size:11px;padding:5px 12px;" onclick="renderDashTopics('chem')">كيمياء</button>
+              <button class="btn btn-outline" style="font-size:11px;padding:5px 12px;" onclick="renderDashTopics('bio')">أحياء</button>
+            </div>
+            <div id="dash-topic-list"></div>
+          </div>
+
+          <!-- External Resources -->
+          <div class="dash-card">
+            <h3>🔗 المصادر التعليمية الخارجية</h3>
+            <div class="resource-list">
+              <div class="resource-item" onclick="openUrl('https://www.educational.gov.sa')">
+                <div class="resource-logo" style="background:#e6f0ff;color:#0066cc;font-size:14px;font-weight:900;">عين</div>
+                <div class="resource-info">
+                  <div class="resource-name">بوابة عين التعليمية</div>
+                  <div class="resource-desc">المنصة الرسمية لوزارة التعليم السعودية</div>
+                </div>
+                <span class="resource-arrow">↗</span>
+              </div>
+              <div class="resource-item" onclick="openUrl('https://mawdoo3.com')">
+                <div class="resource-logo" style="background:#fdecea;color:#e63946;font-size:20px;">📖</div>
+                <div class="resource-info">
+                  <div class="resource-name">موضوع</div>
+                  <div class="resource-desc">شرح مبسط بالعربية لجميع المواضيع</div>
+                </div>
+                <span class="resource-arrow">↗</span>
+              </div>
+              <div class="resource-item" onclick="openUrl('https://phet.colorado.edu/ar')">
+                <div class="resource-logo" style="background:#eaf3de;color:#2e7d32;font-size:20px;">⚗️</div>
+                <div class="resource-info">
+                  <div class="resource-name">PhET Simulations</div>
+                  <div class="resource-desc">محاكاة تفاعلية لفيزياء وكيمياء وأحياء</div>
+                </div>
+                <span class="resource-arrow">↗</span>
+              </div>
+              <div class="resource-item" onclick="openUrl('https://ptable.com/?lang=ar')">
+                <div class="resource-logo" style="background:#f0ebfc;color:#7c3fbf;font-size:20px;">⚛️</div>
+                <div class="resource-info">
+                  <div class="resource-name">الجدول الدوري التفاعلي</div>
+                  <div class="resource-desc">معلومات تفصيلية عن كل عنصر</div>
+                </div>
+                <span class="resource-arrow">↗</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+           SCREEN: TOPICS
+           ══════════════════════════════════════ -->
+      <section class="screen" id="screen-topics">
+        <div class="topics-header-row">
+          <div class="section-title">المواضيع حسب المادة</div>
+          <div class="subject-tabs">
+            <button class="stab active-math" onclick="switchTopicTab('math',this)">رياضيات</button>
+            <button class="stab" onclick="switchTopicTab('phys',this)">فيزياء</button>
+            <button class="stab" onclick="switchTopicTab('chem',this)">كيمياء</button>
+            <button class="stab" onclick="switchTopicTab('bio',this)">أحياء</button>
+          </div>
+        </div>
+        <div class="topics-grid" id="topics-grid"></div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+           SCREEN: QUIZ
+           ══════════════════════════════════════ -->
+      <section class="screen" id="screen-quiz">
+
+        <!-- Setup -->
+        <div id="quiz-setup">
+          <div class="quiz-setup-card">
+            <h2>✏️ التدريب على الأسئلة</h2>
+            <p>اختر المادة التي تريد التدريب عليها. سيظهر لك مساعد ذكي يوجهك عند كل سؤال مع روابط لمصادر تعليمية خارجية.</p>
+            <div class="filter-row">
+              <button class="fchip active" data-filter="all"  onclick="setFilter('all',this)">جميع المواد</button>
+              <button class="fchip"        data-filter="math" onclick="setFilter('math',this)">➕ رياضيات</button>
+              <button class="fchip"        data-filter="phys" onclick="setFilter('phys',this)">⚡ فيزياء</button>
+              <button class="fchip"        data-filter="chem" onclick="setFilter('chem',this)">⚗️ كيمياء</button>
+              <button class="fchip"        data-filter="bio"  onclick="setFilter('bio',this)">🧬 أحياء</button>
+            </div>
+            <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;font-size:15px;" onclick="startQuiz()">
+              ابدأ التدريب الآن ←
+            </button>
+          </div>
+        </div>
+
+        <!-- Active quiz -->
+        <div id="quiz-active" style="display:none;">
+          <div class="quiz-shell">
+
+            <!-- Question card -->
+            <div>
+              <div class="q-card">
+                <!-- Top meta -->
+                <div class="q-top">
+                  <span class="q-tag" id="q-tag">الرياضيات</span>
+                  <span class="q-counter" id="q-counter">1 / 5</span>
+                </div>
+                <!-- Progress bar -->
+                <div class="q-progress-bar">
+                  <div class="q-progress-fill" id="q-progress-fill" style="width:0%"></div>
+                </div>
+                <!-- Question text -->
+                <div class="q-text" id="q-text"></div>
+                <!-- Options -->
+                <div class="options-list" id="options-list"></div>
+                <!-- Explanation -->
+                <div class="explanation-box" id="explanation-box"></div>
+                <!-- Navigation -->
+                <div class="q-nav-row">
+                  <div class="q-dots" id="q-dots"></div>
+                  <button class="btn btn-primary" id="q-next-btn"
+                          style="display:none;" onclick="nextQ()">التالي ←</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Assistant panel -->
+            <div class="assistant-panel">
+
+              <!-- Hint card -->
+              <div class="hint-card">
+                <div class="hint-header">
+                  <div class="ai-dot"></div>
+                  🤖 المساعد الذكي
+                </div>
+                <div class="hint-body">
+                  <div class="hint-text" id="hint-text"></div>
+
+                  <!-- Steps (hidden until requested) -->
+                  <div id="hint-steps-wrap" style="display:none;">
+                    <ul class="hint-steps" id="hint-steps-list"></ul>
+                  </div>
+
+                  <div class="hint-action">
+                    <button class="hint-btn primary" id="hint-show-btn" onclick="showHint()">
+                      💡 أرِني التلميح
+                    </button>
+                    <button class="hint-btn" id="hint-hide-btn"
+                            style="display:none;" onclick="hideHint()">
+                      إخفاء
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Resources card -->
+              <div class="resources-card">
+                <div class="resources-header">
+                  🔗 مصادر تعليمية للسؤال
+                </div>
+                <div class="resources-body" id="resources-body"></div>
+              </div>
+
+            </div>
+            <!-- /assistant-panel -->
+
+          </div>
+          <!-- /quiz-shell -->
+        </div>
+
+        <!-- Score screen -->
+        <div id="quiz-score" style="display:none;">
+          <div class="score-screen">
+            <div class="score-ring" id="score-ring">
+              <div class="score-num" id="score-num">0</div>
+              <div class="score-denom" id="score-denom">من 0</div>
+            </div>
+            <div class="score-title" id="score-title"></div>
+            <div class="score-msg"   id="score-msg"></div>
+            <div class="score-breakdown" id="score-breakdown"></div>
+            <div style="display:flex;gap:10px;margin-top:20px;justify-content:center;flex-wrap:wrap;">
+              <button class="btn btn-primary" onclick="restartQuiz()">🔄 تدريب جديد</button>
+              <button class="btn btn-outline" onclick="showScreen('progress')">📊 عرض تقدمي</button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════
+           SCREEN: PROGRESS
+           ══════════════════════════════════════ -->
+      <section class="screen" id="screen-progress">
+
+        <div class="progress-grid">
+
+          <!-- Overall readiness -->
+          <div class="prog-card">
+            <h3>🎯 مقياس الجاهزية الكلي</h3>
+            <div style="font-size:13px;color:var(--text2);margin-bottom:8px;">يتحدث تلقائياً بعد كل جلسة تدريب</div>
+            <div class="big-progress-bar">
+              <div class="big-progress-fill" id="big-fill" style="width:0%"></div>
+            </div>
+            <div class="big-pct" id="big-pct">0%</div>
+            <div style="display:flex;gap:24px;margin-top:16px;">
+              <div>
+                <div style="font-size:22px;font-weight:900;color:var(--blue);" id="prog-total">0</div>
+                <div style="font-size:11px;color:var(--text3);">أسئلة أُجيبت</div>
+              </div>
+              <div>
+                <div style="font-size:22px;font-weight:900;color:var(--success);" id="prog-correct">0</div>
+                <div style="font-size:11px;color:var(--text3);">إجابات صحيحة</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Per-subject breakdown -->
+          <div class="prog-card">
+            <h3>📚 الأداء حسب المادة</h3>
+            <div id="progress-rows"></div>
+
+            <div class="empty-progress" id="empty-progress">
+              <div class="empty-icon">📊</div>
+              <p>ابدأ التدريب لرؤية تقدمك</p>
+              <button class="btn btn-primary" onclick="showScreen('quiz')" style="margin-top:12px;">
+                ابدأ التدريب ←
+              </button>
+            </div>
+          </div>
+
+          <!-- Resources panel (full width) -->
+          <div class="prog-card" style="grid-column:1/-1;">
+            <h3>🔗 المصادر التعليمية المرتبطة</h3>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:4px;">
+
+              <div class="res-link" onclick="openUrl('https://www.educational.gov.sa')">
+                <div class="res-logo" style="background:#e6f0ff;color:#0066cc;font-size:14px;font-weight:900;">عين</div>
+                <div class="res-info">
+                  <div class="res-name">بوابة عين التعليمية</div>
+                  <div class="res-sub">وزارة التعليم السعودية</div>
+                </div>
+                <span class="res-arrow">↗</span>
+              </div>
+
+              <div class="res-link" onclick="openUrl('https://mawdoo3.com')">
+                <div class="res-logo" style="background:#fdecea;color:#e63946;">📖</div>
+                <div class="res-info">
+                  <div class="res-name">موضوع</div>
+                  <div class="res-sub">شرح مبسط بالعربية</div>
+                </div>
+                <span class="res-arrow">↗</span>
+              </div>
+
+              <div class="res-link" onclick="openUrl('https://www.youtube.com/results?search_query=تحصيلي+علمي+شرح')">
+                <div class="res-logo" style="background:#fff0f0;color:#ff0000;">▶️</div>
+                <div class="res-info">
+                  <div class="res-name">يوتيوب تعليمي</div>
+                  <div class="res-sub">فيديوهات شرح بالعربية</div>
+                </div>
+                <span class="res-arrow">↗</span>
+              </div>
+
+              <div class="res-link" onclick="openUrl('https://phet.colorado.edu/ar')">
+                <div class="res-logo" style="background:#eaf3de;color:#2e7d32;">⚗️</div>
+                <div class="res-info">
+                  <div class="res-name">PhET Simulations</div>
+                  <div class="res-sub">محاكاة تفاعلية مجانية</div>
+                </div>
+                <span class="res-arrow">↗</span>
+              </div>
+
+              <div class="res-link" onclick="openUrl('https://ptable.com/?lang=ar')">
+                <div class="res-logo" style="background:#f0ebfc;color:#7c3fbf;">⚛️</div>
+                <div class="res-info">
+                  <div class="res-name">الجدول الدوري التفاعلي</div>
+                  <div class="res-sub">ptable.com</div>
+                </div>
+                <span class="res-arrow">↗</span>
+              </div>
+
+              <div class="res-link" onclick="openUrl('https://www.desmos.com/geometry')">
+                <div class="res-logo" style="background:#e6f1fb;color:#1a6fc0;">📐</div>
+                <div class="res-info">
+                  <div class="res-name">Desmos</div>
+                  <div class="res-sub">رسم هندسي وبياني تفاعلي</div>
+                </div>
+                <span class="res-arrow">↗</span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div><!-- /content-area -->
+  </div><!-- /main-area -->
+</div><!-- /app-shell -->
+</div>
+
+<script>
+
+
+const STORAGE_KEY = 'tahsili_user_data_v1';
+
+function onNameInput(){
+  const v=document.getElementById('inputName').value.trim();
+  if(v.length>0){
+    document.getElementById('nameError').textContent='';
+    document.getElementById('nameWrap').classList.remove('error');
+  }
+}
+function onEmailInput(){
+  const v=document.getElementById('inputEmail').value.trim();
+  if(v.length>0 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){
+    document.getElementById('emailError').textContent='';
+    document.getElementById('emailWrap').classList.remove('error');
+  }
+}
+function submitLogin(){
+  const name=document.getElementById('inputName').value.trim();
+  const email=document.getElementById('inputEmail').value.trim();
+  let ok=true;
+  if(!name){
+    document.getElementById('nameError').textContent='⚠ الاسم مطلوب';
+    document.getElementById('nameWrap').classList.add('error');
+    document.getElementById('inputName').focus();
+    ok=false;
+  }
+  if(!email){
+    document.getElementById('emailError').textContent='⚠ البريد الإلكتروني مطلوب';
+    document.getElementById('emailWrap').classList.add('error');
+    if(ok) document.getElementById('inputEmail').focus();
+    ok=false;
+  } else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    document.getElementById('emailError').textContent='⚠ صيغة البريد غير صحيحة';
+    document.getElementById('emailWrap').classList.add('error');
+    if(ok) document.getElementById('inputEmail').focus();
+    ok=false;
+  }
+  if(!ok) return;
+  try{
+    const d=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');
+    d.user={name,email,joinDate:new Date().toLocaleDateString('ar-SA')};
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(d));
+  }catch(e){}
+  document.getElementById('successName').textContent='مرحباً، '+name+'!';
+  document.getElementById('successOverlay').classList.add('show');
+  setTimeout(goToApp,1600);
+}
+function skipLogin(){
+  try{
+    const d=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');
+    d.user={name:'ضيف',email:'—',joinDate:''};
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(d));
+  }catch(e){}
+  goToApp();
+}
+function goToApp(){
+  document.getElementById('loginPage').style.display='none';
+  document.getElementById('appPage').style.display='block';
+  if(typeof initApp==='function') initApp();
+}
+/* إذا مسجّل مسبقاً — انتقل للتطبيق مباشرة */
+(function(){
+  try{
+    const d=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');
+    if(d&&d.user&&d.user.name) goToApp();
+  }catch(e){}
+})();
+
+
+
+
+/* ============================================================
+   DATA — الأسئلة مع تلميحات + مصادر مباشرة لكل سؤال
+   ============================================================ */
+const DATA = {
+
+  /* ══ رياضيات ══ */
+  math: {
+    name: 'الرياضيات', color: '#1e6fc0',
+    bgLight: '#e6f1fb', textDark: '#0c447c',
+    topics: [
+      { name: 'المثال المضاد',                      level: 'أساسي' },
+      { name: 'العبارات المنطقية وقيم الصواب',       level: 'أساسي' },
+      { name: 'العبارات الشرطية (إذا... إذن)',        level: 'متوسط' },
+      { name: 'المعاكس الإيجابي والعكس',             level: 'متوسط' },
+      { name: 'النقاط والمستقيمات',                  level: 'أساسي' },
+      { name: 'تقاطع المستويات',                     level: 'متوسط' },
+      { name: 'الزوايا المتكاملة والمتتامة',          level: 'أساسي' },
+      { name: 'العلاقات بين الزوايا',                level: 'متوسط' },
+      { name: 'متباينات المثلثات',                   level: 'متقدم' },
+      { name: 'الإحصاء والاحتمالات',                 level: 'متوسط' },
+    ],
+    questions: [
+      {
+        q: 'أي مما يلي يُعدّ مثالاً مضاداً للجملة: "كل الأعداد الزوجية تقبل القسمة على 4"؟',
+        opts: ['العدد 2', 'العدد 8', 'العدد 12', 'العدد 16'],
+        ans: 0,
+        exp: 'العدد 2 زوجي ولا يقبل القسمة على 4، فهو مثال مضاد يُبطل الجملة الكلية.',
+        hint: 'ابحث عن عدد زوجي لا يقبل القسمة على 4.',
+        steps: ['تحقق: 2÷4=0.5 ← ليس صحيحاً ✓', '8÷4=2 ، 12÷4=3 ، 16÷4=4 ← تنجح جميعاً'],
+        topic: 'المثال المضاد',
+        refs: [
+          { name: 'بوابة عين — المثال المضاد', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — المثال المضاد', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
+          { name: 'يوتيوب — شرح المثال المضاد', url: 'https://www.youtube.com/results?search_query=%D8%A7%D9%84%D9%85%D8%AB%D8%A7%D9%84+%D8%A7%D9%84%D9%85%D8%B6%D8%A7%D8%AF+%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
+          { name: 'GeoGebra Classic — استكشاف الجبر', url: 'https://www.geogebra.org/classic?lang=ar' },
+        ]
+      },
+      {
+        q: 'إذا كانت العبارة p صحيحة وعبارة q خاطئة، فما قيمة الصواب للعبارة (p ∧ q)؟',
+        opts: ['صحيحة', 'خاطئة', 'يعتمد على السياق', 'لا يمكن تحديدها'],
+        ans: 1,
+        exp: 'الوصل (∧) يكون صحيحاً فقط إذا كانت العبارتان صحيحتين معاً.',
+        hint: 'الوصل (AND) يحتاج الطرفين صحيحين.',
+        steps: ['p=ص ، q=خ', 'ص ∧ خ = خاطئة (قاعدة جدول الحقيقة)'],
+        topic: 'العبارات المنطقية',
+        refs: [
+          { name: 'بوابة عين — المنطق الرياضي', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — المنطق الرياضي', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
+          { name: 'يوتيوب — جدول الحقيقة', url: 'https://www.youtube.com/results?search_query=%D8%AC%D8%AF%D9%88%D9%84+%D8%A7%D9%84%D8%AD%D9%82%D9%8A%D9%82%D8%A9+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
+          { name: 'GeoGebra Classic — الرسم البياني', url: 'https://www.geogebra.org/classic?lang=ar' },
+        ]
+      },
+      {
+        q: 'ما المعاكس الإيجابي للعبارة: "إذا كانت الطالبة مجتهدةً فإنها تنجح"؟',
+        opts: [
+          'إذا نجحت الطالبة فهي مجتهدة',
+          'إذا لم تجتهد الطالبة فلن تنجح',
+          'إذا لم تنجح الطالبة فهي غير مجتهدة',
+          'إذا اجتهدت الطالبة فلن تنجح'
+        ],
+        ans: 2,
+        exp: 'المعاكس الإيجابي: نفي التالي → نفي المقدم.',
+        hint: 'المعاكس الإيجابي = عكس + نفي معاً.',
+        steps: ['العبارة: إذا p فإن q', 'المعاكس الإيجابي: إذا ¬q فإن ¬p'],
+        topic: 'العبارات الشرطية',
+        refs: [
+          { name: 'بوابة عين — العبارات الشرطية', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — العبارات الشرطية', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
+          { name: 'يوتيوب — المعاكس الإيجابي', url: 'https://www.youtube.com/results?search_query=%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%83%D8%B3+%D8%A7%D9%84%D8%A5%D9%8A%D8%AC%D8%A7%D8%A8%D9%8A+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
+          { name: 'GeoGebra Classic — الجبر التفاعلي', url: 'https://www.geogebra.org/classic?lang=ar' },
+        ]
+      },
+      {
+        q: 'إذا كانت زاويتان متتامتان، وإحداهما 35°، فما مقياس الأخرى؟',
+        opts: ['55°', '65°', '145°', '325°'],
+        ans: 0,
+        exp: 'الزوايا المتتامة مجموعها 90°. إذن: 90 − 35 = 55°.',
+        hint: 'المتتامة مجموعها 90°، المكملة مجموعها 180°.',
+        steps: ['مجموع المتتامتين = 90°', '90 − 35 = 55°'],
+        topic: 'الزوايا المتتامة',
+        refs: [
+          { name: 'بوابة عين — الزوايا', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — الزوايا', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
+          { name: 'Desmos — رسم الزوايا تفاعلياً', url: 'https://www.desmos.com/geometry' },
+          { name: 'GeoGebra Geometry — رسم الزوايا', url: 'https://www.geogebra.org/geometry?lang=ar' },
+        ]
+      },
+      {
+        q: 'العبارة "p أو q" (p ∨ q) تكون خاطئة فقط إذا:',
+        opts: ['كانت p صحيحة وq خاطئة', 'كانت p خاطئة وq صحيحة', 'كانتا كلتاهما خاطئتين', 'كانتا كلتاهما صحيحتين'],
+        ans: 2,
+        exp: 'الفصل (∨) يكون خاطئاً فقط حين تكون كلتا العبارتين خاطئتين.',
+        hint: 'OR يكفيه طرف واحد صحيح — يكون خاطئاً فقط حين كلاهما خاطئ.',
+        steps: ['ص∨ص=ص ، ص∨خ=ص ، خ∨ص=ص', 'خ∨خ=خ ← الحالة الوحيدة للخطأ'],
+        topic: 'العبارات المنطقية',
+        refs: [
+          { name: 'بوابة عين — المنطق الرياضي', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — المنطق الرياضي', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
+          { name: 'يوتيوب — الفصل والوصل', url: 'https://www.youtube.com/results?search_query=%D8%A7%D9%84%D9%81%D8%B5%D9%84+%D9%88%D8%A7%D9%84%D9%88%D8%B5%D9%84+%D8%A7%D9%84%D9%85%D9%86%D8%B7%D9%82+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
+          { name: 'GeoGebra Classic — الرسم البياني', url: 'https://www.geogebra.org/classic?lang=ar' },
+        ]
+      },
+    ]
+  },
+
+  /* ══ فيزياء ══ */
+  phys: {
+    name: 'الفيزياء', color: '#2e8b3a',
+    bgLight: '#eaf3de', textDark: '#1a5c25',
+    topics: [
+      { name: 'قوانين نيوتن للحركة',          level: 'أساسي' },
+      { name: 'الطاقة الحركية والكامنة',        level: 'أساسي' },
+      { name: 'الحركة المنتظمة والمتسارعة',     level: 'متوسط' },
+      { name: 'قانون أوم والدوائر الكهربائية',  level: 'متوسط' },
+      { name: 'الموجات والصوت',                 level: 'أساسي' },
+      { name: 'الضوء والبصريات',                level: 'متوسط' },
+      { name: 'المغناطيسية والكهرومغناطيسية',   level: 'متقدم' },
+      { name: 'الحرارة والديناميكا الحرارية',   level: 'متوسط' },
+    ],
+    questions: [
+      {
+        q: 'جسم كتلته 5 كغ يتحرك بسرعة 4 م/ث، ما طاقته الحركية؟',
+        opts: ['20 جول', '40 جول', '80 جول', '10 جول'],
+        ans: 1,
+        exp: 'Ek = ½mv² = ½ × 5 × (4)² = 40 جول.',
+        hint: 'القانون: Ek = ½mv² — ربّع السرعة أولاً.',
+        steps: ['Ek = ½ × 5 × (4)²', '= ½ × 5 × 16 = 40 جول'],
+        topic: 'الطاقة الحركية',
+        refs: [
+          { name: 'بوابة عين — الطاقة الحركية', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — الطاقة الحركية', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
+          { name: 'محاكاة الطاقة — PhET', url: 'https://phet.colorado.edu/sims/html/energy-skate-park-basics/latest/energy-skate-park-basics_all.html' },
+          { name: 'يوتيوب — الطاقة الحركية', url: 'https://www.youtube.com/results?search_query=%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9+%D8%A7%D9%84%D8%AD%D8%B1%D9%83%D9%8A%D8%A9+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A+%D9%81%D9%8A%D8%B2%D9%8A%D8%A7%D8%A1' },
+        ]
+      },
+      {
+        q: 'وفق القانون الثاني لنيوتن، إذا كانت القوة 20 نيوتن والكتلة 4 كغ، فما التسارع؟',
+        opts: ['5 م/ث²', '80 م/ث²', '0.2 م/ث²', '24 م/ث²'],
+        ans: 0,
+        exp: 'F = ma → a = F/m = 20/4 = 5 م/ث².',
+        hint: 'القانون الثاني: F = m×a، اعزل a.',
+        steps: ['a = F ÷ m', 'a = 20 ÷ 4 = 5 م/ث²'],
+        topic: 'قوانين نيوتن',
+        refs: [
+          { name: 'بوابة عين — قوانين نيوتن', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — قوانين نيوتن', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
+          { name: 'محاكاة القوى — PhET', url: 'https://phet.colorado.edu/sims/html/forces-and-motion-basics/latest/forces-and-motion-basics_all.html' },
+          { name: 'يوتيوب — قوانين نيوتن', url: 'https://www.youtube.com/results?search_query=%D9%82%D9%88%D8%A7%D9%86%D9%8A%D9%86+%D9%86%D9%8A%D9%88%D8%AA%D9%86+%D9%81%D9%8A%D8%B2%D9%8A%D8%A7%D8%A1+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
+        ]
+      },
+      {
+        q: 'ما العلاقة بين شدة التيار والمقاومة عند ثبات الجهد الكهربائي؟',
+        opts: ['طردية', 'عكسية', 'لا علاقة', 'تربيعية'],
+        ans: 1,
+        exp: 'V = IR → I = V/R، التيار يتناسب عكسياً مع المقاومة.',
+        hint: 'I = V/R — إذا زادت R وV ثابتة، ماذا يحدث لـ I؟',
+        steps: ['I = V ÷ R', 'R تزداد → I تنقص ← عكسية'],
+        topic: 'قانون أوم',
+        refs: [
+          { name: 'بوابة عين — الكهرباء', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — الكهرباء', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
+          { name: 'محاكاة الدوائر — PhET', url: 'https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_all.html' },
+        ]
+      },
+      {
+        q: 'ما وحدة قياس الشغل في النظام الدولي؟',
+        opts: ['نيوتن', 'واط', 'جول', 'باسكال'],
+        ans: 2,
+        exp: 'الشغل = قوة × إزاحة، ووحدته الجول (J = N·m).',
+        hint: 'شغل = N × m = جول. الواط وحدة الطاقة لا الشغل.',
+        steps: ['شغل = قوة (N) × إزاحة (m)', '1 N·m = 1 جول (J)'],
+        topic: 'الشغل والطاقة',
+        refs: [
+          { name: 'بوابة عين — الشغل والطاقة', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — الشغل والطاقة', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
+          { name: 'يوتيوب — الشغل الميكانيكي', url: 'https://www.youtube.com/results?search_query=%D8%A7%D9%84%D8%B4%D8%BA%D9%84+%D8%A7%D9%84%D9%85%D9%8A%D9%83%D8%A7%D9%86%D9%8A%D9%83%D9%8A+%D9%81%D9%8A%D8%B2%D9%8A%D8%A7%D8%A1+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
+        ]
+      },
+    ]
+  },
+
+  /* ══ كيمياء ══ */
+  chem: {
+    name: 'الكيمياء', color: '#7c3fbf',
+    bgLight: '#f0ebfc', textDark: '#4a2080',
+    topics: [
+      { name: 'التركيب الذري ونظائر العناصر',      level: 'أساسي' },
+      { name: 'الجدول الدوري وخصائص العناصر',       level: 'أساسي' },
+      { name: 'الروابط الكيميائية',                 level: 'متوسط' },
+      { name: 'معادلات التفاعلات الكيميائية',        level: 'متوسط' },
+      { name: 'المحاليل والتراكيز',                 level: 'متقدم' },
+      { name: 'الأحماض والقواعد',                   level: 'متوسط' },
+      { name: 'الكيمياء العضوية - مقدمة',            level: 'متقدم' },
+      { name: 'التفاعلات الأكسدة والاختزال',         level: 'متوسط' },
+    ],
+    questions: [
+      {
+        q: 'أيون الصوديوم Na⁺ يحتوي على كم إلكتروناً؟',
+        opts: ['11', '10', '12', '23'],
+        ans: 1,
+        exp: 'Na له 11 إلكتروناً، وعند فقده إلكتروناً واحداً يصبح 10.',
+        hint: 'Na عدده الذري 11. الشحنة + تعني فقدان إلكترون.',
+        steps: ['عدد إلكترونات Na = 11', 'Na⁺ فقد إلكتروناً: 11−1=10'],
+        topic: 'التركيب الذري',
+        refs: [
+          { name: 'بوابة عين — التركيب الذري', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — التركيب الذري', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
+          { name: 'الجدول الدوري التفاعلي — Ptable', url: 'https://ptable.com/?lang=ar#Properties' },
+          { name: 'يوتيوب — الأيونات', url: 'https://www.youtube.com/results?search_query=%D8%A7%D9%84%D8%A3%D9%8A%D9%88%D9%86%D8%A7%D8%AA+%D9%83%D9%8A%D9%85%D9%8A%D8%A7%D8%A1+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
+        ]
+      },
+      {
+        q: 'ما نوع الرابطة في جزيء الماء H₂O؟',
+        opts: ['أيونية', 'تساهمية قطبية', 'تساهمية غير قطبية', 'فلزية'],
+        ans: 1,
+        exp: 'الماء رابطة تساهمية قطبية بسبب فارق الكهرسلبية بين H وO.',
+        hint: 'كهرسلبية O (3.44) >> H (2.20) → الرابطة قطبية.',
+        steps: ['H وO يتشاركان إلكترونات ← تساهمية', 'الفارق في الكهرسلبية كبير ← قطبية'],
+        topic: 'الروابط الكيميائية',
+        refs: [
+          { name: 'بوابة عين — الروابط الكيميائية', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — الروابط الكيميائية', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
+          { name: 'الجدول الدوري — الكهرسلبية', url: 'https://ptable.com/?lang=ar#Properties/Electronegativity' },
+        ]
+      },
+      {
+        q: 'ما العدد الذري للكربون في الجدول الدوري؟',
+        opts: ['4', '6', '12', '14'],
+        ans: 1,
+        exp: 'العدد الذري للكربون هو 6، أي أن نواته تحتوي على 6 بروتونات.',
+        hint: 'الكربون هو العنصر السادس في الجدول الدوري.',
+        steps: ['ابحث عن C في الجدول', 'العدد الذري = 6'],
+        topic: 'الجدول الدوري',
+        refs: [
+          { name: 'بوابة عين — الجدول الدوري', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — الجدول الدوري', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
+          { name: 'الجدول الدوري التفاعلي — Ptable', url: 'https://ptable.com/?lang=ar#Properties' },
+        ]
+      },
+    ]
+  },
+
+  /* ══ أحياء ══ */
+  bio: {
+    name: 'الأحياء', color: '#c97020',
+    bgLight: '#fef3e2', textDark: '#7a4010',
+    topics: [
+      { name: 'تركيب الخلية ووظائفها',          level: 'أساسي' },
+      { name: 'الانقسام الخلوي (الميتوزيس)',     level: 'أساسي' },
+      { name: 'الوراثة وقوانين مندل',            level: 'متوسط' },
+      { name: 'الجهاز العصبي والهرمونات',        level: 'متوسط' },
+      { name: 'الجهاز الهضمي والتنفسي',          level: 'أساسي' },
+      { name: 'التطور والبيئة',                  level: 'متقدم' },
+      { name: 'التنفس الخلوي والبناء الضوئي',    level: 'متوسط' },
+      { name: 'الجهاز المناعي',                  level: 'متوسط' },
+    ],
+    questions: [
+      {
+        q: 'أين تتم عملية التنفس الخلوي في الخلية؟',
+        opts: ['النواة', 'الميتوكوندريا', 'البلاستيد', 'الريبوسوم'],
+        ans: 1,
+        exp: 'الميتوكوندريا محطة الطاقة وتتم فيها عملية التنفس الخلوي لإنتاج ATP.',
+        hint: 'تذكّر: الميتوكوندريا = محطة الطاقة.',
+        steps: ['التنفس الخلوي ينتج ATP', 'يحدث داخل الميتوكوندريا'],
+        topic: 'تركيب الخلية',
+        refs: [
+          { name: 'بوابة عين — الخلية', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — الخلية', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
+          { name: 'يوتيوب — الميتوكوندريا', url: 'https://www.youtube.com/results?search_query=%D8%A7%D9%84%D9%85%D9%8A%D8%AA%D9%88%D9%83%D9%88%D9%86%D8%AF%D8%B1%D9%8A%D8%A7+%D8%A3%D8%AD%D9%8A%D8%A7%D8%A1+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
+        ]
+      },
+      {
+        q: 'إذا كان النمط الجيني للأم (Aa) والأب (aa)، فما نسبة الأبناء الحاملين للطراز (Aa)؟',
+        opts: ['25%', '50%', '75%', '100%'],
+        ans: 1,
+        exp: 'تزاوج Aa × aa: النتائج Aa،Aa،aa،aa — أي 50% بالنمط Aa.',
+        hint: 'ارسم مربع بانيت: الأم تعطي A أو a، الأب يعطي a دائماً.',
+        steps: ['الأم: A أو a (50/50)', 'الأب: a فقط', 'النتائج: Aa,Aa,aa,aa → 50% Aa'],
+        topic: 'الوراثة',
+        refs: [
+          { name: 'بوابة عين — الوراثة', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — الوراثة', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
+          { name: 'يوتيوب — مربع بانيت', url: 'https://www.youtube.com/results?search_query=%D9%85%D8%B1%D8%A8%D8%B9+%D8%A8%D8%A7%D9%86%D9%8A%D8%AA+%D8%A3%D8%AD%D9%8A%D8%A7%D8%A1+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
+        ]
+      },
+      {
+        q: 'ما الوظيفة الرئيسية للريبوسوم في الخلية؟',
+        opts: ['إنتاج الطاقة', 'تصنيع البروتينات', 'تخزين الماء', 'الهضم الخلوي'],
+        ans: 1,
+        exp: 'الريبوسومات موقع تصنيع البروتينات في الخلية.',
+        hint: 'الريبوسوم = مصنع البروتينات.',
+        steps: ['الريبوسوم يقرأ mRNA', 'يُجمّع الأحماض الأمينية', 'النتيجة: سلسلة بروتينية'],
+        topic: 'تركيب الخلية',
+        refs: [
+          { name: 'بوابة عين — الخلية', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — الخلية', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
+          { name: 'يوتيوب — عضيات الخلية', url: 'https://www.youtube.com/results?search_query=%D8%B9%D8%B6%D9%8A%D8%A7%D8%AA+%D8%A7%D9%84%D8%AE%D9%84%D9%8A%D8%A9+%D8%A3%D8%AD%D9%8A%D8%A7%D8%A1+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
+        ]
+      },
+      {
+        q: 'أي من التالي يُعدّ من الأعضاء الليمفاوية الأولية؟',
+        opts: ['الطحال', 'العقد الليمفاوية', 'الغدة الزعترية (التيموس)', 'اللوزتان'],
+        ans: 2,
+        exp: 'الغدة الزعترية (التيموس) عضو ليمفاوي أولي مسؤول عن نضج الخلايا التائية.',
+        hint: 'الأعضاء الأولية: نخاع العظم + الغدة الزعترية فقط.',
+        steps: ['الأولية: نخاع العظم + التيموس', 'الطحال والعقد واللوزتان = ثانوية'],
+        topic: 'الجهاز المناعي',
+        refs: [
+          { name: 'بوابة عين — الجهاز المناعي', url: 'https://ien.edu.sa' },
+          { name: 'عين دروس (يوتيوب رسمي) — الجهاز المناعي', url: 'https://www.youtube.com/channel/UCndb1LGM5oQJVhjh2NViU5g' },
+          { name: 'يوتيوب — الجهاز المناعي', url: 'https://www.youtube.com/results?search_query=%D8%A7%D9%84%D8%AC%D9%87%D8%A7%D8%B2+%D8%A7%D9%84%D9%85%D9%86%D8%A7%D8%B9%D9%8A+%D8%A3%D8%AD%D9%8A%D8%A7%D8%A1+%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%D9%8A' },
+        ]
+      },
+    ]
+  }
+};
+
+/* ============================================================
+   نظام التحفيز — الأوسمة والنجوم
+   ============================================================ */
+const BADGES = [
+  { id:'first',   icon:'🏅', name:'وسام الانطلاق',   desc:'أجبت على أول سؤال صحيح',  req: c => c >= 1  },
+  { id:'three',   icon:'🥉', name:'وسام البرونز',     desc:'3 إجابات صحيحة',           req: c => c >= 3  },
+  { id:'five',    icon:'🥈', name:'وسام الفضة',       desc:'5 إجابات صحيحة',           req: c => c >= 5  },
+  { id:'ten',     icon:'🥇', name:'وسام الذهب',       desc:'10 إجابات صحيحة',          req: c => c >= 10 },
+  { id:'perfect', icon:'💎', name:'وسام الماسة',      desc:'جلسة كاملة بدون خطأ',      req: (c,t)=>t>=5 && c===t },
+];
+
+/* نجوم: كل 5 أوسمة = نجمة */
+function calcStars(badgeCount) { return Math.floor(badgeCount / 2); }
+
+/* ============================================================
+   STATE
+   ============================================================ */
+let state = {
+  screen        : 'dashboard',
+  topicSubject  : 'math',
+  quizFilter    : 'all',
+  quizQuestions : [],
+  currentQ      : 0,
+  answered      : false,
+  firstAttempt  : true,
+  score         : { math:{c:0,t:0}, phys:{c:0,t:0}, chem:{c:0,t:0}, bio:{c:0,t:0} },
+  totalCorrect  : 0,
+  sessionCorrect: 0,
+  sessionTotal  : 0,
+  earnedBadges  : [],
+  stars         : 0,
+  /* بيانات المستخدم */
+  user          : null,   /* { name, email, joinDate } */
+};
+
+/* ============================================================
+   SAVE / LOAD — localStorage
+   ============================================================ */
+
+
+function saveAll() {
+  try {
+    const data = {
+      user        : state.user,
+      score       : state.score,
+      totalCorrect: state.totalCorrect,
+      earnedBadges: state.earnedBadges,
+      stars       : state.stars,
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch(e) {}
+}
+
+function loadAll() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return false;
+    const data = JSON.parse(raw);
+    if (data.user)                        state.user         = data.user;
+    if (data.score)                       state.score        = data.score;
+    if (typeof data.totalCorrect==='number') state.totalCorrect = data.totalCorrect;
+    if (Array.isArray(data.earnedBadges)) state.earnedBadges = data.earnedBadges;
+    if (typeof data.stars==='number')     state.stars        = data.stars;
+    return !!(state.user && state.user.name);
+  } catch(e) { return false; }
+}
+
+/* ============================================================
+   USER UI — topbar bar
+   ============================================================ */
+function applyUserToUI() {
+  if (!state.user) return;
+  const bar    = $('userInfoBar');
+  const avatar = $('uibAvatar');
+  const name   = $('uibName');
+  const email  = $('uibEmail');
+  if (bar)    bar.classList.add('visible');
+  if (avatar) avatar.textContent = state.user.name.charAt(0).toUpperCase();
+  if (name)   name.textContent   = state.user.name;
+  if (email)  email.textContent  = state.user.email !== '—' ? state.user.email : 'ضيف';
+}
+
+function logoutUser() {
+  if (!confirm('هل تريد تسجيل الخروج وحذف جميع بياناتك؟')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  document.getElementById('appPage').style.display='none';
+  document.getElementById('loginPage').style.display='block';
+  document.getElementById('inputName').value='';
+  document.getElementById('inputEmail').value='';
+}
+
+/* دوال قديمة — متوافقة فارغة */
+function submitLogin() {}
+function skipLogin()   {}
+function showUserCard(){}
+function closeUserCard(){}
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+const $ = id => document.getElementById(id);
+const pct = (c,t) => t>0 ? Math.round(c/t*100) : 0;
+
+function openUrl(url) { window.open(url, '_blank', 'noopener,noreferrer'); }
+
+function showToast(msg, duration=3000) {
+  const el = $('toast');
+  el.innerHTML = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), duration);
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+const TITLES = { dashboard:'لوحة التحكم', topics:'المواضيع', quiz:'التدريب', progress:'تقدمي' };
+
+function showScreen(name) {
+  state.screen = name;
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  $('screen-'+name).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const btn = $('nav-'+name);
+  if (btn) btn.classList.add('active');
+  $('topbar-title').textContent = TITLES[name] || '';
+  if (name==='progress')  renderProgress();
+  if (name==='dashboard') updateDashboard();
+  if (name==='quiz' && !state.quizStarted) showQuizSetup();
+}
+
+function openSubjectQuiz(sub) {
+  state.quizFilter = sub;
+  showScreen('quiz');
+  showQuizSetup();
+}
+
+/* ============================================================
+   DASHBOARD
+   ============================================================ */
+function updateDashboard() {
+  let allC=0, allT=0;
+  ['math','phys','chem','bio'].forEach(s => {
+    const sc=state.score[s];
+    allC+=sc.c; allT+=sc.t;
+    const p=pct(sc.c,sc.t);
+    const fill=$(`sc-fill-${s}`), pEl=$(`sc-pct-${s}`);
+    if(fill) fill.style.width=p+'%';
+    if(pEl)  pEl.textContent=p+'%';
+  });
+  const overall=pct(allC,allT);
+  $('ring-pct').textContent=overall;
+  const circle=document.querySelector('.ring-progress');
+  if(circle){ const c=2*Math.PI*44; circle.style.strokeDashoffset=c-(c*overall/100); }
+  $('dash-total').textContent=allT;
+  $('dash-correct').textContent=allC;
+
+  /* أوسمة في الداشبورد */
+  renderBadgeStrip();
+  updatePills();
+}
+
+function updatePills() {
+  ['math','phys','chem','bio'].forEach(s => {
+    const el=$('pill-'+s);
+    if(!el) return;
+    const sc=state.score[s];
+    el.textContent = sc.t ? `${sc.c}/${sc.t}` : '—';
+  });
+  saveAll();
+}
+
+function renderBadgeStrip() {
+  const el=$('badge-strip');
+  if(!el) return;
+  const stars=calcStars(state.earnedBadges.length);
+  let html='';
+  BADGES.forEach(b => {
+    const earned=state.earnedBadges.includes(b.id);
+    html+=`<div class="badge-item ${earned?'earned':'locked'}" title="${b.name}: ${b.desc}">
+      <span class="badge-icon">${earned ? b.icon : '🔒'}</span>
+      <span class="badge-name">${b.name}</span>
+    </div>`;
+  });
+  /* نجوم */
+  if(stars>0) {
+    for(let i=0;i<stars;i++) html+=`<div class="badge-item earned star-item" title="نجمة تميّز"><span class="badge-icon">⭐</span><span class="badge-name">نجمة ${i+1}</span></div>`;
+  }
+  el.innerHTML=html;
+}
+
+function renderDashTopics(subj) {
+  const d=DATA[subj], list=$('dash-topic-list'), title=$('dash-topic-title');
+  if(title) title.innerHTML=`<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${d.color};margin-left:6px"></span>${d.name}`;
+  if(list)  list.innerHTML=d.topics.map(t=>`
+    <div class="topic-row">
+      <div class="t-dot" style="background:${d.color}"></div>
+      <span>${t.name}</span>${badge(t.level)}
+    </div>`).join('');
+}
+
+function badge(level) {
+  const m={'أساسي':{bg:'#eaf3de',c:'#1a5c25'},'متوسط':{bg:'#e6f1fb',c:'#0c447c'},'متقدم':{bg:'#fef3e2',c:'#7a4010'}};
+  const s=m[level]||m['أساسي'];
+  return `<span class="t-badge" style="background:${s.bg};color:${s.c}">${level}</span>`;
+}
+
+/* ============================================================
+   TOPICS
+   ============================================================ */
+function switchTopicTab(sub,el) {
+  state.topicSubject=sub;
+  document.querySelectorAll('.stab').forEach(t=>t.className='stab');
+  el.className=`stab active-${sub}`;
+  renderTopicsGrid(sub);
+}
+function renderTopicsGrid(sub) {
+  const d=DATA[sub];
+  $('topics-grid').innerHTML=d.topics.map(t=>`
+    <div class="topic-card">
+      <div class="tc-dot" style="background:${d.color}"></div>
+      <span class="tc-name">${t.name}</span>${badge(t.level)}
+    </div>`).join('');
+}
+
+/* ============================================================
+   QUIZ SETUP
+   ============================================================ */
+function showQuizSetup() {
+  state.quizStarted=false;
+  $('quiz-setup').style.display='block';
+  $('quiz-active').style.display='none';
+  $('quiz-score').style.display='none';
+  document.querySelectorAll('.fchip').forEach(c=>c.classList.toggle('active',c.dataset.filter===state.quizFilter));
+}
+function setFilter(f,el) {
+  state.quizFilter=f;
+  document.querySelectorAll('.fchip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+}
+function startQuiz() {
+  const subjects=state.quizFilter==='all'?['math','phys','chem','bio']:[state.quizFilter];
+  let pool=[];
+  subjects.forEach(s=>DATA[s].questions.forEach(q=>pool.push({...q,subject:s})));
+  pool=pool.sort(()=>Math.random()-.5).slice(0,Math.min(8,pool.length));
+  state.quizQuestions=pool;
+  state.currentQ=0;
+  state.quizStarted=true;
+  state.sessionCorrect=0;
+  state.sessionTotal=0;
+  $('quiz-setup').style.display='none';
+  $('quiz-active').style.display='block';
+  $('quiz-score').style.display='none';
+  renderQuestion();
+}
+
+/* ============================================================
+   RENDER QUESTION
+   ============================================================ */
+function renderQuestion() {
+  state.answered=false;
+  state.firstAttempt=true;
+  const qs=state.quizQuestions, q=qs[state.currentQ], d=DATA[q.subject];
+  const n=state.currentQ, total=qs.length;
+  const letters=['أ','ب','ج','د'];
+
+  $('q-progress-fill').style.width=((n/total)*100)+'%';
+  $('q-counter').textContent=`${n+1} / ${total}`;
+  $('q-tag').textContent=d.name;
+  $('q-tag').style.background=d.bgLight;
+  $('q-tag').style.color=d.textDark;
+  $('q-dots').innerHTML=qs.map((_,i)=>`<div class="qdot ${i<n?'done':i===n?'current':''}"></div>`).join('');
+  $('q-text').textContent=q.q;
+  $('options-list').innerHTML=q.opts.map((opt,i)=>`
+    <button class="option" id="opt-${i}" onclick="answerQ(${i})">
+      <span class="opt-letter">${letters[i]}</span><span>${opt}</span>
+    </button>`).join('');
+
+  const expBox=$('explanation-box');
+  expBox.className='explanation-box'; expBox.innerHTML='';
+  $('q-next-btn').style.display='none';
+
+  /* مساعد */
+  renderAssistant(q);
+}
+
+/* ============================================================
+   ASSISTANT + REFERENCES
+   ============================================================ */
+function renderAssistant(q) {
+  $('hint-text').textContent=q.hint||'فكّر في المفاهيم الأساسية.';
+  $('hint-steps-list').innerHTML=(q.steps||[]).map((s,i)=>`<li><span class="step-num">${i+1}</span>${s}</li>`).join('');
+  $('hint-steps-wrap').style.display='none';
+  $('hint-show-btn').style.display='flex';
+  $('hint-hide-btn').style.display='none';
+
+  /* مصادر خاصة بالسؤال */
+  $('resources-body').innerHTML=(q.refs||[]).map(r=>`
+    <div class="res-link" onclick="openUrl('${r.url}')">
+      <div class="res-icon">${getResIcon(r.name)}</div>
+      <div class="res-info">
+        <div class="res-name">${r.name}</div>
+      </div>
+      <span class="res-arrow">↗</span>
+    </div>`).join('');
+}
+
+function getResIcon(name) {
+  if(name.includes('GeoGebra')) return '<span style="background:#f0f4ff;color:#2d4a9e;padding:4px 7px;border-radius:6px;font-size:10px;font-weight:900;">GGB</span>';
+  if(name.includes('عين دروس')) return '<span style="background:#fff3e0;color:#e65100;padding:4px 7px;border-radius:6px;font-size:11px;font-weight:900;">▶عين</span>';
+  if(name.includes('عين'))   return '<span style="background:#e6f0ff;color:#0066cc;padding:4px 7px;border-radius:6px;font-size:11px;font-weight:900;">عين</span>';
+  if(name.includes('يوتيوب'))return '<span style="background:#fff0f0;color:#ff0000;font-size:18px;">▶️</span>';
+  if(name.includes('PhET') || name.includes('محاكاة')) return '<span style="background:#eaf3de;color:#2e7d32;font-size:18px;">⚗️</span>';
+  if(name.includes('Ptable') || name.includes('الجدول'))return '<span style="background:#f0ebfc;color:#7c3fbf;font-size:18px;">⚛️</span>';
+  if(name.includes('Desmos'))return '<span style="background:#e6f1fb;color:#1a6fc0;font-size:18px;">📐</span>';
+  return '<span style="font-size:18px;">🔗</span>';
+}
+
+function showHint() {
+  state.firstAttempt=false;  // استخدم التلميح → لن يحصل على وسام الانجاز من أول مرة
+  $('hint-steps-wrap').style.display='block';
+  $('hint-show-btn').style.display='none';
+  $('hint-hide-btn').style.display='flex';
+}
+function hideHint() {
+  $('hint-steps-wrap').style.display='none';
+  $('hint-show-btn').style.display='flex';
+  $('hint-hide-btn').style.display='none';
+}
+
+/* ============================================================
+   ANSWER
+   ============================================================ */
+function answerQ(idx) {
+  if(state.answered) return;
+  state.answered=true;
+  const q=state.quizQuestions[state.currentQ];
+  const correct=idx===q.ans;
+
+  if(correct) {
+    state.score[q.subject].c++;
+    state.sessionCorrect++;
+    if(state.firstAttempt) state.totalCorrect++;  // أول محاولة بدون تلميح
+  }
+  state.score[q.subject].t++;
+  state.sessionTotal++;
+
+  /* تلوين الخيارات */
+  document.querySelectorAll('.option').forEach((btn,i)=>{
+    btn.disabled=true;
+    if(i===q.ans) btn.classList.add('correct');
+    else if(i===idx&&!correct) btn.classList.add('wrong');
+  });
+
+  /* شرح */
+  const expBox=$('explanation-box');
+  expBox.className='explanation-box show '+(correct?'correct-exp':'wrong-exp');
+  expBox.innerHTML=`<strong>${correct?'✓ إجابة صحيحة!':'✗ إجابة خاطئة'}</strong><p style="margin-top:6px">${q.exp}</p>`;
+
+  /* وسام فوري إن استحق */
+  if(correct && state.firstAttempt) checkBadges(true);
+
+  $('q-next-btn').style.display='flex';
+  $('q-next-btn').textContent=state.currentQ<state.quizQuestions.length-1?'السؤال التالي ←':'عرض النتيجة';
+  updatePills();
+}
+
+/* ============================================================
+   BADGE SYSTEM
+   ============================================================ */
+function checkBadges(showPopup=false) {
+  const totalC=state.totalCorrect;
+  const sessC=state.sessionCorrect, sessT=state.sessionTotal;
+  let newlyEarned=[];
+
+  BADGES.forEach(b=>{
+    if(!state.earnedBadges.includes(b.id) && b.req(totalC, sessT ? sessC : 0, sessT)) {
+      state.earnedBadges.push(b.id);
+      newlyEarned.push(b);
+    }
+  });
+
+  /* نجوم جديدة */
+  const newStars=calcStars(state.earnedBadges.length);
+  const oldStars=state.stars;
+  state.stars=newStars;
+
+  if(showPopup && newlyEarned.length>0) {
+    newlyEarned.forEach((b,i)=>{
+      setTimeout(()=>showAchievement(b.icon, b.name, b.desc), i*1400);
+    });
+  }
+  if(newStars>oldStars) {
+    setTimeout(()=>showAchievement('⭐','نجمة تميّز جديدة!',`حصلت على نجمة رقم ${newStars}`), newlyEarned.length*1400);
+  }
+}
+
+function showAchievement(icon, name, desc) {
+  $('ach-icon').textContent=icon;
+  $('ach-name').textContent=name;
+  $('ach-desc').textContent=desc;
+  const el=$('achievement-popup');
+  el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),3000);
+}
+
+/* ============================================================
+   NEXT / SCORE
+   ============================================================ */
+function nextQ() {
+  if(state.currentQ<state.quizQuestions.length-1){ state.currentQ++; renderQuestion(); }
+  else showScore();
+}
+
+function showScore() {
+  /* فحص وسام الجلسة الكاملة */
+  checkBadges(true);
+  saveAll();
+
+  $('quiz-active').style.display='none';
+  $('quiz-score').style.display='block';
+
+  let allC=0, allT=0;
+  ['math','phys','chem','bio'].forEach(s=>{ allC+=state.score[s].c; allT+=state.score[s].t; });
+  const p=pct(allC,allT);
+  const color=p>=80?'#22a855':p>=60?'#e0901a':'#dd3344';
+  const ring=$('score-ring');
+  ring.style.borderColor=color; ring.style.color=color;
+  $('score-num').textContent=allC;
+  $('score-denom').textContent='من '+allT;
+  $('score-title').textContent=p>=80?'ممتاز! أداء رائع 🎉':p>=60?'جيد! واصل التدريب 💪':'راجع المواضيع وأعد المحاولة 📚';
+  $('score-msg').textContent=`أجبتَ صحيحاً على ${allC} من ${allT} سؤال (${p}%)`;
+
+  /* أوسمة في صفحة النتيجة */
+  const stars=calcStars(state.earnedBadges.length);
+  let badgeHtml=state.earnedBadges.map(id=>{
+    const b=BADGES.find(x=>x.id===id);
+    return b?`<span class="score-badge" title="${b.desc}">${b.icon} ${b.name}</span>`:'';
+  }).join('');
+  for(let i=0;i<stars;i++) badgeHtml+=`<span class="score-badge star">⭐ نجمة ${i+1}</span>`;
+  $('score-badges').innerHTML=badgeHtml||'<span style="color:var(--text3);font-size:13px;">تدرّب أكثر لتحصل على أوسمة!</span>';
+
+  const subNames={math:'الرياضيات',phys:'الفيزياء',chem:'الكيمياء',bio:'الأحياء'};
+  const subColors={math:'#1e6fc0',phys:'#2e8b3a',chem:'#7c3fbf',bio:'#c97020'};
+  $('score-breakdown').innerHTML=['math','phys','chem','bio'].map(s=>{
+    const sc=state.score[s], p2=pct(sc.c,sc.t);
+    return `<div class="sb-row">
+      <span class="sb-label">${subNames[s]}</span>
+      <div class="sb-bar-wrap"><div class="sb-bar" style="background:${subColors[s]};width:${p2}%"></div></div>
+      <span class="sb-val" style="color:${subColors[s]}">${sc.t?sc.c+'/'+sc.t:'—'}</span>
+    </div>`;
+  }).join('');
+
+  updateDashboard();
+}
+
+function restartQuiz() { showQuizSetup(); }
+
+/* ============================================================
+   PROGRESS
+   ============================================================ */
+function renderProgress() {
+  let allC=0, allT=0;
+  const subNames={math:'الرياضيات',phys:'الفيزياء',chem:'الكيمياء',bio:'الأحياء'};
+  const subColors={math:'#1e6fc0',phys:'#2e8b3a',chem:'#7c3fbf',bio:'#c97020'};
+  $('progress-rows').innerHTML=['math','phys','chem','bio'].map(s=>{
+    const sc=state.score[s]; allC+=sc.c; allT+=sc.t;
+    const p=pct(sc.c,sc.t);
+    return `<div class="subj-row">
+      <span class="subj-name">${subNames[s]}</span>
+      <div class="subj-bar"><div class="subj-fill" style="background:${subColors[s]};width:${p}%"></div></div>
+      <span class="subj-pct" style="color:${subColors[s]}">${p}%</span>
+    </div>`;
+  }).join('');
+  const overall=pct(allC,allT);
+  $('big-fill').style.width=overall+'%';
+  $('big-pct').textContent=overall+'%';
+  $('prog-total').textContent=allT;
+  $('prog-correct').textContent=allC;
+  const emptyEl=$('empty-progress');
+  if(emptyEl) emptyEl.style.display=allT===0?'block':'none';
+
+  /* أوسمة وعرضها */
+  const stars=calcStars(state.earnedBadges.length);
+  let bHtml='';
+  BADGES.forEach(b=>{
+    const earned=state.earnedBadges.includes(b.id);
+    bHtml+=`<div class="prog-badge ${earned?'earned':'locked'}">
+      <div class="pb-icon">${earned?b.icon:'🔒'}</div>
+      <div class="pb-name">${b.name}</div>
+      <div class="pb-desc">${b.desc}</div>
+    </div>`;
+  });
+  for(let i=0;i<stars;i++) bHtml+=`<div class="prog-badge earned">
+    <div class="pb-icon">⭐</div>
+    <div class="pb-name">نجمة ${i+1}</div>
+    <div class="pb-desc">مكافأة تميّز</div>
+  </div>`;
+  $('prog-badges').innerHTML=bHtml||'<div style="color:var(--text3);font-size:13px;grid-column:1/-1">لم تحصل على أوسمة بعد</div>';
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+function initApp(){
+  /* إذا لم يكن المستخدم مسجلاً — أعده لصفحة الدخول */
+  loadAll();
+  applyUserToUI();
+  renderDashTopics('math');
+  renderTopicsGrid('math');
+  updateDashboard();
+  document.querySelector('.stab').className='stab active-math';
+}
+
+
+</script>
+</body>
+</html>
