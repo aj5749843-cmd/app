@@ -8,47 +8,6 @@
 </head>
 <body>
 
-<!-- ══════════════════════════════════════════
-     نافذة تسجيل المستخدم
-     ══════════════════════════════════════════ -->
-<div class="login-overlay" id="loginOverlay">
-  <div class="login-modal">
-    <div class="login-logo">🎓</div>
-    <h2>حقيبة التحصيلي العلمي</h2>
-    <p>أدخل بياناتك لحفظ نتائجك وتقدمك تلقائياً</p>
-
-    <div class="login-form">
-      <div class="lf-group">
-        <label class="lf-label">الاسم الكامل</label>
-        <div class="lf-input-wrap">
-          <span class="lf-icon">👤</span>
-          <input type="text" id="inputName" class="lf-input"
-                 placeholder="أدخل اسمك هنا..." maxlength="60" autocomplete="name"/>
-        </div>
-        <span class="lf-error" id="nameError"></span>
-      </div>
-
-      <div class="lf-group">
-        <label class="lf-label">البريد الإلكتروني</label>
-        <div class="lf-input-wrap">
-          <span class="lf-icon">✉️</span>
-          <input type="email" id="inputEmail" class="lf-input"
-                 placeholder="example@email.com" maxlength="100" autocomplete="email"/>
-        </div>
-        <span class="lf-error" id="emailError"></span>
-      </div>
-
-      <button class="lf-btn" id="loginBtn" onclick="submitLogin()">
-        ابدأ التدريب ←
-      </button>
-
-      <button class="lf-skip" onclick="skipLogin()">
-        تخطّ وابدأ بدون حفظ
-      </button>
-    </div>
-  </div>
-</div>
-
 <!-- نافذة الإنجاز التحفيزية -->
 <div class="achievement-popup" id="achievement-popup">
   <div class="ach-icon" id="ach-icon">🏅</div>
@@ -108,11 +67,15 @@
         <span class="topbar-title" id="topbar-title">لوحة التحكم</span>
       </div>
       <div class="topbar-right">
-        <div class="user-chip" id="userChip" style="display:none;" onclick="showUserCard()">
-          <span class="user-avatar" id="userAvatar">؟</span>
-          <span class="user-name-short" id="userNameShort">—</span>
+        <div class="user-info-bar" id="userInfoBar">
+          <div class="uib-avatar" id="uibAvatar"></div>
+          <div class="uib-details">
+            <span class="uib-name" id="uibName"></span>
+            <span class="uib-email" id="uibEmail"></span>
+          </div>
+          <button class="uib-logout" onclick="logoutUser()" title="تسجيل خروج">↩</button>
         </div>
-        <div class="score-pills">
+<div class="score-pills">
           <div class="score-pill" style="color:#1e6fc0;border-color:#b3d4f7;">➕ <span id="pill-math">—</span></div>
           <div class="score-pill" style="color:#2e8b3a;border-color:#b3ddb8;">⚡ <span id="pill-phys">—</span></div>
           <div class="score-pill" style="color:#7c3fbf;border-color:#c9b3e8;">⚗️ <span id="pill-chem">—</span></div>
