@@ -375,89 +375,41 @@ function loadAll() {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return false;
     const data = JSON.parse(raw);
-    if (data.user)         state.user         = data.user;
-    if (data.score)        state.score        = data.score;
-    if (data.totalCorrect) state.totalCorrect = data.totalCorrect;
-    if (data.earnedBadges) state.earnedBadges = data.earnedBadges;
-    if (data.stars)        state.stars        = data.stars;
-    return true;
+    if (data.user)                        state.user         = data.user;
+    if (data.score)                       state.score        = data.score;
+    if (typeof data.totalCorrect==='number') state.totalCorrect = data.totalCorrect;
+    if (Array.isArray(data.earnedBadges)) state.earnedBadges = data.earnedBadges;
+    if (typeof data.stars==='number')     state.stars        = data.stars;
+    return !!(state.user && state.user.name);
   } catch(e) { return false; }
 }
 
 /* ============================================================
-   LOGIN
+   USER UI — topbar bar
    ============================================================ */
-function submitLogin() {
-  const nameVal  = $('inputName').value.trim();
-  const emailVal = $('inputEmail').value.trim();
-  let valid = true;
-
-  $('nameError').textContent  = '';
-  $('emailError').textContent = '';
-
-  if (!nameVal) {
-    $('nameError').textContent = '⚠️ الاسم مطلوب';
-    valid = false;
-  }
-  if (!emailVal) {
-    $('emailError').textContent = '⚠️ البريد الإلكتروني مطلوب';
-    valid = false;
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
-    $('emailError').textContent = '⚠️ صيغة البريد غير صحيحة';
-    valid = false;
-  }
-  if (!valid) return;
-
-  state.user = {
-    name    : nameVal,
-    email   : emailVal,
-    joinDate: new Date().toLocaleDateString('ar-SA'),
-  };
-  saveAll();
-  closeLoginAndStart();
-}
-
-function skipLogin() {
-  state.user = { name: 'ضيف', email: '—', joinDate: '' };
-  closeLoginAndStart();
-}
-
-function closeLoginAndStart() {
-  $('loginOverlay').style.display = 'none';
-  applyUserToUI();
-}
-
 function applyUserToUI() {
   if (!state.user) return;
-  const chip   = $('userChip');
-  const avatar = $('userAvatar');
-  const nameS  = $('userNameShort');
-  if (chip) chip.style.display = 'flex';
+  const bar    = $('userInfoBar');
+  const avatar = $('uibAvatar');
+  const name   = $('uibName');
+  const email  = $('uibEmail');
+  if (bar)    bar.classList.add('visible');
   if (avatar) avatar.textContent = state.user.name.charAt(0).toUpperCase();
-  if (nameS)  nameS.textContent  = state.user.name;
+  if (name)   name.textContent   = state.user.name;
+  if (email)  email.textContent  = state.user.email !== '—' ? state.user.email : 'ضيف';
 }
-
-function showUserCard() {
-  if (!state.user) return;
-  $('ucAvatar').textContent  = state.user.name.charAt(0).toUpperCase();
-  $('ucName').textContent    = state.user.name;
-  $('ucEmail').textContent   = state.user.email;
-
-  let allC=0, allT=0;
-  Object.values(state.score).forEach(s => { allC+=s.c; allT+=s.t; });
-  $('ucTotal').textContent   = allT;
-  $('ucCorrect').textContent = allC;
-  $('ucBadges').textContent  = state.earnedBadges.length;
-
-  $('userCardOverlay').style.display = 'flex';
-}
-function closeUserCard() { $('userCardOverlay').style.display = 'none'; }
 
 function logoutUser() {
   if (!confirm('هل تريد تسجيل الخروج وحذف جميع بياناتك؟')) return;
   localStorage.removeItem(STORAGE_KEY);
-  location.reload();
+  window.location.href = 'login.html';
 }
+
+/* دوال قديمة — متوافقة فارغة */
+function submitLogin() {}
+function skipLogin()   {}
+function showUserCard(){}
+function closeUserCard(){}
 
 /* ============================================================
    HELPERS
@@ -866,33 +818,16 @@ function renderProgress() {
    INIT
    ============================================================ */
 document.addEventListener('DOMContentLoaded', ()=>{
-  const hasSaved = loadAll();
-
-  if (hasSaved && state.user && state.user.name !== 'ضيف') {
-    /* مستخدم مسجّل سابقاً — ادخل مباشرة */
-    $('loginOverlay').style.display = 'none';
-    applyUserToUI();
-  } else if (hasSaved && state.user) {
-    /* كان ضيفاً — أظهر الشاشة بدون تسجيل */
-    $('loginOverlay').style.display = 'none';
-    applyUserToUI();
-  } else {
-    /* مستخدم جديد — أظهر نافذة التسجيل */
-    $('loginOverlay').style.display = 'flex';
+  /* إذا لم يكن المستخدم مسجلاً — أعده لصفحة الدخول */
+  const hasUser = loadAll();
+  if (!hasUser) {
+    window.location.href = 'login.html';
+    return;
   }
 
+  applyUserToUI();
   renderDashTopics('math');
   renderTopicsGrid('math');
   updateDashboard();
   document.querySelector('.stab').className='stab active-math';
-
-  /* Enter في حقل الإيميل يُشغّل التسجيل */
-  const emailInput = $('inputEmail');
-  if (emailInput) emailInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter') submitLogin();
-  });
-  const nameInput = $('inputName');
-  if (nameInput) nameInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter') { $('inputEmail').focus(); }
-  });
 });
