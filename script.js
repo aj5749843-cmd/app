@@ -402,7 +402,7 @@ function applyUserToUI() {
 function logoutUser() {
   if (!confirm('هل تريد تسجيل الخروج وحذف جميع بياناتك؟')) return;
   localStorage.removeItem(STORAGE_KEY);
-  window.location.href = 'login.html';
+  window.location.href = 'index.html';
 }
 
 /* دوال قديمة — متوافقة فارغة */
@@ -821,7 +821,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   /* إذا لم يكن المستخدم مسجلاً — أعده لصفحة الدخول */
   const hasUser = loadAll();
   if (!hasUser) {
-    window.location.href = 'login.html';
+    window.location.href = 'index.html';
     return;
   }
 

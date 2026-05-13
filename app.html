@@ -292,7 +292,7 @@ const STORAGE_KEY = 'tahsili_user_data_v1';
     const data = JSON.parse(raw);
     if (data && data.user && data.user.name) {
       /* انتقل مباشرة للتطبيق */
-      window.location.href = 'app.html';
+      window.location.href = 'index.html';
     }
   } catch(e){}
 })();
@@ -359,7 +359,7 @@ function submitLogin(){
   document.getElementById('successOverlay').classList.add('show');
 
   /* انتقال بعد 1.6 ثانية */
-  setTimeout(() => { window.location.href = 'app.html'; }, 1600);
+  setTimeout(() => { window.location.href = 'index.html'; }, 1600);
 }
 
 function skipLogin(){
@@ -368,7 +368,7 @@ function skipLogin(){
     existing.user = { name: 'ضيف', email: '—', joinDate: '' };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
   } catch(e){}
-  window.location.href = 'app.html';
+  window.location.href = 'index.html';
 }
 </script>
 </body>
