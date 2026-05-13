@@ -463,3 +463,55 @@ body{font-family:'Cairo','Segoe UI',sans-serif;direction:rtl;background:var(--su
   background: #e8eeff;
   border-color: #2d4a9e;
 }
+
+/* ============================================================
+   USER INFO BAR  (topbar)
+   ============================================================ */
+.user-info-bar {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px 6px 8px;
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  border-radius: 40px;
+  cursor: default;
+  transition: all .2s;
+  max-width: 240px;
+}
+.user-info-bar.visible { display: flex; }
+.user-info-bar:hover   { border-color: var(--blue); background: var(--blue-l,#e6f1fb); }
+
+.uib-avatar {
+  width: 34px; height: 34px;
+  border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg,#1a1a2e,#1e6fc0);
+  color: #f5c518;
+  font-size: 15px; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+}
+.uib-details {
+  display: flex; flex-direction: column;
+  min-width: 0; flex: 1;
+}
+.uib-name {
+  font-size: 13px; font-weight: 700;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  color: var(--text);
+}
+.uib-email {
+  font-size: 10px; color: var(--text3);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.uib-logout {
+  width: 28px; height: 28px;
+  border-radius: 50%; border: 1.5px solid var(--border);
+  background: #fff; color: var(--text3);
+  font-size: 14px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s; flex-shrink: 0;
+}
+.uib-logout:hover { background: var(--danger); color: #fff; border-color: var(--danger); }
+
+/* حذف الـ user-card القديم */
+.modal-overlay { display: none !important; }
