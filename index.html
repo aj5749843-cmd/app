@@ -6076,10 +6076,16 @@ window.addEventListener('DOMContentLoaded', function(){
   document.getElementById('inputName').addEventListener('keydown',  function(e){ if(e.key==='Enter') document.getElementById('inputEmail').focus(); });
   document.getElementById('inputEmail').addEventListener('keydown', function(e){ if(e.key==='Enter') doLogin(); });
 
-  // إذا مسجّل مسبقاً
+  // إذا مسجّل مسبقاً — أظهر زر المتابعة بدلاً من الدخول التلقائي
   var saved=loadData();
   if(saved && saved.user && saved.user.name){
-    startAppPage();
+    var btnContinue = document.createElement('button');
+    btnContinue.className = 'btn-login';
+    btnContinue.style.cssText = 'background:linear-gradient(135deg,#22a855,#16a34a);margin-bottom:8px;';
+    btnContinue.textContent = 'متابعة كـ ' + saved.user.name + ' ←';
+    btnContinue.onclick = function(){ startAppPage(); };
+    var formBox = document.querySelector('.form-box');
+    if(formBox) formBox.insertBefore(btnContinue, formBox.firstChild);
   }
 });
 </script>
