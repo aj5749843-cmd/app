@@ -5418,7 +5418,7 @@ function answerQ(idx){
   state.answered=true;
   var q=state.quizQuestions[state.currentQ];
   var correct=idx===q.ans;
-  if(correct){ state.score[q.subject].c++; state.sessionCorrect++; if(state.firstAttempt) state.totalCorrect++; playCorrectSound(); speak('إجابة صحيحة! أحسنت'); }
+  if(correct){ state.score[q.subject].c++; state.sessionCorrect++; if(state.firstAttempt) state.totalCorrect++; playCorrectSound(); speak('إجابة صحيحة'); }
   else { playWrongSound(); speak('إجابة خاطئة. ' + q.exp); }
   state.score[q.subject].t++; state.sessionTotal++;
   document.querySelectorAll('.opt').forEach(function(btn,i){
@@ -6020,7 +6020,7 @@ function answerPlacement(idx) {
   var p = state.placement;
   var q = p.questions[p.currentQ];
   var correct = (idx === q.ans);
-  if (correct) { p.correct++; playCorrectSound(); speak('إجابة صحيحة! أحسنت'); }
+  if (correct) { p.correct++; playCorrectSound(); speak('إجابة صحيحة'); }
   else { playWrongSound(); speak('إجابة خاطئة. الإجابة الصحيحة: ' + q.opts[q.ans]); }
 
   document.querySelectorAll('.pl-opt').forEach(function(btn,i){
